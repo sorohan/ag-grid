@@ -2,7 +2,7 @@
 
     .ag-header {
         @include ag-color-property(background-color, header-background-color);
-        @include ag-border(critical, bottom);
+        border-bottom: var(--ag-borders-critical);
     }
 
     .ag-header-row {
@@ -11,11 +11,11 @@
     }
 
     .ag-pinned-right-header {
-        @include ag-border(critical, left);
+        border-left: var(--ag-borders-critical);
     }
 
     .ag-pinned-left-header {
-        @include ag-border(critical, right);
+        border-right: var(--ag-borders-critical);
     }
 
     .ag-header-cell:not(.ag-right-aligned-header) .ag-header-label-icon {
@@ -50,7 +50,7 @@
     .ag-header-row:not(:first-child) {
         .ag-header-cell,
         .ag-header-group-cell.ag-header-group-cell-with-group {
-            @include ag-border(critical, top);
+            border-top: var(--ag-borders-critical);
         }
     }
 

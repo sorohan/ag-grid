@@ -29,7 +29,7 @@
     }
 
     .ag-status-bar {
-        @include ag-border(primary, top);
+        border-top: var(--ag-borders);
         @include ag-color-property(color, disabled-foreground-color);
         padding-right: calc(var(--ag-grid-size) * 4);
         padding-left: calc(var(--ag-grid-size) * 4);

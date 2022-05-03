@@ -37,7 +37,7 @@
         @include ag-color-property(background-color, control-panel-background-color);
         @include ag-color-property(color, secondary-foreground-color);
         height: var(--ag-row-height);
-        @include ag-border(primary, bottom);
+        border-bottom: var(--ag-borders);
 
         @include ag-theme-rtl(( padding-left: var(--ag-cell-horizontal-padding) ));
     }
@@ -76,9 +76,9 @@
     .ag-column-drop-vertical {
         min-height: 50px;
         
-        @include ag-border(secondary, bottom);
+        border-bottom: var(--ag-borders-secondary);
         &.ag-last-column-drop {
-            @include ag-border(secondary, bottom, $none: true);
+            border-bottom: none;
         }
     }
 

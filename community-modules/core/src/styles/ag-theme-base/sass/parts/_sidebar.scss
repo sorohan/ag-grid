@@ -60,9 +60,9 @@
     // sidebar visually on left
     .ag-ltr .ag-side-bar-left,
     .ag-rtl .ag-side-bar-right {
-        @include ag-border(primary, right);
+        border-right: var(--ag-borders);
         .ag-tool-panel-wrapper {
-            @include ag-border(primary, left);
+            border-left: var(--ag-borders);
         }
 
         .ag-side-button-button {
@@ -86,10 +86,10 @@
     // sidebar visually on right
     .ag-rtl .ag-side-bar-left,
     .ag-ltr .ag-side-bar-right {
-        @include ag-border(primary, left);
+        border-left: var(--ag-borders);
         
         .ag-tool-panel-wrapper {
-            @include ag-border(primary, right);
+            border-right: var(--ag-borders);
         }
 
         .ag-side-button-button {

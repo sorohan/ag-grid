@@ -114,7 +114,7 @@
 }
 
 @mixin ag-card() {
-    @include ag-border(primary);
+    border: var(--ag-borders);
     
     @include ag-color-property(background, background-color);
     border-radius: var(--ag-card-radius);

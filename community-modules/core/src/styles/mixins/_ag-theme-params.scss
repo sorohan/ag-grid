@@ -9,10 +9,10 @@
 // ));
 // @debug ag-param(a); // outputs 42
 
-// Define a derived parameter. Derived values are lazily evaluated. This function is
-// sugar for defining a data structure to record the derived value's parameters.
 @use "sass:math";
 
+// Define a derived parameter. Derived values are lazily evaluated. This function is
+// sugar for defining a data structure to record the derived value's parameters.
 @function ag-derived(
     $reference-name,
     $times: null,
@@ -80,6 +80,10 @@
     @return $resolved;
 }
 
+@function -ag-color-param-value($name) {
+    @return ag-param($name, $caller: "permitted internal _ag-theme-params.scss access");
+}
+
 // Return true if a param has a value other than null or false
 @function ag-param-is-set($name) {
     $value: -ag-param-unchecked($name);
@@ -106,7 +110,7 @@
 //
 // The optional $important argument can be used to add a CSS !important directive
 @mixin ag-color-property($property, $param, $important: false) {
-    $value: ag-param($param, $caller: "permitted internal _ag-theme-params.scss access");
+    $value: -ag-color-param-value($param);
     $important: if($important, !important, null);
 
     @if $value != null {
@@ -170,14 +174,14 @@ $-ag-theme-parameters-to-map-onto-variables: (grid-size icon-size widget-contain
         --ag-#{$name}: #{$value};
     };
 
-    @include -ag-border-type-to-variable-expressions(borders-critical, critical);
-    @include -ag-border-type-to-variable-expressions(borders, primary);
-    @include -ag-border-type-to-variable-expressions(borders-secondar, secondary);
+    @include -ag-border-type-to-variable-expressions(borders-critical, critical, border-color);
+    @include -ag-border-type-to-variable-expressions(borders, primary, border-color);
+    @include -ag-border-type-to-variable-expressions(borders-secondary, secondary, secondary-border-color);
 }
 
-@mixin -ag-border-type-to-variable-expressions($name, $border-type) {
+@mixin -ag-border-type-to-variable-expressions($name, $border-type, $color-property) {
     @if ag-should-draw-border($border-type) {
-        --ag-#{$name}: solid 1px;
+        --ag-#{$name}: solid 1px #{-ag-color-param-value($color-property)};
     } @else {
         --ag-#{$name}: none;
     }
@@ -233,7 +237,7 @@ $-ag-theme-parameters-to-map-onto-variables: (grid-size icon-size widget-contain
     @if -is-ag-derived($value) {
         $has-modificatons: length($value) > 2;
         @if $has-modificatons {
-            $value: ag-param($name, $caller: "permitted internal _ag-theme-params.scss access");
+            $value: -ag-color-param-value($name);
         }
         @else {
             $reference-name: map-get($value, "reference-name");

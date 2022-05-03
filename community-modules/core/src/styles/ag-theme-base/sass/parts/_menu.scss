@@ -17,7 +17,7 @@
     .ag-menu-separator-part::after {
         content: "";
         display: block;
-        @include ag-border(critical, top);
+        border-top: var(--ag-borders-critical);
     }
 
     .ag-menu-option-active, .ag-compact-menu-option-active {
@@ -91,7 +91,7 @@
     }
 
     .ag-filter-separator {
-        @include ag-border(critical, top);
+        border-top: var(--ag-borders-critical);
     }
 
     .ag-menu:not(.ag-tabs) .ag-filter-select {
@@ -151,7 +151,7 @@
 
     .ag-filter-apply-panel {
         padding: var(--ag-widget-container-vertical-padding) var(--ag-widget-container-horizontal-padding);
-        @include ag-border(secondary, top);
+        border-top: var(--ag-borders-secondary);
     }
 
     .ag-filter-apply-panel-button {

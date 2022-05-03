@@ -37,7 +37,7 @@
     }
 
     .ag-filter-toolpanel-group-level-0 {
-        @include ag-border(secondary, top);
+        border-top: var(--ag-borders-secondary);
     }
 
     .ag-filter-toolpanel-expand,
@@ -65,7 +65,8 @@
     }
 
     .ag-filter-toolpanel-instance-filter {
-        @include ag-border(primary, (top, bottom));
+        border-bottom: var(--ag-borders);
+        border-top: var(--ag-borders);
         margin-top: var(--ag-grid-size);
     }
 

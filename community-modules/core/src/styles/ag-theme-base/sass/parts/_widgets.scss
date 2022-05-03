@@ -179,7 +179,7 @@
         padding: 0 var(--ag-grid-size) 0 var(--ag-cell-horizontal-padding);
         height: var(--ag-row-height);
 
-        @include ag-border(secondary, bottom);
+        border-bottom: var(--ag-borders-secondary);
     }
 
     .ag-rich-select-virtual-list-item {
@@ -378,7 +378,7 @@
         @include ag-card();
         overflow: hidden;
         text-overflow: ellipsis;
-        @include ag-border(secondary);
+        border: var(--ag-borders-secondary);
         @include ag-color-property(color, secondary-foreground-color);
         height: var(--ag-header-height) !important;
         line-height: var(--ag-header-height);
@@ -411,7 +411,7 @@
 
     .ag-dialog {
         border-radius: var(--ag-border-radius);
-        @include ag-border(primary);
+        border: var(--ag-borders);
     }
 
     .ag-panel {
@@ -423,7 +423,7 @@
         @include ag-color-property(color, header-foreground-color);
         height: var(--ag-header-height);
         padding: var(--ag-grid-size) var(--ag-cell-horizontal-padding);
-        @include ag-border(primary, bottom);
+        border-bottom: var(--ag-borders);
     }
 
     .ag-panel-title-bar-button {
@@ -437,7 +437,7 @@
         @include ag-color-property(background-color, header-background-color);
         @include ag-color-property(color, foreground-color);
         padding: var(--ag-grid-size);
-        @include ag-border(primary);
+        border: var(--ag-borders);
         border-radius: var(--ag-card-radius);
         transition: opacity 1s;
         white-space: normal;

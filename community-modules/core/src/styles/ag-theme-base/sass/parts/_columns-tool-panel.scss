@@ -21,11 +21,12 @@
         align-items: center;
         padding: 0 var(--ag-widget-container-horizontal-padding);
 
-        @include ag-border(secondary, bottom);
+        border-bottom: var(--ag-borders-secondary);
     }
     
     .ag-column-panel-column-select {
-        @include ag-border(secondary, (bottom, top));
+        border-bottom: var(--ag-borders-secondary);
+        border-top: var(--ag-borders-secondary);
     }
 
     .ag-column-group-icons,

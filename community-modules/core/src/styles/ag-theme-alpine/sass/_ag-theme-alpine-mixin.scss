@@ -71,7 +71,7 @@
     }
 
     .ag-tabs-header {
-        @include ag-border(primary, bottom);
+        border-bottom: var(--ag-borders);
     }
 
     .ag-charts-settings-group-title-bar,
@@ -86,7 +86,7 @@
     }
 
     .ag-chart-settings-nav-bar {
-        @include ag-border(secondary, top);
+        border-top: var(--ag-borders-secondary);
     }
 
     .ag-group-title-bar-icon {
