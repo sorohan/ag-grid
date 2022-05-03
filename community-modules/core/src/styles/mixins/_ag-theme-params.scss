@@ -168,6 +168,18 @@ $-ag-theme-parameters-to-map-onto-variables: (grid-size icon-size widget-contain
     @each $name in $-ag-theme-parameters-to-map-onto-variables {
         $value: -ag-parameter-as-expression($name);
         --ag-#{$name}: #{$value};
+    };
+
+    @include -ag-border-type-to-variable-expressions(borders-critical, critical);
+    @include -ag-border-type-to-variable-expressions(borders, primary);
+    @include -ag-border-type-to-variable-expressions(borders-secondar, secondary);
+}
+
+@mixin -ag-border-type-to-variable-expressions($name, $border-type) {
+    @if ag-should-draw-border($border-type) {
+        --ag-#{$name}: solid 1px;
+    } @else {
+        --ag-#{$name}: none;
     }
 }
 
