@@ -9,36 +9,6 @@
     line-height: inherit;
 }
 
-@mixin ag-border($border-type, $sides: null, $radius: null, $width: 1px, $style: solid, $none: false) {
-    @if ag-should-draw-border($border-type) {
-        $color-param: if($border-type == secondary, secondary-border-color, border-color);
-
-        @if $sides {
-            @each $side in $sides {
-                @if $none {
-                    border-#{$side}: none;
-                }
-                @else {
-                    border-#{$side}: $style $width;
-                    @include ag-color-property(border-#{$side}-color, $color-param);
-                }
-            }
-        }
-        @else {
-            @if $none {
-                border: none;
-            }
-            @else {
-                border: $style $width;
-                @include ag-color-property(border-color, $color-param);
-            }
-        }
-        @if $radius {
-            border-radius: $radius;
-        }
-    }
-}
-
 @mixin ag-keyboard-focus($selectors, $offset) {
     .ag-keyboard-focus {
         @each $selector in $selectors {
@@ -86,20 +56,6 @@
     .ag-item-highlight-bottom::after {
         bottom: 0;
     }
-}
-
-@function ag-should-draw-border($type) {
-    $valid-types: (
-        critical: ag-param(borders-critical),
-        primary: ag-param(borders),
-        side-button: ag-param(borders-side-button),
-        secondary: ag-param(borders-secondary)
-    );
-    $draw-border: false;
-    @if not map-has-key($valid-types, $type) {
-        @error "Invalid border type '#{inspect($type)}'";
-    }
-    @return map-get($valid-types, $type);
 }
 
 @function ag-icon-char($name) {

@@ -166,7 +166,7 @@ $-ag-params: null !default;
     $-ag-params: $params !global;
 }
 
-$-ag-theme-parameters-to-map-onto-variables: (grid-size icon-size widget-container-horizontal-padding widget-container-vertical-padding widget-horizontal-spacing widget-vertical-spacing cell-horizontal-padding cell-widget-spacing row-height header-height list-item-height column-select-indent-size row-group-indent-size filter-tool-panel-group-indent tab-min-width menu-min-width side-bar-panel-width border-radius card-radius checkbox-border-radius cell-horizontal-border toggle-button-border-width toggle-button-height toggle-button-width font-family font-size card-shadow popup-shadow);
+$-ag-theme-parameters-to-map-onto-variables: (grid-size icon-size widget-container-horizontal-padding widget-container-vertical-padding widget-horizontal-spacing widget-vertical-spacing cell-horizontal-padding cell-widget-spacing row-height header-height list-item-height column-select-indent-size row-group-indent-size filter-tool-panel-group-indent tab-min-width menu-min-width side-bar-panel-width border-radius card-radius checkbox-border-radius toggle-button-border-width toggle-button-height toggle-button-width font-family font-size card-shadow popup-shadow);
 
 @mixin ag-theme-parameters-to-variable-expressions() {
     @each $name in $-ag-theme-parameters-to-map-onto-variables {
@@ -174,21 +174,35 @@ $-ag-theme-parameters-to-map-onto-variables: (grid-size icon-size widget-contain
         --ag-#{$name}: #{$value};
     };
 
-    @include -ag-border-type-to-variable-expressions(borders-critical, critical, border-color);
-    @include -ag-border-type-to-variable-expressions(borders, primary, border-color);
-    @include -ag-border-type-to-variable-expressions(borders-secondary, secondary, secondary-border-color);
+    @include -ag-border-type-to-variable-expressions(borders-critical, border-color);
+    @include -ag-border-type-to-variable-expressions(borders, border-color);
+    @include -ag-border-type-to-variable-expressions(borders-side-button, border-color);
+    @include -ag-border-type-to-variable-expressions(borders-secondary, secondary-border-color);
     @if ag-param-is-set(row-border-color) and ag-param(borders-critical) {
         --ag-borders-row: solid 1px #{-ag-color-param-value(row-border-color)};
     } @else {
         --ag-borders-row: none;
     }
+
+    $cell-horizontal-border-has-size: str-index("#{ag-param(cell-horizontal-border)}", "px");
+    @if $cell-horizontal-border-has-size {
+        --ag-borders-cell: #{ag-param(cell-horizontal-border)};
+    } @else {
+        // old cell-horizontal-border parameter didn't require size, new --ag-borders-cell
+        // variable does, so add it if it's not there
+        --ag-borders-cell: 1px #{ag-param(cell-horizontal-border)};
+    }
+
+    @if ag-param(borders-side-button) {
+        --ag-side-button-selected-background: #{-ag-color-param-value(control-panel-background-color)};
+    }
 }
 
-@mixin -ag-border-type-to-variable-expressions($name, $border-type, $color-property) {
-    @if ag-should-draw-border($border-type) {
-        --ag-#{$name}: solid 1px #{-ag-color-param-value($color-property)};
+@mixin -ag-border-type-to-variable-expressions($border-param, $color-property) {
+    @if ag-param($border-param) {
+        --ag-#{$border-param}: solid 1px #{-ag-color-param-value($color-property)};
     } @else {
-        --ag-#{$name}: none;
+        --ag-#{$border-param}: none;
     }
 }
 

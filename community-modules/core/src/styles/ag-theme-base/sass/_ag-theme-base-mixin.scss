@@ -23,6 +23,9 @@ $ag-compatibility-mode: "variables" !default;
     @include ag-include-theme-once-only();
     $params: ag-process-theme-variables($params, $ag-theme-base-default-params);
 
+    // TODO: extract this into @mixin ag-theme-base-variables
+    --ag-side-button-selected-background: none;
+
     @include ag-theme-parameters-to-variable-expressions();
 
     @include ag-icons-font-face();
