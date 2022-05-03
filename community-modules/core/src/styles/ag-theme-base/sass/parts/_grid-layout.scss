@@ -69,16 +69,7 @@
         height: var(--ag-row-height);
         @include ag-color-property(background-color, background-color);
         @include ag-color-property(color, data-color);
-        
-        @if ag-param-is-set(row-border-color) and ag-param(borders-critical) {
-            // NOTE: we define border-width and border-color at .ag-row level and only set
-            // border-style inside nested pseudoclass selectors, to allow derived themes
-            // to override border-width on .ag-row
-            border-width: 1px;
-            @include ag-color-property(border-color, row-border-color);
-
-            border-bottom-style: solid;
-        }
+        border-bottom: var(--ag-borders-row);
     }
 
     .ag-row-highlight-above::after, .ag-row-highlight-below::after {

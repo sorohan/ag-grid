@@ -177,6 +177,11 @@ $-ag-theme-parameters-to-map-onto-variables: (grid-size icon-size widget-contain
     @include -ag-border-type-to-variable-expressions(borders-critical, critical, border-color);
     @include -ag-border-type-to-variable-expressions(borders, primary, border-color);
     @include -ag-border-type-to-variable-expressions(borders-secondary, secondary, secondary-border-color);
+    @if ag-param-is-set(row-border-color) and ag-param(borders-critical) {
+        --ag-borders-row: solid 1px #{-ag-color-param-value(row-border-color)};
+    } @else {
+        --ag-borders-row: none;
+    }
 }
 
 @mixin -ag-border-type-to-variable-expressions($name, $border-type, $color-property) {
