@@ -264,7 +264,10 @@ $ag-theme-base-default-params: (
 
     // Cause tabs to stretch across the full width of the tab panel header
     full-width-tabs: false,
+
+    // Minimum width of a tabbed menu (usd in charts)
     tab-min-width: 220px,
+    // Minimum width of a menu that is not tabbed
     menu-min-width: 181px,
 
     // Fonts

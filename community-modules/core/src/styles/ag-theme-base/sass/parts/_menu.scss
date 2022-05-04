@@ -64,16 +64,13 @@
     }
 
     .ag-tab {
-        border-bottom: ag-param(selected-tab-underline-width) solid transparent;
+        border-bottom: var(--ag-selected-tab-underline-width) solid transparent;
+        transition: border-bottom var(--ag-selected-tab-underline-transition-speed);
         display: flex;
         flex: none;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-
-        @if ag-param(selected-tab-underline-transition-speed) {
-            transition: border-bottom ag-param(selected-tab-underline-transition-speed);
-        }
     }
 
     @include ag-keyboard-focus((ag-tab), 4px);

@@ -59,10 +59,8 @@
         }
 
         .ag-side-button-button {
-            border-right: ag-param(selected-tab-underline-width) solid transparent;
-            @if ag-param(selected-tab-underline-transition-speed) {
-                transition: border-right ag-param(selected-tab-underline-transition-speed);
-            }
+            border-right: var(--ag-selected-tab-underline-width) solid transparent;
+            transition: border-right var(--ag-selected-tab-underline-transition-speed);
         }
 
         .ag-selected .ag-side-button-button {
@@ -80,10 +78,8 @@
         }
 
         .ag-side-button-button {
-            border-left: ag-param(selected-tab-underline-width) solid transparent;
-            @if ag-param(selected-tab-underline-transition-speed) {
-                transition: border-left ag-param(selected-tab-underline-transition-speed);
-            }
+            border-left: var(--ag-selected-tab-underline-width) solid transparent;
+            transition: border-left var(--ag-selected-tab-underline-transition-speed);
         }
 
         .ag-selected .ag-side-button-button {
