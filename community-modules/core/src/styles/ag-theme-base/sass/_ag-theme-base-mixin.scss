@@ -19,7 +19,6 @@
 $ag-compatibility-mode: "variables" !default;
 
 @mixin ag-theme-base($params: ()) {
-    @include ag-allow-color-param-access-with-ag-param(false);
     @include ag-include-theme-once-only();
     $params: ag-process-theme-variables($params, $ag-theme-base-default-params);
 
@@ -55,6 +54,4 @@ $ag-compatibility-mode: "variables" !default;
     @include ag-theme-base-part-charts();
     @include ag-theme-base-part-date-time();
     @include ag-native-inputs();
-    
-    @include ag-allow-color-param-access-with-ag-param(true);
 }

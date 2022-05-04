@@ -2,8 +2,6 @@
 @import "./ag-theme-material-default-params";
 
 @mixin ag-theme-material($params: ()) {
-    @include ag-allow-color-param-access-with-ag-param(false);
-
     $params: ag-process-theme-variables($params, $ag-theme-material-default-params);
     @include ag-theme-base($params);
 
@@ -205,6 +203,4 @@
     .ag-picker-field-wrapper:focus {
         box-shadow: 0 0 0 1px ag-param(material-primary-color);
     }
-
-    @include ag-allow-color-param-access-with-ag-param(true);
 }
