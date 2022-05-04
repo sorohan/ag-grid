@@ -25,6 +25,8 @@ $ag-compatibility-mode: "variables" !default;
     // TODO: extract this into @mixin ag-theme-base-variables
     --ag-side-button-selected-background: none;
     --ag-selected-tab-underline-transition-speed: 0s;
+    --ag-header-column-resize-handle-display: none;
+    --ag-header-column-separator-display: none;
 
     @include ag-theme-parameters-to-variable-expressions();
 

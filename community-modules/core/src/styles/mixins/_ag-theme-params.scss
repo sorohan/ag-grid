@@ -155,7 +155,7 @@ $-ag-params: null !default;
     $-ag-params: $params !global;
 }
 
-$-ag-theme-parameters-to-map-onto-variables: (grid-size icon-size widget-container-horizontal-padding widget-container-vertical-padding widget-horizontal-spacing widget-vertical-spacing cell-horizontal-padding cell-widget-spacing row-height header-height list-item-height column-select-indent-size row-group-indent-size filter-tool-panel-group-indent tab-min-width menu-min-width side-bar-panel-width border-radius card-radius checkbox-border-radius toggle-button-border-width toggle-button-height toggle-button-width font-family font-size card-shadow popup-shadow selected-tab-underline-width selected-tab-underline-transition-speed);
+$-ag-theme-parameters-to-map-onto-variables: (grid-size icon-size widget-container-horizontal-padding widget-container-vertical-padding widget-horizontal-spacing widget-vertical-spacing cell-horizontal-padding cell-widget-spacing row-height header-height list-item-height column-select-indent-size row-group-indent-size filter-tool-panel-group-indent tab-min-width menu-min-width side-bar-panel-width border-radius card-radius checkbox-border-radius toggle-button-border-width toggle-button-height toggle-button-width font-family font-size card-shadow popup-shadow selected-tab-underline-width selected-tab-underline-transition-speed header-column-resize-handle-width header-column-resize-handle-height header-column-separator-width header-column-separator-height);
 
 @mixin ag-theme-parameters-to-variable-expressions() {
     @each $name in $-ag-theme-parameters-to-map-onto-variables {
@@ -184,6 +184,13 @@ $-ag-theme-parameters-to-map-onto-variables: (grid-size icon-size widget-contain
 
     @if ag-param(borders-side-button) {
         --ag-side-button-selected-background: #{ag-param(control-panel-background-color)};
+    }
+
+    @if ag-param(header-column-resize-handle) {
+        --ag-header-column-resize-handle-display: block;
+    }
+    @if ag-param(header-column-separator) {
+        --ag-header-column-separator-display: block;
     }
 }
 
