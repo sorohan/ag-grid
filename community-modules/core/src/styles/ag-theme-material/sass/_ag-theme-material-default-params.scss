@@ -13,6 +13,7 @@ $ag-theme-material-default-params: (
     background-color: #fff,
     header-background-color: #fff,
     subheader-background-color: #eee,
+    subheader-toolbar-background-color: ag-derived(subheader-background-color, $opacity: 0.5),
     header-cell-hover-background-color: ag-derived(header-background-color, $darken: 5%),
     chip-background-color: #e2e2e2,
     range-selection-background-color: rgba(122, 134, 203, 0.1),

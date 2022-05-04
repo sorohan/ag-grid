@@ -243,6 +243,7 @@
 
     .ag-group-toolbar {
         padding: var(--ag-grid-size);
+        @include ag-color-property(background-color, subheader-toolbar-background-color);
     }
 
     .ag-disabled-group-title-bar, .ag-disabled-group-container {

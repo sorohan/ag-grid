@@ -116,10 +116,6 @@
         padding-bottom: calc(var(--ag-grid-size) * 0.5);
     }
 
-    .ag-group-toolbar {
-        @include ag-color-property(background-color, subheader-toolbar-background-color);
-    }
-
     .ag-chart-tab {
         padding-top: calc(var(--ag-grid-size) * 0.5);
     }
