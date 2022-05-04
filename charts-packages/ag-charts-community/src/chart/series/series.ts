@@ -114,7 +114,14 @@ export abstract class Series extends Observable {
 
     abstract tooltip: SeriesTooltip;
 
-    data?: any[] = undefined;
+    protected _data?: any[] = undefined;
+    set data(input: any[] | undefined) {
+        this._data = input;
+    }
+    get data() {
+        return this._data;
+    }
+
     visible = true;
     showInLegend = true;
 

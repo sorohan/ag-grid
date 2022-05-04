@@ -152,14 +152,12 @@ export class PieSeries extends PolarSeries {
 
     tooltip: PieSeriesTooltip = new PieSeriesTooltip();
 
-    constructor() {
-        super();
-
-        this.addPropertyListener('data', event => {
-            if (event.value) {
-                event.source.seriesItemEnabled = event.value.map(() => true);
-            }
-        });
+    set data(input: any[] | undefined) {
+        this._data = input;
+        this.seriesItemEnabled = input?.map(() => true) || [];
+    }
+    get data() {
+        return this._data;
     }
 
     /**
