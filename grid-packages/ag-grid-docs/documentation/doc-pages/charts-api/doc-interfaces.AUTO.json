@@ -3140,6 +3140,7 @@
     "color": { "type": { "returnType": "string", "optional": true } },
     "backgroundColor": { "type": { "returnType": "string", "optional": true } }
   },
+  "ChartUpdateType": {},
   "Point": {},
   "ChartAxisDirection": {},
   "ChartAxisPosition": {},
