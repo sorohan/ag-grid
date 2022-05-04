@@ -509,11 +509,10 @@ export abstract class Chart extends Observable {
         }
         const end = performance.now();
         console.log({
-            durationMs: Math.round((end - start)/100) * 100,
+            durationMs: Math.round((end - start)*100) / 100,
             count,
             performUpdateType: ChartUpdateType[performUpdateType],
         });
-
     }
 
     private onLegendPositionChange() {
@@ -1008,10 +1007,15 @@ export abstract class Chart extends Observable {
             if (this.tooltip.delay > 0) {
                 this.tooltip.toggle(false);
             }
-            this.handleTooltip(event);
+            this.lastTooltipEvent = event;
+            this.handleTooltipTrigger.schedule();
         }
     }
 
+    private lastTooltipEvent?: MouseEvent = undefined;
+    private handleTooltipTrigger = debouncedAnimationFrame(({ count }) => {
+        this.handleTooltip(this.lastTooltipEvent!);
+    });
     protected handleTooltip(event: MouseEvent) {
         const { lastPick, tooltip: { tracking: tooltipTracking } } = this;
         const { offsetX, offsetY } = event;
