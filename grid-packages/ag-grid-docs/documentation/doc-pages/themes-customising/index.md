@@ -333,13 +333,6 @@ header-column-resize-handle-color: ag-derived(border-color, $opacity: 0.5),
 // INPUTS
 //
 
-// Suppress styling of checkbox/radio/range input elements. If you want to
-// style these yourself, set this to true. If you only want to disable styling
-// for some kinds of input, you can set this to true and e.g.
-// @include ag-native-inputs((checkbox: false)) which will emit styles for
-// all kinds of input except checkboxes.
-suppress-native-widget-styling: false,
-
 input-border-color: null,
 input-border-color-invalid: null,
 input-disabled-border-color: ag-derived(input-border-color, $opacity: 0.3),

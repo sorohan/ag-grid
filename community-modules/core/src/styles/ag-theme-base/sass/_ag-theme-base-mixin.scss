@@ -54,9 +54,7 @@ $ag-compatibility-mode: "variables" !default;
     @include ag-theme-base-part-column-drop();
     @include ag-theme-base-part-charts();
     @include ag-theme-base-part-date-time();
-
-    @if not ag-param(suppress-native-widget-styling) {
-        @include ag-native-inputs();
-    }
+    @include ag-native-inputs();
+    
     @include ag-allow-color-param-access-with-ag-param(true);
 }

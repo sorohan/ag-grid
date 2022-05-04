@@ -130,6 +130,8 @@ $-ag-allow-color-param-access-with-ag-param: true;
     $-ag-allow-color-param-access-with-ag-param: $allow !global;
 }
 
+$-ag-deleted-params: (suppress-native-widget-styling: true);
+
 // Merge params supplied to a theme with the defaults, optionally validate, and register
 // the resulting map globally for use with ag-param()
 //
@@ -141,7 +143,7 @@ $-ag-allow-color-param-access-with-ag-param: true;
     // passed to the base theme, so don't re-validate params that have already been validated
     @if not map-has-key($params, "--ag-already-validated") {
         @each $key in map-keys($params) {
-            @if not map-has-key($defaults, $key) and str-index($key, "--internal-") != 1 {
+            @if not map-has-key($defaults, $key) and not map-get($-ag-deleted-params, $key) and str-index($key, "--internal-") != 1 {
                 @warn "Unrecognised param \"#{$key}\"";
             }
         }
