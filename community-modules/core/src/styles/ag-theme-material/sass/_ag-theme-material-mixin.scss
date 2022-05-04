@@ -21,6 +21,7 @@
 
     .ag-tab {
         height: calc(var(--ag-grid-size) * 4.5);
+        flex: 1 1 auto;
     }
 
     .ag-tabs-header,

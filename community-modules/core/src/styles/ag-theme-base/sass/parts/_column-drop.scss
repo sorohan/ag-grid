@@ -43,9 +43,7 @@
     }
     
     .ag-column-drop-horizontal-half-width:not(:last-child) {
-        @if ag-param(borders) {
-            @include ag-theme-rtl((border-right: solid 1px), $color-param: border-color);
-        }
+        @include ag-theme-rtl((border-right: var(--ag-borders)));
     }
 
     .ag-column-drop-horizontal-cell-separator {

@@ -71,10 +71,6 @@
         justify-content: center;
         cursor: pointer;
 
-        @if ag-param(full-width-tabs) {
-            flex: 1 1 auto;
-        }
-
         @if ag-param(selected-tab-underline-transition-speed) {
             transition: border-bottom ag-param(selected-tab-underline-transition-speed);
         }
