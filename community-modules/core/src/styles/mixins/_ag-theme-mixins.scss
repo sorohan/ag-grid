@@ -25,7 +25,7 @@
                     width: calc(100% - #{$offset * 2});
                     height: calc(100% - #{$offset * 2});
                     border: 1px solid;
-                    @include ag-color-property(border-color, input-focus-border-color);
+                    border-color: var(--ag-input-focus-border-color);
                 }
             }
         }
@@ -48,7 +48,7 @@
         left: 0;
         right: 0;
         height: 1px;
-        @include ag-color-property(background-color, range-selection-border-color);
+        background-color: var(--ag-range-selection-border-color);
     }
     .ag-item-highlight-top::after {
         top: 0;
@@ -72,7 +72,7 @@
 @mixin ag-card() {
     border: var(--ag-borders);
     
-    @include ag-color-property(background, background-color);
+    background: var(--ag-background-color);
     border-radius: var(--ag-card-radius);
     box-shadow: var(--ag-card-shadow);
     padding: var(--ag-grid-size);
@@ -223,7 +223,7 @@ $-ag-included-themes: () !default;
             @each $property, $value in $rules {
                 #{$property}: $value;
                 @if $color-param {
-                    @include ag-color-property(#{$property}-color, $color-param);
+                    #{$property}-color: var(--ag-#{$color-param});
                 }
             }
         }
@@ -231,7 +231,7 @@ $-ag-included-themes: () !default;
             @each $property, $value in ag-get-rtl-rules($rules) {
                 #{$property}: $value;
                 @if $color-param {
-                    @include ag-color-property(#{$property}-color, $color-param);
+                    #{$property}-color: var(--ag-#{$color-param});
                 }
             }
         }

@@ -34,12 +34,12 @@ $ag-compatibility-mode: "variables" !default;
     @include ag-icons-webfont();
 
     -webkit-font-smoothing: antialiased;
-    @include ag-color-property(color, foreground-color);
+    color: var(--ag-foreground-color);
     font-family: var(--ag-font-family);
     font-size: var(--ag-font-size);
     line-height: normal;
     .ag-root-wrapper {
-        @include ag-color-property(background-color, background-color);
+        background-color: var(--ag-background-color);
     }
 
     @include ag-theme-base-part-reset();

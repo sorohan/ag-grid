@@ -25,12 +25,12 @@
 
     input[class^='ag-'] {
         margin: 0;
-        @include ag-color-property(background-color, background-color);
+        background-color: var(--ag-background-color);
     }
 
     textarea[class^='ag-'],
     select[class^='ag-'] {
-        @include ag-color-property(background-color, background-color);
+        background-color: var(--ag-background-color);
     }
 
     input[class^='ag-']:not([type]),
@@ -49,25 +49,25 @@
         @if ag-param-is-set(input-border-color) {
             border-width: 1px;
             border-style: solid;
-            @include ag-color-property(border-color, input-border-color);
+            border-color: var(--ag-input-border-color);
         }
 
         &:disabled {
-            @include ag-color-property(color, disabled-foreground-color);
-            @include ag-color-property(background-color, input-disabled-background-color);
-            @include ag-color-property(border-color, input-disabled-border-color);
+            color: var(--ag-disabled-foreground-color);
+            background-color: var(--ag-input-disabled-background-color);
+            border-color: var(--ag-input-disabled-border-color);
         }
 
         &:focus {
             outline: none;
             box-shadow: var(--ag-input-focus-box-shadow);
-            @include ag-color-property(border-color, input-focus-border-color);
+            border-color: var(--ag-input-focus-border-color);
         }
 
         &:invalid {
             border-width: 2px;
             border-style: solid;
-            @include ag-color-property(border-color, input-border-color-invalid);
+            border-color: var(--ag-input-border-color-invalid);
         }
     }
 
@@ -91,7 +91,7 @@
     }
 
     .ag-drag-handle {
-        @include ag-color-property(color, secondary-foreground-color);
+        color: var(--ag-secondary-foreground-color);
     }
 
     ////////////////////////////////////////
@@ -104,7 +104,7 @@
     @include ag-keyboard-focus((ag-virtual-list-item), 4px);
 
     .ag-select-list {
-        @include ag-color-property(background-color, background-color);
+        background-color: var(--ag-background-color);
         overflow-y: auto;
         overflow-x: hidden;
     }
@@ -117,7 +117,7 @@
         text-overflow: ellipsis;
 
         &.ag-active-item {
-            @include ag-color-property(background-color, row-hover-color);
+            background-color: var(--ag-row-hover-color);
         }
     }
 
@@ -135,7 +135,7 @@
 
     .ag-select {
         .ag-picker-field-wrapper {
-            @include ag-color-property(background-color, background-color);
+            background-color: var(--ag-background-color);
             min-height: var(--ag-list-item-height);
             cursor: default;
         }
@@ -166,7 +166,7 @@
     // Rich Select
     ////////////////////////////////////////
     .ag-rich-select {
-        @include ag-color-property(background-color, control-panel-background-color);
+        background-color: var(--ag-control-panel-background-color);
     }
 
     .ag-rich-select-list {
@@ -187,7 +187,7 @@
         height: var(--ag-list-item-height);
 
         &:hover {
-            @include ag-color-property(background-color, row-hover-color);
+            background-color: var(--ag-row-hover-color);
         }
     }
 
@@ -196,7 +196,7 @@
     }
 
     .ag-rich-select-row-selected {
-        @include ag-color-property(background-color, selected-row-background-color);
+        background-color: var(--ag-selected-row-background-color);
     }
 
     ////////////////////////////////////////
@@ -210,7 +210,7 @@
     .ag-group-contracted {
         @include ag-theme-rtl(( margin-right: var(--ag-cell-widget-spacing) ));
 
-        @include ag-color-property(color, secondary-foreground-color);
+        color: var(--ag-secondary-foreground-color);
     }
 
     .ag-cell-wrapper > *:not(.ag-cell-value):not(.ag-group-value) {
@@ -229,7 +229,7 @@
     .ag-group-title-bar-icon {
         cursor: pointer;
         flex: none;
-        @include ag-color-property(color, secondary-foreground-color);
+        color: var(--ag-secondary-foreground-color);
     }
 
     .ag-group-child-count {
@@ -237,13 +237,13 @@
     }
 
     .ag-group-title-bar {
-        @include ag-color-property(background-color, subheader-background-color);
+        background-color: var(--ag-subheader-background-color);
         padding: var(--ag-grid-size);
     }
 
     .ag-group-toolbar {
         padding: var(--ag-grid-size);
-        @include ag-color-property(background-color, subheader-toolbar-background-color);
+        background-color: var(--ag-subheader-toolbar-background-color);
     }
 
     .ag-disabled-group-title-bar, .ag-disabled-group-container {
@@ -273,8 +273,8 @@
         height: 24px;
         border-radius: 12px;
         border: solid 1px;
-        @include ag-color-property(border-color, border-color);
-        @include ag-color-property(background-color, background-color);
+        border-color: var(--ag-border-color);
+        background-color: var(--ag-background-color);
     }
     .ag-angle-select-child-circle {
         top: 4px;
@@ -284,12 +284,12 @@
         margin-left: -3px;
         margin-top: -4px;
         border-radius: 3px;
-        @include ag-color-property(background-color, secondary-foreground-color);
+        background-color: var(--ag-secondary-foreground-color);
     }
 
     .ag-picker-field-wrapper {
         border: 1px solid;
-        @include ag-color-property(border-color, border-color);
+        border-color: var(--ag-border-color);
         border-radius: 5px;
         &:focus {
             box-shadow: var(--ag-input-focus-box-shadow);
@@ -297,8 +297,8 @@
     }
 
     .ag-picker-field-button {
-        @include ag-color-property(background-color, background-color);
-        @include ag-color-property(color, secondary-foreground-color);
+        background-color: var(--ag-background-color);
+        color: var(--ag-secondary-foreground-color);
     }
 
     .ag-dialog.ag-color-dialog {
@@ -380,7 +380,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         border: var(--ag-borders-secondary);
-        @include ag-color-property(color, secondary-foreground-color);
+        color: var(--ag-secondary-foreground-color);
         height: var(--ag-header-height) !important;
         line-height: var(--ag-header-height);
         margin: 0;
@@ -390,7 +390,7 @@
 
     .ag-dnd-ghost-icon {
         margin-right: var(--ag-grid-size);
-        @include ag-color-property(color, foreground-color);
+        color: var(--ag-foreground-color);
     }
 
     ////////////////////////////////////////
@@ -416,12 +416,12 @@
     }
 
     .ag-panel {
-        @include ag-color-property(background-color, background-color);
+        background-color: var(--ag-background-color);
     }
 
     .ag-panel-title-bar {
-        @include ag-color-property(background-color, header-background-color);
-        @include ag-color-property(color, header-foreground-color);
+        background-color: var(--ag-header-background-color);
+        color: var(--ag-header-foreground-color);
         height: var(--ag-header-height);
         padding: var(--ag-grid-size) var(--ag-cell-horizontal-padding);
         border-bottom: var(--ag-borders);
@@ -435,8 +435,8 @@
     // Tooltip
     ////////////////////////////////////////
     .ag-tooltip {
-        @include ag-color-property(background-color, header-background-color);
-        @include ag-color-property(color, foreground-color);
+        background-color: var(--ag-header-background-color);
+        color: var(--ag-foreground-color);
         padding: var(--ag-grid-size);
         border: var(--ag-borders);
         border-radius: var(--ag-card-radius);
@@ -493,7 +493,7 @@
 
     .ag-column-select-column-readonly,
     .ag-column-select-column-group-readonly {
-        @include ag-color-property(color, disabled-foreground-color);
+        color: var(--ag-disabled-foreground-color);
         pointer-events: none;
     }
 
@@ -556,7 +556,7 @@
         height: 100%;
     }
 
-    @include ag-color-property(background-color, checkbox-background-color);
+    background-color: var(--ag-checkbox-background-color);
     border-radius: var(--ag-checkbox-border-radius);
     display: inline-block;
     vertical-align: middle;
@@ -582,7 +582,7 @@
 
     &::after {
         content: ag-icon-char(checkbox-unchecked);
-        @include ag-color-property(color, checkbox-unchecked-color);
+        color: var(--ag-checkbox-unchecked-color);
         position: absolute;
         top: 0;
         left: 0;
@@ -591,7 +591,7 @@
 
     &.ag-checked::after {
         content: ag-icon-char(checkbox-checked);
-        @include ag-color-property(color, checkbox-checked-color);
+        color: var(--ag-checkbox-checked-color);
         position: absolute;
         top: 0;
         left: 0;
@@ -600,7 +600,7 @@
 
     &.ag-indeterminate::after {
         content: ag-icon-char(checkbox-indeterminate);
-        @include ag-color-property(color, checkbox-indeterminate-color);
+        color: var(--ag-checkbox-indeterminate-color);
         position: absolute;
         top: 0;
         left: 0;
@@ -615,7 +615,7 @@
 
     &::after {
         content: ag-icon-char(radio-button-off);
-        @include ag-color-property(color, checkbox-unchecked-color);
+        color: var(--ag-checkbox-unchecked-color);
         position: absolute;
         top: 0;
         left: 0;
@@ -624,7 +624,7 @@
 
     &.ag-checked::after {
         content: ag-icon-char(radio-button-on);
-        @include ag-color-property(color, checkbox-checked-color);
+        color: var(--ag-checkbox-checked-color);
         position: absolute;
         top: 0;
         left: 0;
@@ -636,12 +636,12 @@
     box-sizing: border-box;
     width: var(--ag-toggle-button-width);
     height: var(--ag-toggle-button-height);
-    @include ag-color-property(background-color, toggle-button-off-background-color);
+    background-color: var(--ag-toggle-button-off-background-color);
     border-radius: calc(var(--ag-toggle-button-height) * 0.5);
     position: relative;
     flex: none;
     border: var(--ag-toggle-button-border-width) solid;
-    @include ag-color-property(border-color, toggle-button-off-border-color);
+    border-color: var(--ag-toggle-button-off-border-color);
 
     input {
         opacity: 0;
@@ -659,8 +659,8 @@
     }
 
     &.ag-checked {
-        @include ag-color-property(background-color, toggle-button-on-background-color);
-        @include ag-color-property(border-color, toggle-button-on-border-color);
+        background-color: var(--ag-toggle-button-on-background-color);
+        border-color: var(--ag-toggle-button-on-border-color);
     }
 
     &::before {
@@ -672,16 +672,16 @@
         box-sizing: border-box;
         height: var(--ag-toggle-button-height);
         width: var(--ag-toggle-button-height);
-        @include ag-color-property(background-color, toggle-button-switch-background-color);
+        background-color: var(--ag-toggle-button-switch-background-color);
         border-radius: 100%;
         transition: left 100ms;
         border: var(--ag-toggle-button-border-width) solid;
-        @include ag-color-property(border-color, toggle-button-switch-border-color);
+        border-color: var(--ag-toggle-button-switch-border-color);
     }
 
     &.ag-checked::before {
         left: calc(100% - var(--ag-toggle-button-height) );
-        @include ag-color-property(border-color, toggle-button-on-border-color);
+        border-color: var(--ag-toggle-button-on-border-color);
     }
 }
 
@@ -694,7 +694,7 @@
         padding: 0;
         width: 100%;
         height: 3px;
-        @include ag-color-property(background-color, border-color);
+        background-color: var(--ag-border-color);
         border-radius: var(--ag-border-radius);
         border-radius: var(--ag-checkbox-border-radius);
     }
@@ -711,7 +711,7 @@
         @include ag-focus-range-track
     }
     @else {
-        @include ag-color-property(background-color, input-focus-border-color);
+        background-color: var(--ag-input-focus-border-color);
     }
 }
 
@@ -725,9 +725,9 @@
         -webkit-appearance: none;
         width: var(--ag-icon-size);
         height: var(--ag-icon-size);
-        @include ag-color-property(background-color, background-color);
+        background-color: var(--ag-background-color);
         border: 1px solid;
-        @include ag-color-property(border-color, checkbox-unchecked-color);
+        border-color: var(--ag-checkbox-unchecked-color);
         border-radius: var(--ag-icon-size);
     }
 }
@@ -738,7 +738,7 @@
         @include ag-focus-range-thumb
     }
     @else {
-        @include ag-color-property(border-color, checkbox-checked-color);
+        border-color: var(--ag-checkbox-checked-color);
     }
 }
 

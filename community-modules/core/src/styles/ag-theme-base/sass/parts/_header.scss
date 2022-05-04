@@ -1,12 +1,12 @@
 @mixin ag-theme-base-part-header {
 
     .ag-header {
-        @include ag-color-property(background-color, header-background-color);
+        background-color: var(--ag-header-background-color);
         border-bottom: var(--ag-borders-critical);
     }
 
     .ag-header-row {
-        @include ag-color-property(color, header-foreground-color);
+        color: var(--ag-header-foreground-color);
         height: var(--ag-header-height);
     }
 
@@ -32,14 +32,14 @@
         padding-right: var(--ag-cell-horizontal-padding);
 
         &.ag-header-cell-moving {
-            @include ag-color-property(background-color, header-cell-moving-background-color);
+            background-color: var(--ag-header-cell-moving-background-color);
         }
     }
 
     @include ag-keyboard-focus((ag-header-cell, ag-header-group-cell), 4px);
 
     .ag-header-icon {
-        @include ag-color-property(color, secondary-foreground-color);
+        color: var(--ag-secondary-foreground-color);
     }
 
     .ag-header-expand-icon {
@@ -64,7 +64,7 @@
         @if (ag-param-is-set(header-cell-hover-background-color) and ag-params-are-different(header-cell-hover-background-color, header-background-color)) {
             &:not(.ag-header-cell-moving):hover,
             &.ag-column-resizing {
-                @include ag-color-property(background-color, header-cell-hover-background-color);
+                background-color: var(--ag-header-cell-hover-background-color);
             }
         }
     }
@@ -78,7 +78,7 @@
         width: var(--ag-header-column-separator-width);
         height: var(--ag-header-column-separator-height);
         top: calc(50% - var(--ag-header-column-separator-height) * 0.5);
-        @include ag-color-property(background-color, header-column-separator-color);
+        background-color: var(--ag-header-column-separator-color);
 
         @include ag-theme-rtl(( right: 0 ));
     }
@@ -97,7 +97,7 @@
         width: var(--ag-header-column-resize-handle-width);
         height: var(--ag-header-column-resize-handle-height);
         top: calc(50% - var(--ag-header-column-resize-handle-height) * 0.5);
-        @include ag-color-property(background-color, header-column-resize-handle-color);
+        background-color: var(--ag-header-column-resize-handle-color);
     }
 
     .ag-pinned-right-header .ag-header-cell-resize::after {
@@ -123,7 +123,7 @@
     }
 
     .ag-filter-loading {
-        @include ag-color-property(background-color, control-panel-background-color);
+        background-color: var(--ag-control-panel-background-color);
         height: 100%;
         padding: var(--ag-widget-container-vertical-padding) var(--ag-widget-container-horizontal-padding);
         position: absolute;

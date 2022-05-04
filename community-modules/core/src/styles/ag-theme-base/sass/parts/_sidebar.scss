@@ -7,14 +7,14 @@
 
     .ag-tool-panel-wrapper {
         width: var(--ag-side-bar-panel-width);
-        @include ag-color-property(background-color, control-panel-background-color);
+        background-color: var(--ag-control-panel-background-color);
     }
 
     .ag-side-buttons {
         padding-top: calc(var(--ag-grid-size) * 4);
         width: calc(var(--ag-icon-size) + 4px);
         position: relative;
-        @include ag-color-property(color, foreground-color);
+        color: var(--ag-foreground-color);
         overflow: hidden;
     }
 
@@ -64,7 +64,7 @@
         }
 
         .ag-selected .ag-side-button-button {
-            @include ag-color-property(border-right-color, selected-tab-underline-color);
+            border-right-color: var(--ag-selected-tab-underline-color);
         }
     }
 
@@ -83,7 +83,7 @@
         }
 
         .ag-selected .ag-side-button-button {
-            @include ag-color-property(border-left-color, selected-tab-underline-color);
+            border-left-color: var(--ag-selected-tab-underline-color);
         }
     }
     

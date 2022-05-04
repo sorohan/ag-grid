@@ -31,7 +31,7 @@
 
     .ag-column-group-icons,
     .ag-column-select-header-icon {
-        @include ag-color-property(color, secondary-foreground-color);
+        color: var(--ag-secondary-foreground-color);
     }
 
     .ag-column-select-list {

@@ -3,7 +3,7 @@
 
     // CELL (SHARED)
     .ag-column-drop-cell {
-        @include ag-color-property(background, chip-background-color);
+        background: var(--ag-chip-background-color);
         border-radius: calc(var(--ag-grid-size) * 4);
         height: calc(var(--ag-grid-size) * 4);
         padding: 0 calc(var(--ag-grid-size) * 0.5);
@@ -20,7 +20,7 @@
         min-width: calc(var(--ag-grid-size) * 4);
 
         margin: 0 calc(var(--ag-grid-size) * 0.5);
-        @include ag-color-property(color, secondary-foreground-color);
+        color: var(--ag-secondary-foreground-color);
     }
     
     .ag-column-drop-cell-drag-handle {
@@ -34,8 +34,8 @@
     // HORIZONTAL COLUMN DROP
     
     .ag-column-drop-horizontal {
-        @include ag-color-property(background-color, control-panel-background-color);
-        @include ag-color-property(color, secondary-foreground-color);
+        background-color: var(--ag-control-panel-background-color);
+        color: var(--ag-secondary-foreground-color);
         height: var(--ag-row-height);
         border-bottom: var(--ag-borders);
 
@@ -48,11 +48,11 @@
 
     .ag-column-drop-horizontal-cell-separator {
         margin: 0 var(--ag-grid-size);
-        @include ag-color-property(color, secondary-foreground-color);
+        color: var(--ag-secondary-foreground-color);
     }
 
     .ag-column-drop-horizontal-empty-message {
-        @include ag-color-property(color, disabled-foreground-color);
+        color: var(--ag-disabled-foreground-color);
     }
 
     .ag-column-drop-horizontal-icon {
@@ -92,14 +92,14 @@
         left: 0;
         right: 0;
         overflow: hidden;
-        @include ag-color-property(color, disabled-foreground-color);
+        color: var(--ag-disabled-foreground-color);
         margin-top: var(--ag-grid-size);
     }
 
     .ag-select-agg-func-popup {
         @include ag-card();
 
-        @include ag-color-property(background, background-color);
+        background: var(--ag-background-color);
         height: calc(var(--ag-grid-size) * 5 * 3.5);
         padding: 0;
     }
@@ -109,7 +109,7 @@
         padding-left: calc(var(--ag-grid-size) * 2);
 
         &:hover {
-            @include ag-color-property(background-color, selected-row-background-color);
+            background-color: var(--ag-selected-row-background-color);
         }
     }
 

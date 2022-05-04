@@ -12,30 +12,7 @@
     .ag-panel-title-bar-title,
     .ag-multi-filter-group-title-bar {
         font-weight: 700;
-        @include ag-color-property(color, header-foreground-color);
-    }
-
-    %ag-pinned-row-end {
-        content: '';
-        position: absolute;
-        height: calc(100% - 20px);
-        top: 10px;
-        width: 1px;
-        @include ag-color-property(background-color, border-color);
-    }
-
-    .ag-ltr {
-        .ag-pinned-right-header .ag-header-row::after {
-            @extend %ag-pinned-row-end;
-            right: 0;
-        }
-    }
-
-    .ag-rtl {
-        .ag-pinned-left-header .ag-header-row::before {
-            @extend %ag-pinned-row-end;
-            left: 0;
-        }
+        color: var(--ag-header-foreground-color);
     }
 
     .ag-row {
@@ -57,15 +34,15 @@
         flex: 1 1 auto;
     }
     .ag-tab-selected {
-        @include ag-color-property(color, alpine-active-color);
+        color: var(--ag-alpine-active-color);
     }
 
     .ag-menu {
-        @include ag-color-property(background-color, control-panel-background-color);
+        background-color: var(--ag-control-panel-background-color);
     }
 
     .ag-menu-header {
-        @include ag-color-property(background-color, control-panel-background-color);
+        background-color: var(--ag-control-panel-background-color);
         padding-top: 1px; // hack to align column menu tab header border with header row border
     }
 
@@ -81,7 +58,7 @@
     }
 
     .ag-chart-mini-thumbnail {
-        @include ag-color-property(background-color, background-color);
+        background-color: var(--ag-background-color);
     }
 
     .ag-chart-settings-nav-bar {
@@ -99,7 +76,7 @@
 
     .ag-charts-format-sub-level-group {
         border-left: dashed 1px;
-        @include ag-color-property(border-left-color, border-color);
+        border-left-color: var(--ag-border-color);
         padding-left: var(--ag-grid-size);
         margin-bottom: calc(var(--ag-grid-size) * 2);
     }
@@ -133,27 +110,27 @@
         -webkit-appearance: none;
         border-radius: var(--ag-border-radius);
         border: 1px solid;
-        @include ag-color-property(border-color, alpine-active-color);
-        @include ag-color-property(color, alpine-active-color);
-        @include ag-color-property(background-color, background-color);
+        border-color: var(--ag-alpine-active-color);
+        color: var(--ag-alpine-active-color);
+        background-color: var(--ag-background-color);
         font-weight: 600;
         padding: var(--ag-grid-size) calc(var(--ag-grid-size) * 2);
 
         &:hover {
-            @include ag-color-property(border-color, alpine-active-color);
-            @include ag-color-property(background-color, row-hover-color);
+            border-color: var(--ag-alpine-active-color);
+            background-color: var(--ag-row-hover-color);
         }
 
         &:active {
-            @include ag-color-property(border-color, alpine-active-color);
-            @include ag-color-property(background-color, alpine-active-color);
-            @include ag-color-property(color, background-color);
+            border-color: var(--ag-alpine-active-color);
+            background-color: var(--ag-alpine-active-color);
+            color: var(--ag-background-color);
         }
 
         &:disabled {
-            @include ag-color-property(color, disabled-foreground-color);
-            @include ag-color-property(background-color, input-disabled-background-color);
-            @include ag-color-property(border-color, input-disabled-border-color);
+            color: var(--ag-disabled-foreground-color);
+            background-color: var(--ag-input-disabled-background-color);
+            border-color: var(--ag-input-disabled-border-color);
         }
     }
 
@@ -170,13 +147,13 @@
         display: flex;
         align-items: center;
         border: dashed 1px;
-        @include ag-color-property(border-color, border-color);
+        border-color: var(--ag-border-color);
         margin: calc(var(--ag-grid-size) * 2);
         padding: calc(var(--ag-grid-size) * 2);
     }
 
     .ag-column-drop-empty-message {
-        @include ag-color-property(color, foreground-color);
+        color: var(--ag-foreground-color);
         opacity: 0.75;
     }
 
@@ -216,7 +193,7 @@
     .ag-filter-toolpanel-expand,
     .ag-chart-menu-icon {
         &:hover {
-            @include ag-color-property(color, alpine-active-color);
+            color: var(--ag-alpine-active-color);
         }
     }
 
@@ -237,9 +214,9 @@
 
     .ag-filter-toolpanel-instance-filter {
         border: none;
-        @include ag-color-property(background-color, control-panel-background-color);
+        background-color: var(--ag-control-panel-background-color);
         border-left: dashed 1px;
-        @include ag-color-property(border-left-color, border-color);
+        border-left-color: var(--ag-border-color);
         margin-left: calc(var(--ag-icon-size) * 0.5);
         padding-left: calc(var(--ag-icon-size) * 0.5);
         margin-right: calc(var(--ag-grid-size) * 2);
@@ -261,6 +238,6 @@
     }
 
     .ag-date-time-list-page-entry-is-current {
-        @include ag-color-property(background-color, alpine-active-color);
+        background-color: var(--ag-alpine-active-color);
     }
 }

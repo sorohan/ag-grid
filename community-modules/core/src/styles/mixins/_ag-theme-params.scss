@@ -60,7 +60,6 @@
 }
 
 // Use a parameter in SCSS, e.g. `color: ag-param(foreground-color)`
-// Note, it is not possible to use this for color params, use the ag-color-property mixin instead
 @function ag-param($name, $caller: null) {
     $resolved: -ag-param-unchecked($name);
     @if str-index(inspect($resolved), "ag-derived(") != null {
@@ -86,35 +85,6 @@
 // Return true if two params have different values
 @function ag-params-are-different($name-a, $name-b) {
     @return -ag-param-unchecked($name-a) != -ag-param-unchecked($name-b);
-}
-
-
-// A mixin to apply a color to an element. This sets the value of a CSS property using a
-// theme parameter, and also emits CSS that allows the value to be overridden at runtime
-// using CSS variables. If the mixin is called like this:
-//
-//   @include ag-color-property(background-color, header-background-color)
-//
-// ... and the header-background-color parameter is set to `red` then the emitted CSS will
-// be something like:
-//
-//   background-color: red;
-//   background-color: var(--ag-header-background-color, red);
-//
-// The optional $important argument can be used to add a CSS !important directive
-@mixin ag-color-property($property, $param, $important: false) {
-    $value: ag-param($param);
-    $important: if($important, !important, null);
-
-    @if $value != null {
-        #{$property}: $value $important;
-    }
-    @if not ag-param-is-set(suppress-css-var-overrides) {
-        $value-as-css-var: -ag-param-as-css-var($param);
-        @if $value != $value-as-css-var {
-            #{$property}: $value-as-css-var $important;
-        }
-    }
 }
 
 $-ag-deleted-params: (suppress-native-widget-styling: true);

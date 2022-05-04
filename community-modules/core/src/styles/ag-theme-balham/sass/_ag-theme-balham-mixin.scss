@@ -11,7 +11,7 @@
     .ag-header-row,
     .ag-multi-filter-group-title-bar {
         font-weight: 600;
-        @include ag-color-property(color, header-foreground-color);
+        color: var(--ag-header-foreground-color);
     }
 
     %ag-text-input {
@@ -22,7 +22,7 @@
 
     .ag-column-drop-vertical-empty-message, .ag-status-bar {
         font-weight: 600;
-        @include ag-color-property(color, disabled-foreground-color);
+        color: var(--ag-disabled-foreground-color);
     }
     .ag-dnd-ghost {
         font-weight: 600;
@@ -36,14 +36,14 @@
     }
 
     .ag-tab-selected {
-        @include ag-color-property(background-color, background-color);
-        @include ag-color-property(border-color, border-color);
+        background-color: var(--ag-background-color);
+        border-color: var(--ag-border-color);
         border-bottom-color: transparent;
     }
 
     .ag-tabs-header {
         border-bottom: 1px solid;
-        @include ag-color-property(border-bottom-color, border-color);
+        border-bottom-color: var(--ag-border-color);
     }
 
     .ag-column-drop-cell {
@@ -51,7 +51,7 @@
     }
 
     .ag-column-drop-vertical-title {
-        @include ag-color-property(color, foreground-color);
+        color: var(--ag-foreground-color);
     }
 
     .ag-column-drop-vertical-cell {
@@ -64,7 +64,7 @@
     }
 
     .ag-column-drop-vertical-icon {
-        @include ag-color-property(color, secondary-foreground-color);
+        color: var(--ag-secondary-foreground-color);
     }
 
     .ag-column-drop-vertical-empty-message {
@@ -79,7 +79,7 @@
     }
 
     .ag-column-drop-empty {
-        @include ag-color-property(color, disabled-foreground-color);
+        color: var(--ag-disabled-foreground-color);
     }
 
     .ag-column-drop-horizontal-cell-text {
@@ -91,14 +91,14 @@
     }
 
     .ag-menu-header {
-        @include ag-color-property(background-color, header-background-color);
+        background-color: var(--ag-header-background-color);
     }
 
     .ag-overlay-loading-center {
-        @include ag-color-property(background-color, background-color);
+        background-color: var(--ag-background-color);
         border: 1px solid;
-        @include ag-color-property(border-color, border-color);
-        @include ag-color-property(color, foreground-color);
+        border-color: var(--ag-border-color);
+        color: var(--ag-foreground-color);
         padding: calc(var(--ag-grid-size) * 4);
     }
 
