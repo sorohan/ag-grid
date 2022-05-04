@@ -60,7 +60,7 @@
 
         &:focus {
             outline: none;
-            box-shadow: ag-param(input-focus-box-shadow);
+            box-shadow: var(--ag-input-focus-box-shadow);
             @include ag-color-property(border-color, input-focus-border-color);
         }
 
@@ -86,7 +86,7 @@
 
     input[class^='ag-'][type='button'], button[class^='ag-'] {
         &:focus {
-            box-shadow: ag-param(input-focus-box-shadow);
+            box-shadow: var(--ag-input-focus-box-shadow);
         }
     }
 
@@ -292,7 +292,7 @@
         @include ag-color-property(border-color, border-color);
         border-radius: 5px;
         &:focus {
-            box-shadow: ag-param(input-focus-box-shadow);
+            box-shadow: var(--ag-input-focus-box-shadow);
         }
     }
 
@@ -564,7 +564,7 @@
 
     &:focus-within, &:active {
         outline: none;
-        box-shadow: ag-param(input-focus-box-shadow);
+        box-shadow: var(--ag-input-focus-box-shadow);
     }
 
     &.ag-disabled {
@@ -651,7 +651,7 @@
 
     &:focus-within {
         outline: none;
-        box-shadow: ag-param(input-focus-box-shadow);
+        box-shadow: var(--ag-input-focus-box-shadow);
     }
 
     &.ag-disabled {
@@ -733,7 +733,7 @@
 }
 
 @mixin ag-internal-focus-range-thumb {
-    box-shadow: ag-param(input-focus-box-shadow);
+    box-shadow: var(--ag-input-focus-box-shadow);
     @if mixin-exists(ag-focus-range-thumb) {
         @include ag-focus-range-thumb
     }

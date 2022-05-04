@@ -195,6 +195,6 @@
     }
 
     .ag-picker-field-wrapper:focus {
-        box-shadow: 0 0 0 1px ag-param(material-primary-color);
+        box-shadow: 0 0 0 1px var(--ag-material-primary-color);
     }
 }
