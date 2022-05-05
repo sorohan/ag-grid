@@ -58,7 +58,11 @@ export class Path extends Shape {
 
     protected updatePath() {}
 
-    render(ctx: CanvasRenderingContext2D): void {
+    render(ctx: CanvasRenderingContext2D, forceRender: boolean) {
+        if (!this.dirty && !forceRender) {
+            return;
+        }
+
         this.computeTransformMatrix();
         // if (scene.debug.renderBoundingBoxes) {
         //     const bbox = this.computeBBox();
@@ -75,5 +79,7 @@ export class Path extends Shape {
         this.path.draw(ctx);
 
         this.fillStroke(ctx);
+
+        super.render(ctx, forceRender);
     }
 }

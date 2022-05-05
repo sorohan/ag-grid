@@ -114,17 +114,20 @@ export class RangeSelector extends Group {
         return this.mask.computeVisibleRangeBBox();
     }
 
-    render(ctx: CanvasRenderingContext2D) {
+    render(ctx: CanvasRenderingContext2D, forceRender: boolean) {
+        if (!this.dirty && !forceRender) {
+            return;
+        }
         this.computeTransformMatrix();
         this.matrix.toContext(ctx);
 
         const { mask, minHandle, maxHandle } = this;
         [mask, minHandle, maxHandle].forEach(child => {
-            ctx.save();
-            if (child.visible) {
-                child.render(ctx);
+            if (child.visible && (forceRender || child.dirty)) {
+                ctx.save();
+                child.render(ctx, forceRender);
+                ctx.restore();
             }
-            ctx.restore();
         });
     }
 }

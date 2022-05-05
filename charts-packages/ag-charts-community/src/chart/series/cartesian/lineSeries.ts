@@ -204,6 +204,11 @@ export class LineSeries extends CartesianSeries {
     }
 
     private updateSelections() {
+        if (!this.nodeDataRefresh) {
+            return;
+        }
+        this.nodeDataRefresh = false;
+
         this.updateLinePath(); // this will create node data too
         this.updateNodeSelection();
     }

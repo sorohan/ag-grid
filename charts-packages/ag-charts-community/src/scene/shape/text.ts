@@ -236,7 +236,11 @@ export class Text extends Shape {
         return false;
     }
 
-    render(ctx: CanvasRenderingContext2D): void {
+    render(ctx: CanvasRenderingContext2D, forceRender: boolean): void {
+        if (!this.dirty && !forceRender) {
+            return;
+        }
+
         if (!this.lines.length || !this.scene) {
             return;
         }
@@ -302,6 +306,8 @@ export class Text extends Shape {
 
             ctx.strokeText(text, x, y);
         }
+
+        super.render(ctx, forceRender);
     }
 }
 

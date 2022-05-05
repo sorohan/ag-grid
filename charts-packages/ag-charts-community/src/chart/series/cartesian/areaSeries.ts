@@ -394,6 +394,11 @@ export class AreaSeries extends CartesianSeries {
     }
 
     updateSelections() {
+        if (!this.nodeDataRefresh) {
+            return;
+        }
+        this.nodeDataRefresh = false;
+
         this.createSelectionData();
         this.updateFillSelection();
         this.updateStrokeSelection();

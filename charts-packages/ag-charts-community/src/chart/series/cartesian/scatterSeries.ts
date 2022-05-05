@@ -303,6 +303,11 @@ export class ScatterSeries extends CartesianSeries {
     }
 
     private updateSelections() {
+        if (!this.nodeDataRefresh) {
+            return;
+        }
+        this.nodeDataRefresh = false;
+
         this.createNodeData();
         this.updateMarkerSelection();
         this.updateLabelSelection();

@@ -631,6 +631,11 @@ export class BarSeries extends CartesianSeries {
     }
 
     private updateSelections() {
+        if (!this.nodeDataRefresh) {
+            return;
+        }
+        this.nodeDataRefresh = false;
+
         this.createNodeData();
         this.updateRectSelection();
         this.updateLabelSelection();

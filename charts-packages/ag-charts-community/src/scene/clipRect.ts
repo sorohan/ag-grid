@@ -103,7 +103,11 @@ export class ClipRect extends Node {
         return new BBox(x, y, width, height);
     }
 
-    render(ctx: CanvasRenderingContext2D) {
+    render(ctx: CanvasRenderingContext2D, forceRender: boolean) {
+        if (!this.dirty && !forceRender) {
+            return;
+        }
+
         if (this.enabled) {
             if (this.dirtyPath) {
                 this.updatePath();
@@ -118,11 +122,13 @@ export class ClipRect extends Node {
         for (let i = 0; i < n; i++) {
             ctx.save();
             const child = children[i];
-            if (child.visible) {
-                child.render(ctx);
+            if (child.visible && (forceRender || child.dirty)) {
+                child.render(ctx, forceRender);
             }
             ctx.restore();
         }
+
+        super.render(ctx, forceRender);
 
         // debug
         // this.computeBBox().render(ctx, {

@@ -108,6 +108,9 @@ export abstract class Series extends Observable {
     directions: ChartAxisDirection[] = [ChartAxisDirection.X, ChartAxisDirection.Y];
     directionKeys: { [key in ChartAxisDirection]?: string[] } = {};
 
+    // Flag to determine if we should recalculate node data.
+    protected nodeDataRefresh = true;
+
     protected static highlightedZIndex = 1000000000000;
 
     readonly label = new Label();
@@ -165,6 +168,11 @@ export abstract class Series extends Observable {
 
     // Using processed data, create data that backs visible nodes.
     createNodeData(): SeriesNodeDatum[] { return []; }
+
+    // Indicate that something external changed and we should recalculate nodeData.
+    markNodeDataDirty() {
+        this.nodeDataRefresh = true;
+    }
 
     // Returns persisted node data associated with the rendered portion of the series' data.
     getNodeData(): readonly SeriesNodeDatum[] { return []; }

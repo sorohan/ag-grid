@@ -405,6 +405,11 @@ export class HistogramSeries extends CartesianSeries {
     }
 
     updateSelections() {
+        if (!this.nodeDataRefresh) {
+            return;
+        }
+        this.nodeDataRefresh = false;
+
         const nodeData = this.createNodeData();
 
         this.updateRectSelection(nodeData);

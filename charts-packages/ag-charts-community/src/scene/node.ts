@@ -517,14 +517,21 @@ export abstract class Node { // Don't confuse with `window.Node`.
         ]).inverseTo(this.inverseMatrix);
     }
 
-    abstract render(ctx: CanvasRenderingContext2D): void;
+    render(ctx: CanvasRenderingContext2D, forceRender: boolean): void {
+        this._dirty = false;
+    }
 
+    private _dirty = true;
     markDirty() {
+        this._dirty = true;
         if (this.parent) {
             this.parent.markDirty();
         } else if (this.scene) {
             this.scene.markDirty();
         }
+    }
+    get dirty() {
+        return this._dirty;
     }
 
     private _visible: boolean = true;

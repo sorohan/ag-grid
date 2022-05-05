@@ -473,7 +473,13 @@ export abstract class Chart extends Observable {
     private performUpdateTrigger = debouncedAnimationFrame(({ count }) => {
         this.performUpdate(count);
     });
-    public update(type = ChartUpdateType.FULL) {
+    public update(type = ChartUpdateType.FULL, opts?: { forceNodeDataRefresh: boolean }) {
+        const { forceNodeDataRefresh = false } = opts || {};
+
+        if (forceNodeDataRefresh) {
+            this.series.forEach(series => series.markNodeDataDirty());
+        }
+
         if (type < this.performUpdateType) {
             this.performUpdateType = type;
             this.performUpdateTrigger.schedule();
@@ -705,7 +711,7 @@ export abstract class Chart extends Observable {
     private resize(width: number, height: number) {
         this.scene.resize(width, height);
         
-        this.update(ChartUpdateType.PERFORM_LAYOUT);
+        this.update(ChartUpdateType.PERFORM_LAYOUT, { forceNodeDataRefresh: true });
     }
 
     processData(): void {
@@ -1179,6 +1185,17 @@ export abstract class Chart extends Observable {
                 }
             }
         }
+
+        // Careful to only schedule updates when necessary.
+        if ((this.highlightedDatum && !oldHighlightedDatum) ||
+            (this.highlightedDatum && oldHighlightedDatum &&
+                (this.highlightedDatum.series !== oldHighlightedDatum.series ||
+                    this.highlightedDatum.itemId !== oldHighlightedDatum.itemId))) {
+            this.highlightedDatum.series.markNodeDataDirty();
+            oldHighlightedDatum?.series.markNodeDataDirty();
+
+            this.update(ChartUpdateType.SERIES_UPDATE);
+        }
     }
 
     private onSeriesDatumPick(meta: TooltipMeta, datum: SeriesNodeDatum, node?: Shape, event?: MouseEvent) {
@@ -1207,12 +1224,14 @@ export abstract class Chart extends Observable {
 
     highlightDatum(datum: SeriesNodeDatum): void {
         this.scene.canvas.element.style.cursor = datum.series.cursor;
-        this.highlightedDatum = datum;
+
+        this.update(ChartUpdateType.SERIES_UPDATE);
     }
 
     dehighlightDatum(): void {
         if (this.highlightedDatum) {
             this.highlightedDatum = undefined;
+            this.update(ChartUpdateType.SERIES_UPDATE);
         }
     }
 }

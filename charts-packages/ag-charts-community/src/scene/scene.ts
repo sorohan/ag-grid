@@ -106,7 +106,7 @@ export class Scene {
         return this._frameIndex;
     }
 
-    readonly render = () => {
+    render() {
         const { ctx, root, pendingSize } = this;
 
         this.animationFrameId = 0;
@@ -121,13 +121,17 @@ export class Scene {
             return;
         }
 
+        if (!this.dirty) {
+            return;
+        }
+
         // start with a blank canvas, clear previous drawing
         ctx.clearRect(0, 0, this.width, this.height);
 
         if (root) {
             ctx.save();
             if (root.visible) {
-                root.render(ctx);
+                root.render(ctx, true);
             }
             ctx.restore();
         }

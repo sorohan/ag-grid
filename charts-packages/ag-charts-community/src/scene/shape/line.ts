@@ -90,7 +90,11 @@ export class Line extends Shape {
         return false;
     }
 
-    render(ctx: CanvasRenderingContext2D): void {
+    render(ctx: CanvasRenderingContext2D, forceRender: boolean) {
+        if (!this.dirty && !forceRender) {
+            return;
+        }
+    
         this.computeTransformMatrix();
         this.matrix.toContext(ctx);
 
@@ -116,5 +120,7 @@ export class Line extends Shape {
         ctx.lineTo(x2, y2);
 
         this.fillStroke(ctx);
+
+        super.render(ctx, forceRender);
     }
 }

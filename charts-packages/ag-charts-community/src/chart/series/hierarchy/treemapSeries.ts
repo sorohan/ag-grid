@@ -245,6 +245,11 @@ export class TreemapSeries extends HierarchySeries {
     }
 
     updateSelections() {
+        if (!this.nodeDataRefresh) {
+            return;
+        }
+        this.nodeDataRefresh = false;
+
         const { chart, dataRoot } = this;
 
         if (!chart || !dataRoot) {

@@ -78,7 +78,11 @@ export class Group extends Node {
         );
     }
 
-    render(ctx: CanvasRenderingContext2D) {
+    render(ctx: CanvasRenderingContext2D, forceRender: boolean) {
+        if (!this.dirty && !forceRender) {
+            return;
+        }
+
         // A group can have `scaling`, `rotation`, `translation` properties
         // that are applied to the canvas context before children are rendered,
         // so all children can be transformed at once.
@@ -97,12 +101,14 @@ export class Group extends Node {
 
         for (let i = 0; i < n; i++) {
             const child = children[i];
-            if (child.visible) {
+            if (child.visible && (forceRender || child.dirty)) {
                 ctx.save();
-                child.render(ctx);
+                child.render(ctx, forceRender);
                 ctx.restore();
             }
         }
+
+        super.render(ctx, forceRender);
 
         // debug
         // this.computeBBox().render(ctx, {
