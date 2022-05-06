@@ -164,22 +164,14 @@ export class AreaSeries extends CartesianSeries {
         const { marker, label } = this;
 
         marker.enabled = false;
-        marker.addPropertyListener('shape', this.onMarkerShapeChange, this);
 
         label.enabled = false;
     }
 
-    onMarkerShapeChange() {
-        this.markerSelection = this.markerSelection.setData([]);
-        this.markerSelection.exit.remove();
-    }
-
     protected _xKey: string = '';
     set xKey(value: string) {
-        if (this._xKey !== value) {
-            this._xKey = value;
-            this.xData = [];
-        }
+        this._xKey = value;
+        this.xData = [];
     }
 
     get xKey(): string {

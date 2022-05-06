@@ -100,6 +100,7 @@ export class Navigator {
             }
         });
         chart.seriesRoot.enabled = clipSeries;
+        chart.update(ChartUpdateType.SERIES_UPDATE, { forceNodeDataRefresh: true });
     }
 
     onDragStart(offset: Offset) {
@@ -165,8 +166,6 @@ export class Navigator {
                 rs.min = rs.max - span;
             }
         }
-
-        this.chart.update(ChartUpdateType.SERIES_UPDATE, { forceNodeDataRefresh: true });
     }
 
     onDragStop() {

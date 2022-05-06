@@ -180,64 +180,12 @@ export class HistogramSeries extends CartesianSeries {
         return values;
     }
 
-    protected _xKey: string = '';
-    set xKey(value: string) {
-        if (this._xKey !== value) {
-            this._xKey = value;
-        }
-    }
-
-    get xKey(): string {
-        return this._xKey;
-    }
-
-    private _areaPlot: boolean = false;
-    set areaPlot(c: boolean) {
-        this._areaPlot = c;
-    }
-
-    get areaPlot(): boolean {
-        return this._areaPlot;
-    }
-
-    private _bins: [number, number][] | undefined = undefined;
-    set bins(bins: [number, number][] | undefined) {
-        this._bins = bins;
-    }
-
-    get bins(): [number, number][] | undefined {
-        return this._bins;
-    }
-
-    private _aggregation: HistogramAggregation = 'count';
-    set aggregation(aggregation: HistogramAggregation) {
-        this._aggregation = aggregation;
-    }
-
-    get aggregation(): HistogramAggregation {
-        return this._aggregation;
-    }
-
-    private _binCount: number | undefined = undefined;
-    set binCount(binCount: number | undefined) {
-        this._binCount = binCount;
-    }
-
-    get binCount(): number | undefined {
-        return this._binCount;
-    }
-
-    protected _xName: string = '';
-    set xName(value: string) {
-        if (this._xName !== value) {
-            this._xName = value;
-        }
-    }
-
-    get xName(): string {
-        return this._xName;
-    }
-
+    xKey: string = '';
+    areaPlot: boolean = false;
+    bins: [number, number][] | undefined = undefined;
+    aggregation: HistogramAggregation = 'count';
+    binCount: number | undefined = undefined;
+    xName: string = '';
     protected _yKey: string = '';
     set yKey(yKey: string) {
         this._yKey = yKey;
@@ -248,36 +196,9 @@ export class HistogramSeries extends CartesianSeries {
         return this._yKey;
     }
 
-    protected _yName: string = '';
-    set yName(values: string) {
-        this._yName = values;
-    }
-
-    get yName(): string {
-        return this._yName;
-    }
-
-    private _strokeWidth: number = 1;
-    set strokeWidth(value: number) {
-        if (this._strokeWidth !== value) {
-            this._strokeWidth = value;
-        }
-    }
-
-    get strokeWidth(): number {
-        return this._strokeWidth;
-    }
-
-    private _shadow?: DropShadow;
-    set shadow(value: DropShadow | undefined) {
-        if (this._shadow !== value) {
-            this._shadow = value;
-        }
-    }
-
-    get shadow(): DropShadow | undefined {
-        return this._shadow;
-    }
+    yName: string = '';
+    strokeWidth: number = 1;
+    shadow?: DropShadow;
 
     onHighlightChange() {
         this.updateRectNodes();
@@ -351,7 +272,7 @@ export class HistogramSeries extends CartesianSeries {
             bins[currentBin].addDatum(datum);
         }
 
-        bins.forEach(b => b.calculateAggregatedValue(this._aggregation, this.yKey));
+        bins.forEach(b => b.calculateAggregatedValue(this.aggregation, this.yKey));
 
         return bins;
     }

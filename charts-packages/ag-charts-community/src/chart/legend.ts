@@ -48,7 +48,7 @@ interface LegendLabelFormatterParams {
     value: string;
 }
 
-export class LegendLabel extends Observable {
+export class LegendLabel {
     color = 'black';
     fontStyle?: FontStyle = undefined;
     fontWeight?: FontWeight = undefined;
@@ -57,7 +57,7 @@ export class LegendLabel extends Observable {
     formatter?: (params: LegendLabelFormatterParams) => string = undefined;
 }
 
-export class LegendMarker extends Observable {
+export class LegendMarker {
     size = 15;
     /**
      * If the marker type is set, the legend will always use that marker type for all its items,
@@ -88,7 +88,7 @@ export class LegendItem extends Observable {
     paddingY = 8;
 }
 
-export class Legend extends Observable {
+export class Legend {
 
     static className = 'Legend';
 
@@ -149,21 +149,7 @@ export class Legend extends Observable {
      */
     spacing = 20;
 
-    constructor() {
-        super();
-
-        this.item.marker.addPropertyListener('shape', this.onMarkerShapeChange, this);
-    }
-
-    private _size: [number, number] = [0, 0];
-    get size(): Readonly<[number, number]> {
-        return this._size;
-    }
-
-    protected onMarkerShapeChange() {
-        this.itemSelection = this.itemSelection.setData([]);
-        this.itemSelection.exit.remove();
-    }
+    readonly size: [number, number] = [0, 0];
 
     /**
      * The method is given the desired size of the legend, which only serves as a hint.
@@ -345,7 +331,7 @@ export class Legend extends Observable {
         // Update legend item properties that don't affect the layout.
         this.update();
 
-        const size = this._size;
+        const size = this.size;
         const oldSize = this.oldSize;
         size[0] = paddedItemsWidth;
         size[1] = paddedItemsHeight;

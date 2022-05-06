@@ -87,6 +87,7 @@ export class SeriesTooltip {
 }
 
 export abstract class Series extends Observable {
+    protected static highlightedZIndex = 1000000000000;
 
     readonly id = createId(this);
 
@@ -110,8 +111,6 @@ export abstract class Series extends Observable {
 
     // Flag to determine if we should recalculate node data.
     protected nodeDataRefresh = true;
-
-    protected static highlightedZIndex = 1000000000000;
 
     readonly label = new Label();
 

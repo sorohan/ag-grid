@@ -104,14 +104,8 @@ export class LineSeries extends CartesianSeries {
 
         marker.fill = '#c16068';
         marker.stroke = '#874349';
-        marker.addPropertyListener('shape', this.onMarkerShapeChange, this);
 
         label.enabled = false;
-    }
-
-    onMarkerShapeChange() {
-        this.nodeSelection = this.nodeSelection.setData([]);
-        this.nodeSelection.exit.remove();
     }
 
     setColors(fills: string[], strokes: string[]) {
@@ -122,10 +116,8 @@ export class LineSeries extends CartesianSeries {
 
     protected _xKey: string = '';
     set xKey(value: string) {
-        if (this._xKey !== value) {
-            this._xKey = value;
-            this.xData = [];
-        }
+        this._xKey = value;
+        this.xData = [];
     }
     get xKey(): string {
         return this._xKey;
@@ -135,10 +127,8 @@ export class LineSeries extends CartesianSeries {
 
     protected _yKey: string = '';
     set yKey(value: string) {
-        if (this._yKey !== value) {
-            this._yKey = value;
-            this.yData = [];
-        }
+        this._yKey = value;
+        this.yData = [];
     }
     get yKey(): string {
         return this._yKey;

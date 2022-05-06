@@ -432,7 +432,7 @@ export abstract class Chart extends Observable {
         background.fill = 'white';
         root.appendChild(background);
 
-        const element = this._element = document.createElement('div');
+        const element = this.element = document.createElement('div');
         element.setAttribute('class', 'ag-chart-wrapper');
 
         const scene = new Scene(document);
@@ -440,10 +440,6 @@ export abstract class Chart extends Observable {
         this.autoSize = true; // Triggers width/height calc - needs to happen before root group assignment.
         scene.root = root;
         scene.container = element;
-
-        const { legend } = this;
-        legend.item.label.addPropertyListener('formatter', this.updateLegend, this);
-        legend.addPropertyListener('position', this.onLegendPositionChange, this);
 
         this.tooltip = new ChartTooltip(this, document);
         this.tooltip.addPropertyListener('class', () => this.tooltip.toggle());
@@ -521,14 +517,7 @@ export abstract class Chart extends Observable {
         });
     }
 
-    private onLegendPositionChange() {
-        this.legendAutoPadding.clear();
-    }
-
-    protected _element: HTMLElement;
-    get element(): HTMLElement {
-        return this._element;
-    }
+    readonly element: HTMLElement;
 
     abstract get seriesRoot(): Node;
 
@@ -592,7 +581,6 @@ export abstract class Chart extends Observable {
 
     protected freeSeries(series: Series) {
         series.chart = undefined;
-        series.removeEventListener('legendChange', this.updateLegend, this);
         series.removeEventListener('nodeClick', this.onSeriesNodeClick, this);
     }
 

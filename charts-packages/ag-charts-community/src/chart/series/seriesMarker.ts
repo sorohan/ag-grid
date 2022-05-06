@@ -1,8 +1,7 @@
 import { Marker } from "../marker/marker";
-import { Observable } from "../../util/observable";
 import { Circle } from "../marker/circle";
 
-export class SeriesMarker extends Observable {
+export class SeriesMarker {
 
     enabled = true;
 

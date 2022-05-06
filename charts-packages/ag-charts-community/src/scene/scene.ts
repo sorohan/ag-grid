@@ -151,13 +151,3 @@ export class Scene {
         this._dirty = false;
     }
 }
-
-function dirtyTree(node: Node): {} {
-    return {
-        dirty: RedrawType[node.dirty],
-        node,
-        children: node.children
-            .filter(n => n.dirty !== RedrawType.NONE && n.visible)
-            .map(n => dirtyTree(n)),
-    };
-}

@@ -144,19 +144,13 @@ export class TreemapSeries extends HierarchySeries {
     colorName: string = 'Change';
     rootName: string = 'Root';
 
-    protected _shadow: DropShadow = (() => {
+    shadow: DropShadow = (() => {
         const shadow = new DropShadow();
         shadow.color = 'rgba(0, 0, 0, 0.4)';
         shadow.xOffset = 1.5;
         shadow.yOffset = 1.5;
         return shadow;
     })();
-    set shadow(value: DropShadow) {
-        this._shadow = value;
-    }
-    get shadow(): DropShadow {
-        return this._shadow;
-    }
 
     readonly tooltip = new TreemapSeriesTooltip();
 

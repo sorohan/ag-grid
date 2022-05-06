@@ -124,7 +124,7 @@ export class RangeSelector extends Group {
 
         const { mask, minHandle, maxHandle } = this;
         [mask, minHandle, maxHandle].forEach(child => {
-            if (child.visible && (forceRender || child.dirty)) {
+            if (child.visible && (forceRender || child.dirty > RedrawType.NONE)) {
                 ctx.save();
                 child.render(ctx, forceRender);
                 ctx.restore();

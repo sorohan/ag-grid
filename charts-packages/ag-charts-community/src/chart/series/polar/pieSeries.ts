@@ -180,7 +180,7 @@ export class PieSeries extends PolarSeries {
     labelKey?: string = undefined;
     labelName?: string = undefined;
 
-    private _fills: string[] = [
+    fills: string[] = [
         '#c16068',
         '#a2bf8a',
         '#ebcc87',
@@ -188,14 +188,8 @@ export class PieSeries extends PolarSeries {
         '#b58dae',
         '#85c0d1'
     ];
-    set fills(values: string[]) {
-        this._fills = values;
-    }
-    get fills(): string[] {
-        return this._fills;
-    }
 
-    private _strokes: string[] = [
+    strokes: string[] = [
         '#874349',
         '#718661',
         '#a48f5f',
@@ -203,12 +197,6 @@ export class PieSeries extends PolarSeries {
         '#7f637a',
         '#5d8692'
     ];
-    set strokes(values: string[]) {
-        this._strokes = values;
-    }
-    get strokes(): string[] {
-        return this._strokes;
-    }
 
     fillOpacity = 1;
     strokeOpacity = 1;

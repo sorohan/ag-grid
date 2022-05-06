@@ -13,7 +13,7 @@ import { PointerEvents } from "../../../scene/node";
 import { LegendDatum } from "../../legend";
 import { CartesianSeries } from "./cartesianSeries";
 import { ChartAxis, ChartAxisDirection, flipChartAxisDirection } from "../../chartAxis";
-import { TooltipRendererResult, toTooltipHtml } from "../../chart";
+import { TooltipRendererResult, toTooltipHtml, ChartUpdateType } from "../../chart";
 import { findMinMax } from "../../../util/array";
 import { equal } from "../../../util/equal";
 import { TypedEvent } from "../../../util/observable";
@@ -208,24 +208,14 @@ export class BarSeries extends CartesianSeries {
 
     protected _xKey: string = '';
     set xKey(value: string) {
-        if (this._xKey !== value) {
-            this._xKey = value;
-            this.xData = [];
-        }
+        this._xKey = value;
+        this.xData = [];
     }
     get xKey(): string {
         return this._xKey;
     }
 
-    protected _xName: string = '';
-    set xName(value: string) {
-        if (this._xName !== value) {
-            this._xName = value;
-        }
-    }
-    get xName(): string {
-        return this._xName;
-    }
+    protected xName: string = '';
 
     private cumYKeyCount: number[] = [];
     private flatYKeys: string[] | undefined = undefined; // only set when a user used a flat array for yKeys
@@ -326,33 +316,15 @@ export class BarSeries extends CartesianSeries {
     set normalizedTo(value: number | undefined) {
         const absValue = value ? Math.abs(value) : undefined;
 
-        if (this._normalizedTo !== absValue) {
-            this._normalizedTo = absValue;
-        }
+        this._normalizedTo = absValue;
     }
     get normalizedTo(): number | undefined {
         return this._normalizedTo;
     }
 
-    private _strokeWidth: number = 1;
-    set strokeWidth(value: number) {
-        if (this._strokeWidth !== value) {
-            this._strokeWidth = value;
-        }
-    }
-    get strokeWidth(): number {
-        return this._strokeWidth;
-    }
+    strokeWidth: number = 1;
 
-    private _shadow?: DropShadow;
-    set shadow(value: DropShadow | undefined) {
-        if (this._shadow !== value) {
-            this._shadow = value;
-        }
-    }
-    get shadow(): DropShadow | undefined {
-        return this._shadow;
-    }
+    shadow?: DropShadow;
 
     onHighlightChange() {
         this.updateRectNodes();
