@@ -1,6 +1,7 @@
 import { Shape } from "./shape";
 import { chainObjects } from "../../util/object";
 import { BBox } from "../bbox";
+import { RedrawType } from "../node";
 
 export class Line extends Shape {
 
@@ -20,7 +21,7 @@ export class Line extends Shape {
     set x1(value: number) {
         if (this._x1 !== value) {
             this._x1 = value;
-            this.markDirty();
+            this.markDirty(RedrawType.MAJOR);
         }
     }
     get x1(): number {
@@ -44,7 +45,7 @@ export class Line extends Shape {
     set y1(value: number) {
         if (this._y1 !== value) {
             this._y1 = value;
-            this.markDirty();
+            this.markDirty(RedrawType.MAJOR);
         }
     }
     get y1(): number {
@@ -55,7 +56,7 @@ export class Line extends Shape {
     set x2(value: number) {
         if (this._x2 !== value) {
             this._x2 = value;
-            this.markDirty();
+            this.markDirty(RedrawType.MAJOR);
         }
     }
     get x2(): number {
@@ -66,7 +67,7 @@ export class Line extends Shape {
     set y2(value: number) {
         if (this._y2 !== value) {
             this._y2 = value;
-            this.markDirty();
+            this.markDirty(RedrawType.MAJOR);
         }
     }
     get y2(): number {
@@ -91,7 +92,7 @@ export class Line extends Shape {
     }
 
     render(ctx: CanvasRenderingContext2D, forceRender: boolean) {
-        if (!this.dirty && !forceRender) {
+        if (this.dirty === RedrawType.NONE && !forceRender) {
             return;
         }
     

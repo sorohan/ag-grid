@@ -122,7 +122,7 @@ export class BarSeries extends CartesianSeries {
     private rectGroup = this.pickGroup.appendChild(new Group);
     private labelGroup = this.group.appendChild(new Group);
 
-    private rectSelection: Selection<Rect, Group, BarNodeDatum, any> = Selection.select(this.rectGroup).selectAll<Rect>();
+    private rectSelection: Selection<Group, Group, BarNodeDatum, any> = Selection.select(this.rectGroup).selectAll<Group>();
     private labelSelection: Selection<Text, Group, BarNodeDatum, any> = Selection.select(this.labelGroup).selectAll<Text>();
 
     private nodeData: BarNodeDatum[] = [];
@@ -648,13 +648,16 @@ export class BarSeries extends CartesianSeries {
     }
 
     private updateRectSelection(): void {
-        const updateRects = this.rectSelection.setData(this.nodeData);
-        updateRects.exit.remove();
-        const enterRects = updateRects.enter.append(Rect).each(rect => {
+        const updateSelection = this.rectSelection.setData(this.nodeData);
+        updateSelection.exit.remove();
+
+        const enterSelection = updateSelection.enter.append(Group);
+        enterSelection.append(Rect).each(rect => {
             rect.tag = BarSeriesNodeTag.Bar;
             rect.crisp = true;
         });
-        this.rectSelection = updateRects.merge(enterRects);
+
+        this.rectSelection = updateSelection.merge(enterSelection);
     }
 
     private updateRectNodes(): void {
@@ -678,7 +681,9 @@ export class BarSeries extends CartesianSeries {
             }
         } = this;
 
-        this.rectSelection.each((rect, datum, index) => {
+        this.rectSelection.each((group, datum, index) => {
+            const rect = group.children[0] as Rect;
+
             let colorIndex = 0;
             let i = 0;
             for (let j = 0; j < yKeys.length; j++) {
@@ -888,7 +893,6 @@ export class BarSeries extends CartesianSeries {
         seriesItemEnabled.set(itemId, enabled);
 
         const yKeys = this.yKeys.map(stack => stack.slice()); // deep clone
-
 
         seriesItemEnabled.forEach((enabled, yKey) => {
             if (!enabled) {

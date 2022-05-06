@@ -8,6 +8,19 @@ export enum PointerEvents {
     None
 }
 
+export enum RedrawType {
+    NONE, // No change in rendering.
+
+    // Canvas doesn't need clearing, an incremental re-rerender is sufficient.
+    TRIVIAL, // Non-positional change in rendering.
+
+    // Group needs clearing, a semi-incremental re-render is sufficient.
+    MINOR, // Small change in rendering, potentially affecting other elements in the same group.
+
+    // Canvas needs to be cleared for these redraw types.
+    MAJOR, // Significant change in rendering.
+}
+
 /**
  * Abstract scene graph node.
  * Each node can have zero or one parent and belong to zero or one scene.
@@ -143,7 +156,7 @@ export abstract class Node { // Don't confuse with `window.Node`.
             node._setScene(this.scene);
         }
 
-        this.markDirty();
+        this.markDirty(RedrawType.MAJOR);
     }
 
     appendChild<T extends Node>(node: T): T {
@@ -164,7 +177,7 @@ export abstract class Node { // Don't confuse with `window.Node`.
         node._setParent(this);
         node._setScene(this.scene);
 
-        this.markDirty();
+        this.markDirty(RedrawType.MAJOR);
 
         return node;
     }
@@ -178,7 +191,7 @@ export abstract class Node { // Don't confuse with `window.Node`.
                 delete this.childSet[node.id];
                 node._setParent();
                 node._setScene();
-                this.markDirty();
+                this.markDirty(RedrawType.MINOR);
 
                 return node;
             }
@@ -214,7 +227,7 @@ export abstract class Node { // Don't confuse with `window.Node`.
                     + `but is not in its list of children.`);
             }
 
-            this.markDirty();
+            this.markDirty(RedrawType.MAJOR);
         } else {
             this.append(node);
         }
@@ -267,7 +280,7 @@ export abstract class Node { // Don't confuse with `window.Node`.
     private _dirtyTransform = false;
     markDirtyTransform() {
         this._dirtyTransform = true;
-        this.markDirty();
+        this.markDirty(RedrawType.MAJOR);
     }
 
     private _scalingX: number = 1;
@@ -518,14 +531,32 @@ export abstract class Node { // Don't confuse with `window.Node`.
     }
 
     render(ctx: CanvasRenderingContext2D, forceRender: boolean): void {
-        this._dirty = false;
+        this._dirty = RedrawType.NONE;
     }
 
-    private _dirty = true;
-    markDirty() {
-        this._dirty = true;
+    clearBBox(ctx: CanvasRenderingContext2D) {
+        const bbox = this.computeBBox();
+        if (bbox == null) { return; }
+
+        const { x, y, width, height } = bbox;
+        const topLeft = this.transformPoint(x, y);
+        const bottomRight = this.transformPoint(x + width, y + height);
+        ctx.clearRect(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+    }
+
+    private _dirty: RedrawType = RedrawType.MAJOR;
+    markDirty(type = RedrawType.TRIVIAL, parentType = type) {
+        if (this._dirty > type) {
+            return;
+        }
+
+        if (this._dirty === type && type === parentType) {
+            return;
+        }
+
+        this._dirty = type;
         if (this.parent) {
-            this.parent.markDirty();
+            this.parent.markDirty(parentType);
         } else if (this.scene) {
             this.scene.markDirty();
         }
@@ -538,7 +569,7 @@ export abstract class Node { // Don't confuse with `window.Node`.
     set visible(value: boolean) {
         if (this._visible !== value) {
             this._visible = value;
-            this.markDirty();
+            this.markDirty(RedrawType.MINOR);
         }
     }
     get visible(): boolean {
@@ -554,7 +585,7 @@ export abstract class Node { // Don't confuse with `window.Node`.
             if (this.parent) {
                 this.parent.dirtyZIndex = true;
             }
-            this.markDirty();
+            this.markDirty(RedrawType.MINOR);
         }
     }
     get zIndex(): number {

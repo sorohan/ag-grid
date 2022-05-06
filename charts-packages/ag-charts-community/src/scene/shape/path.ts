@@ -1,5 +1,6 @@
 import { Shape } from "./shape";
 import { Path2D } from "../path2D";
+import { RedrawType } from "../node";
 
 export class Path extends Shape {
 
@@ -23,7 +24,7 @@ export class Path extends Shape {
         if (this._dirtyPath !== value) {
             this._dirtyPath = value;
             if (value) {
-                this.markDirty();
+                this.markDirty(RedrawType.MAJOR);
             }
         }
     }
@@ -40,7 +41,7 @@ export class Path extends Shape {
         if (this._svgPath !== value) {
             this._svgPath = value;
             this.path.setFromString(value);
-            this.markDirty();
+            this.markDirty(RedrawType.MAJOR);
         }
     }
     get svgPath(): string {
@@ -59,7 +60,7 @@ export class Path extends Shape {
     protected updatePath() {}
 
     render(ctx: CanvasRenderingContext2D, forceRender: boolean) {
-        if (!this.dirty && !forceRender) {
+        if (this.dirty === RedrawType.NONE && !forceRender) {
             return;
         }
 

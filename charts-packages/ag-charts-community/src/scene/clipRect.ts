@@ -1,4 +1,4 @@
-import { Node } from "./node";
+import { Node, RedrawType } from "./node";
 import { Path2D } from "./path2D";
 import { BBox } from "./bbox";
 
@@ -25,7 +25,7 @@ export class ClipRect extends Node {
     set enabled(value: boolean) {
         if (this._enabled !== value) {
             this._enabled = value;
-            this.markDirty();
+            this.markDirty(RedrawType.MAJOR);
         }
     }
     get enabled(): boolean {
@@ -37,7 +37,7 @@ export class ClipRect extends Node {
         if (this._dirtyPath !== value) {
             this._dirtyPath = value;
             if (value) {
-                this.markDirty();
+                this.markDirty(RedrawType.MAJOR);
             }
         }
     }
@@ -104,7 +104,7 @@ export class ClipRect extends Node {
     }
 
     render(ctx: CanvasRenderingContext2D, forceRender: boolean) {
-        if (!this.dirty && !forceRender) {
+        if (this.dirty === RedrawType.NONE && !forceRender) {
             return;
         }
 
@@ -116,13 +116,19 @@ export class ClipRect extends Node {
             ctx.clip();
         }
 
+        const clearNeeded = this.dirty >= RedrawType.MINOR;
+        if (!forceRender && clearNeeded) {
+            forceRender = true;
+            this.clearBBox(ctx);
+        }
+
         const children = this.children;
         const n = children.length;
 
         for (let i = 0; i < n; i++) {
             ctx.save();
             const child = children[i];
-            if (child.visible && (forceRender || child.dirty)) {
+            if (child.visible && (forceRender || child.dirty > RedrawType.NONE)) {
                 child.render(ctx, forceRender);
             }
             ctx.restore();

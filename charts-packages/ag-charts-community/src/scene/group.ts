@@ -1,4 +1,4 @@
-import { Node } from "./node";
+import { Node, RedrawType } from "./node";
 import { BBox } from "./bbox";
 import { Matrix } from "./matrix";
 
@@ -8,12 +8,17 @@ export class Group extends Node {
 
     protected isContainerNode: boolean = true;
 
+    markDirty(type = RedrawType.TRIVIAL) {
+        const parentType = type <= RedrawType.MINOR ? RedrawType.TRIVIAL : type;
+        super.markDirty(type, parentType);
+    }
+
     protected _opacity: number = 1;
     set opacity(value: number) {
         value = Math.min(1, Math.max(0, value));
         if (this._opacity !== value) {
             this._opacity = value;
-            this.markDirty();
+            this.markDirty(RedrawType.MINOR);
         }
     }
     get opacity(): number {
@@ -79,7 +84,7 @@ export class Group extends Node {
     }
 
     render(ctx: CanvasRenderingContext2D, forceRender: boolean) {
-        if (!this.dirty && !forceRender) {
+        if (this.dirty === RedrawType.NONE && !forceRender) {
             return;
         }
 
@@ -89,19 +94,25 @@ export class Group extends Node {
         this.computeTransformMatrix();
         this.matrix.toContext(ctx);
 
+        const clearNeeded = this.dirty >= RedrawType.MINOR;
+        if (!forceRender && clearNeeded) {
+            forceRender = true;
+            this.clearBBox(ctx);
+        }
+
         const children = this.children;
         const n = children.length;
-
-        ctx.globalAlpha *= this.opacity;
 
         if (this.dirtyZIndex) {
             this.dirtyZIndex = false;
             children.sort((a, b) => a.zIndex - b.zIndex);
         }
 
+        ctx.globalAlpha *= this.opacity;
+
         for (let i = 0; i < n; i++) {
             const child = children[i];
-            if (child.visible && (forceRender || child.dirty)) {
+            if (child.visible && (forceRender || child.dirty > RedrawType.NONE)) {
                 ctx.save();
                 child.render(ctx, forceRender);
                 ctx.restore();

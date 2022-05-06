@@ -2,6 +2,7 @@ import { Shape } from "./shape";
 import { chainObjects } from "../../util/object";
 import { BBox } from "../bbox";
 import { HdpiCanvas } from "../../canvas/hdpiCanvas";
+import { RedrawType } from "../node";
 
 export type FontStyle = 'normal' | 'italic' | 'oblique';
 export type FontWeight = 'normal' | 'bold' | 'bolder' | 'lighter' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
@@ -23,7 +24,7 @@ export class Text extends Shape {
     set x(value: number) {
         if (this._x !== value) {
             this._x = value;
-            this.markDirty();
+            this.markDirty(RedrawType.MAJOR);
         }
     }
     get x(): number {
@@ -34,7 +35,7 @@ export class Text extends Shape {
     set y(value: number) {
         if (this._y !== value) {
             this._y = value;
-            this.markDirty();
+            this.markDirty(RedrawType.MAJOR);
         }
     }
     get y(): number {
@@ -55,7 +56,7 @@ export class Text extends Shape {
         if (this._text !== str) {
             this._text = str;
             this.splitText();
-            this.markDirty();
+            this.markDirty(RedrawType.MAJOR);
         }
     }
     get text(): string {
@@ -77,7 +78,7 @@ export class Text extends Shape {
         if (this._dirtyFont !== value) {
             this._dirtyFont = value;
             if (value) {
-                this.markDirty();
+                this.markDirty(RedrawType.MAJOR);
             }
         }
     }
@@ -136,7 +137,7 @@ export class Text extends Shape {
     set textAlign(value: CanvasTextAlign) {
         if (this._textAlign !== value) {
             this._textAlign = value;
-            this.markDirty();
+            this.markDirty(RedrawType.MAJOR);
         }
     }
     get textAlign(): CanvasTextAlign {
@@ -147,7 +148,7 @@ export class Text extends Shape {
     set textBaseline(value: CanvasTextBaseline) {
         if (this._textBaseline !== value) {
             this._textBaseline = value;
-            this.markDirty();
+            this.markDirty(RedrawType.MAJOR);
         }
     }
     get textBaseline(): CanvasTextBaseline {
@@ -166,7 +167,7 @@ export class Text extends Shape {
         // - textBaseline kind of loses its meaning for multi-line text
         if (this._lineHeight !== value) {
             this._lineHeight = value;
-            this.markDirty();
+            this.markDirty(RedrawType.MAJOR);
         }
     }
     get lineHeight(): number {
@@ -237,7 +238,7 @@ export class Text extends Shape {
     }
 
     render(ctx: CanvasRenderingContext2D, forceRender: boolean): void {
-        if (!this.dirty && !forceRender) {
+        if (this.dirty === RedrawType.NONE && !forceRender) {
             return;
         }
 

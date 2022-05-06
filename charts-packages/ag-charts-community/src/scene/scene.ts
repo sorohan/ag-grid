@@ -1,5 +1,5 @@
 import { HdpiCanvas } from "../canvas/hdpiCanvas";
-import { Node } from "./node";
+import { Node, RedrawType } from "./node";
 import { createId } from "../util/id";
 
 interface DebugOptions {
@@ -62,7 +62,6 @@ export class Scene {
     }
 
     private _dirty = false;
-    private animationFrameId = 0;
     markDirty() {
         this._dirty = true;
     }
@@ -98,7 +97,7 @@ export class Scene {
 
     readonly debug: DebugOptions = {
         renderFrameIndex: false,
-        renderBoundingBoxes: false
+        renderBoundingBoxes: false,
     };
 
     private _frameIndex = 0;
@@ -108,8 +107,6 @@ export class Scene {
 
     render() {
         const { ctx, root, pendingSize } = this;
-
-        this.animationFrameId = 0;
 
         if (pendingSize) {
             this.canvas.resize(...pendingSize);
@@ -125,13 +122,19 @@ export class Scene {
             return;
         }
 
-        // start with a blank canvas, clear previous drawing
-        ctx.clearRect(0, 0, this.width, this.height);
+        let canvasCleared = false;
+        if (!root || root.dirty >= RedrawType.TRIVIAL) {
+            // start with a blank canvas, clear previous drawing
+            canvasCleared = true;
+            ctx.clearRect(0, 0, this.width, this.height);
+        }
 
         if (root) {
+            console.log({ redrawType: RedrawType[root.dirty], canvasCleared });
+
             ctx.save();
             if (root.visible) {
-                root.render(ctx, true);
+                root.render(ctx, canvasCleared);
             }
             ctx.restore();
         }
@@ -147,4 +150,14 @@ export class Scene {
 
         this._dirty = false;
     }
+}
+
+function dirtyTree(node: Node): {} {
+    return {
+        dirty: RedrawType[node.dirty],
+        node,
+        children: node.children
+            .filter(n => n.dirty !== RedrawType.NONE && n.visible)
+            .map(n => dirtyTree(n)),
+    };
 }

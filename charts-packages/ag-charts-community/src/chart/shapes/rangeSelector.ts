@@ -2,6 +2,7 @@ import { Group } from "../../scene/group";
 import { RangeHandle } from "./rangeHandle";
 import { RangeMask } from "./rangeMask";
 import { BBox } from "../../scene/bbox";
+import { RedrawType } from "../../scene/node";
 
 export class RangeSelector extends Group {
     static className = 'Range';
@@ -115,7 +116,7 @@ export class RangeSelector extends Group {
     }
 
     render(ctx: CanvasRenderingContext2D, forceRender: boolean) {
-        if (!this.dirty && !forceRender) {
+        if (this.dirty === RedrawType.NONE && !forceRender) {
             return;
         }
         this.computeTransformMatrix();
