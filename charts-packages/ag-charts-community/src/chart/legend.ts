@@ -104,40 +104,32 @@ export class Legend extends Observable {
 
     readonly item = new LegendItem();
 
-    data: LegendDatum[] = [];
-    enabled = true;
+    private _data: LegendDatum[] = [];
+    set data(value: LegendDatum[]) {
+        this._data = value;
+
+        this.group.visible = value.length > 0 && this.enabled;
+    }
+    get data() {
+        return this._data;
+    }
+
+    private _enabled = true;
+    set enabled(value: boolean) {
+        this._enabled = value;
+
+        this.group.visible = value && this.data.length > 0;
+    }
+    get enabled() {
+        return this._enabled;
+    }
+
     orientation: LegendOrientation = LegendOrientation.Vertical;
-    position: LegendPosition = LegendPosition.Right;
+    private _position: LegendPosition = LegendPosition.Right;
+    set position(value: LegendPosition) {
+        this._position = value;
 
-    /**
-     * Spacing between the legend and the edge of the chart's element.
-     */
-    spacing = 20;
-
-    constructor() {
-        super();
-
-        this.addPropertyListener('data', this.onDataChange);
-        this.addPropertyListener('enabled', this.onEnabledChange);
-        this.addPropertyListener('position', this.onPositionChange);
-        this.item.marker.addPropertyListener('shape', this.onMarkerShapeChange, this);
-    }
-
-    private _size: [number, number] = [0, 0];
-    get size(): Readonly<[number, number]> {
-        return this._size;
-    }
-
-    protected onDataChange(event: PropertyChangeEvent<this, LegendDatum[]>) {
-        this.group.visible = event.value.length > 0 && this.enabled;
-    }
-
-    protected onEnabledChange(event: PropertyChangeEvent<this, boolean>) {
-        this.group.visible = event.value && this.data.length > 0;
-    }
-
-    protected onPositionChange(event: PropertyChangeEvent<this, LegendPosition>) {
-        switch (event.value) {
+        switch (value) {
             case 'right':
             case 'left':
                 this.orientation = LegendOrientation.Vertical;
@@ -147,6 +139,25 @@ export class Legend extends Observable {
                 this.orientation = LegendOrientation.Horizontal;
                 break;
         }
+    }
+    get position() {
+        return this._position;
+    }
+
+    /**
+     * Spacing between the legend and the edge of the chart's element.
+     */
+    spacing = 20;
+
+    constructor() {
+        super();
+
+        this.item.marker.addPropertyListener('shape', this.onMarkerShapeChange, this);
+    }
+
+    private _size: [number, number] = [0, 0];
+    get size(): Readonly<[number, number]> {
+        return this._size;
     }
 
     protected onMarkerShapeChange() {
