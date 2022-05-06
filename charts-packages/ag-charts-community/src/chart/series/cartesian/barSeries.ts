@@ -655,6 +655,7 @@ export class BarSeries extends CartesianSeries {
 
         this.rectSelection.each((group, datum, index) => {
             const rect = group.children[0] as Rect;
+            rect.datum = datum; // Keep Group and Rect in sync.
 
             let colorIndex = 0;
             let i = 0;
