@@ -162,6 +162,13 @@ $-ag-theme-parameters-to-map-onto-variables: (grid-size icon-size widget-contain
     @if ag-param(header-column-separator) {
         --ag-header-column-separator-display: block;
     }
+
+    @if ag-param-is-set(input-border-color) {
+        --ag-input-border: solid 1px #{ag-param(input-border-color)};
+    }
+    @if ag-param-is-set(input-border-color-invalid) {
+        --ag-input-border-invalid: solid 2px #{ag-param(input-border-color-invalid)};
+    }
 }
 
 @mixin -ag-border-type-to-variable-expressions($border-param, $color-property) {

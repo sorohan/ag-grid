@@ -1,9 +1,12 @@
 @import "../../ag-theme-base/sass/ag-theme-base";
 @import "./ag-theme-alpine-default-params";
+@import "./ag-theme-alpine-variables";
 
 @mixin ag-theme-alpine($params: ()) {
     $params: ag-process-theme-variables($params, $ag-theme-alpine-default-params);
     @include ag-theme-base($params);
+
+    @include ag-theme-alpine-variables();
 
     .ag-filter-toolpanel-header,
     .ag-filter-toolpanel-search,

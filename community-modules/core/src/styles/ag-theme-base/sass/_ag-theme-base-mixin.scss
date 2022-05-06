@@ -15,6 +15,7 @@
 @import "./parts/column-drop";
 @import "./parts/charts";
 @import "./parts/date-time";
+@import "./ag-theme-base-variables";
 
 $ag-compatibility-mode: "variables" !default;
 
@@ -22,13 +23,9 @@ $ag-compatibility-mode: "variables" !default;
     @include ag-include-theme-once-only();
     $params: ag-process-theme-variables($params, $ag-theme-base-default-params);
 
-    // TODO: extract this into @mixin ag-theme-base-variables
-    --ag-side-button-selected-background: none;
-    --ag-selected-tab-underline-transition-speed: 0s;
-    --ag-header-column-resize-handle-display: none;
-    --ag-header-column-separator-display: none;
+    @include ag-theme-base-variables();
 
-    @include ag-theme-parameters-to-variable-expressions();
+    // @include ag-theme-parameters-to-variable-expressions();
 
     @include ag-icons-font-face();
     @include ag-icons-webfont();

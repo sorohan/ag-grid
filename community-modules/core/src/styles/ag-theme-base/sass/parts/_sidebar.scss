@@ -42,7 +42,7 @@
 
     @include ag-keyboard-focus((ag-side-button-button), 4px);
 
-    .ag-selected .ag-side-button-button {
+    .ag-selected button.ag-side-button-button {
         background: var(--ag-side-button-selected-background);
     }
 

@@ -46,11 +46,7 @@
         line-height: inherit;
         color: inherit;
 
-        @if ag-param-is-set(input-border-color) {
-            border-width: 1px;
-            border-style: solid;
-            border-color: var(--ag-input-border-color);
-        }
+        border: var(--ag-input-border);
 
         &:disabled {
             color: var(--ag-disabled-foreground-color);
@@ -65,9 +61,7 @@
         }
 
         &:invalid {
-            border-width: 2px;
-            border-style: solid;
-            border-color: var(--ag-input-border-color-invalid);
+            border: var(--ag-input-border-invalid);
         }
     }
 
