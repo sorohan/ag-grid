@@ -908,5 +908,7 @@ export class BarSeries extends CartesianSeries {
             }
         });
         this.groupScale.domain = visibleStacks;
+
+        this.nodeDataRefresh = true;
     }
 }

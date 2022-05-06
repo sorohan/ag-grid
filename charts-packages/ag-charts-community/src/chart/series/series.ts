@@ -213,6 +213,7 @@ export abstract class Series extends Observable {
 
     toggleSeriesItem(itemId: any, enabled: boolean): void {
         this.visible = enabled;
+        this.nodeDataRefresh = true;
     }
 
     readonly highlightStyle = new HighlightStyle();

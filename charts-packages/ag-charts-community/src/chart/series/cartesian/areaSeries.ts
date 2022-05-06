@@ -930,5 +930,7 @@ export class AreaSeries extends CartesianSeries {
 
     toggleSeriesItem(itemId: string, enabled: boolean): void {
         this.seriesItemEnabled.set(itemId, enabled);
+
+        this.nodeDataRefresh = true;
     }
 }

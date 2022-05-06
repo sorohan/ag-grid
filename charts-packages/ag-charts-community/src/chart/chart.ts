@@ -1191,8 +1191,8 @@ export abstract class Chart extends Observable {
             (this.highlightedDatum && oldHighlightedDatum &&
                 (this.highlightedDatum.series !== oldHighlightedDatum.series ||
                     this.highlightedDatum.itemId !== oldHighlightedDatum.itemId))) {
-            this.highlightedDatum.series.markNodeDataDirty();
-            oldHighlightedDatum?.series.markNodeDataDirty();
+            this.highlightedDatum.series.onHighlightChange();
+            oldHighlightedDatum?.series.onHighlightChange();
 
             this.update(ChartUpdateType.SERIES_UPDATE);
         }
@@ -1224,13 +1224,19 @@ export abstract class Chart extends Observable {
 
     highlightDatum(datum: SeriesNodeDatum): void {
         this.scene.canvas.element.style.cursor = datum.series.cursor;
+        this.highlightedDatum = datum;
 
+        const { series } = this.highlightedDatum;
+        series.onHighlightChange();
         this.update(ChartUpdateType.SERIES_UPDATE);
     }
 
     dehighlightDatum(): void {
         if (this.highlightedDatum) {
+            const { series } = this.highlightedDatum;
             this.highlightedDatum = undefined;
+
+            series.onHighlightChange();
             this.update(ChartUpdateType.SERIES_UPDATE);
         }
     }

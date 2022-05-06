@@ -166,7 +166,7 @@ export class Navigator {
             }
         }
 
-        this.chart.update(ChartUpdateType.SERIES_UPDATE);
+        this.chart.update(ChartUpdateType.SERIES_UPDATE, { forceNodeDataRefresh: true });
     }
 
     onDragStop() {
