@@ -3671,6 +3671,7 @@
     "color": { "type": { "returnType": "string", "optional": false } }
   },
   "PointerEvents": {},
+  "RedrawType": {},
   "DebugOptions": {
     "renderFrameIndex": {
       "type": { "returnType": "boolean", "optional": false }

@@ -2758,6 +2758,11 @@
     "type": ["All", "None"],
     "docs": [null, null]
   },
+  "RedrawType": {
+    "meta": { "isEnum": true },
+    "type": ["NONE", "TRIVIAL", "MINOR", "MAJOR"],
+    "docs": [null, null, null, null]
+  },
   "DebugOptions": {
     "meta": {},
     "type": { "renderFrameIndex": "boolean", "renderBoundingBoxes": "boolean" }
