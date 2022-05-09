@@ -55,6 +55,9 @@ export class Scene {
 
         if (width === this.width && height === this.height) {
             return;
+        } else if (width <= 0 || height <= 0) {
+            // HdpiCanvas doesn't allow width/height <= 0.
+            return;
         }
 
         this.pendingSize = [width, height];
