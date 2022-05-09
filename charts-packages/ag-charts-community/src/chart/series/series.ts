@@ -119,6 +119,7 @@ export abstract class Series extends Observable {
     protected _data?: any[] = undefined;
     set data(input: any[] | undefined) {
         this._data = input;
+        this.nodeDataRefresh = true;
     }
     get data() {
         return this._data;
