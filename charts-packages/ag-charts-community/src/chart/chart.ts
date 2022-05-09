@@ -717,6 +717,10 @@ export abstract class Chart extends Observable {
     private resize(width: number, height: number) {
         if (this.scene.resize(width, height)) {
             this.firstResizeReceived = true;
+            
+            this.background.width = this.width;
+            this.background.height = this.height;
+    
             this.update(ChartUpdateType.PERFORM_LAYOUT, { forceNodeDataRefresh: true });
         }
     }
@@ -1100,7 +1104,7 @@ export abstract class Chart extends Observable {
             return;
         }
         if (this.checkLegendClick(event)) {
-            this.update(ChartUpdateType.PROCESS_DATA);
+            this.update(ChartUpdateType.PROCESS_DATA, { forceNodeDataRefresh: true });
             return;
         }
         this.fireEvent<ChartClickEvent>({
