@@ -362,27 +362,29 @@ export abstract class Chart extends Observable {
         return this.scene.height;
     }
 
+    private _lastAutoSize: [number, number];
     protected _autoSize = false;
     set autoSize(value: boolean) {
-        if (this._autoSize !== value) {
-            this._autoSize = value;
-            const { style } = this.element;
-            if (value) {
-                const chart = this; // capture `this` for IE11
-                SizeMonitor.observe(this.element, size => {
-                    if (size.width !== chart.width || size.height !== chart.height) {
-                        chart.resize(size.width, size.height);
-                    }
-                });
-                style.display = 'block';
-                style.width = '100%';
-                style.height = '100%';
-            } else {
-                SizeMonitor.unobserve(this.element);
-                style.display = 'inline-block';
-                style.width = 'auto';
-                style.height = 'auto';
+        if (this._autoSize === value) {
+            return;
+        }
+
+        this._autoSize = value;
+
+        const { style } = this.element;
+        if (value) {
+            style.display = 'block';
+            style.width = '100%';
+            style.height = '100%';
+
+            if (!this._lastAutoSize) {
+                return;
             }
+            this.resize(this._lastAutoSize[0], this._lastAutoSize[1]);
+        } else {
+            style.display = 'inline-block';
+            style.width = 'auto';
+            style.height = 'auto';
         }
     }
     get autoSize(): boolean {
@@ -437,9 +439,24 @@ export abstract class Chart extends Observable {
 
         const scene = new Scene(document);
         this.scene = scene;
-        this.autoSize = true; // Triggers width/height calc - needs to happen before root group assignment.
         scene.root = root;
         scene.container = element;
+        this.autoSize = true;
+
+        SizeMonitor.observe(this.element, size => {
+            const { width, height } = size;
+            this._lastAutoSize = [width, height];
+
+            if (!this.autoSize) {
+                return;
+            }
+
+            if (width === this.width && height === this.height) {
+                return;
+            }
+
+            this.resize(width, height);
+        });
 
         this.tooltip = new ChartTooltip(this, document);
         this.tooltip.addPropertyListener('class', () => this.tooltip.toggle());
@@ -466,6 +483,7 @@ export abstract class Chart extends Observable {
 
     private performUpdateType: ChartUpdateType = ChartUpdateType.NONE;
     private firstRenderComplete = false;
+    private firstResizeReceived = false;
     private performUpdateTrigger = debouncedAnimationFrame(({ count }) => {
         this.performUpdate(count);
     });
@@ -482,7 +500,7 @@ export abstract class Chart extends Observable {
         }
     }
     private performUpdate(count: number) {
-        const { performUpdateType, firstRenderComplete, width, height } = this;
+        const { performUpdateType, firstRenderComplete, firstResizeReceived } = this;
         const start = performance.now();
 
         switch (performUpdateType) {
@@ -490,7 +508,7 @@ export abstract class Chart extends Observable {
             case ChartUpdateType.PROCESS_DATA:
                 this.processData();
             case ChartUpdateType.PERFORM_LAYOUT:
-                if (!firstRenderComplete && width === 0 && height === 0) {
+                if (!firstRenderComplete && !firstResizeReceived) {
                     // Reschedule if canvas size hasn't been set yet to avoid a race.
                     this.performUpdateType = ChartUpdateType.PERFORM_LAYOUT;
                     this.performUpdateTrigger.schedule();
@@ -697,9 +715,10 @@ export abstract class Chart extends Observable {
     }
 
     private resize(width: number, height: number) {
-        this.scene.resize(width, height);
-        
-        this.update(ChartUpdateType.PERFORM_LAYOUT, { forceNodeDataRefresh: true });
+        if (this.scene.resize(width, height)) {
+            this.firstResizeReceived = true;
+            this.update(ChartUpdateType.PERFORM_LAYOUT, { forceNodeDataRefresh: true });
+        }
     }
 
     processData(): void {

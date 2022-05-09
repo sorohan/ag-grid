@@ -49,19 +49,21 @@ export class Scene {
     }
 
     private pendingSize?: [number, number];
-    resize(width: number, height: number) {
+    resize(width: number, height: number): boolean {
         width = Math.round(width);
         height = Math.round(height);
 
         if (width === this.width && height === this.height) {
-            return;
+            return false;
         } else if (width <= 0 || height <= 0) {
             // HdpiCanvas doesn't allow width/height <= 0.
-            return;
+            return false;
         }
 
         this.pendingSize = [width, height];
         this.markDirty();
+        
+        return true;
     }
 
     private _dirty = false;
