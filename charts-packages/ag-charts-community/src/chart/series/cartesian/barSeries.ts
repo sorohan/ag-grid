@@ -215,7 +215,7 @@ export class BarSeries extends CartesianSeries {
         return this._xKey;
     }
 
-    protected xName: string = '';
+    xName: string = '';
 
     private cumYKeyCount: number[] = [];
     private flatYKeys: string[] | undefined = undefined; // only set when a user used a flat array for yKeys
