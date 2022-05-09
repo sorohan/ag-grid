@@ -192,8 +192,12 @@ function applyChartOptions<
             updateType = ChartUpdateType.PROCESS_DATA;
         }
     }
+
+    const seriesOpts = options.series as any[];
     if (options.data) {
         chart.data = options.data;
+        updateType = ChartUpdateType.PROCESS_DATA;
+    } else if (seriesOpts?.some((s) => s.data != null)) {
         updateType = ChartUpdateType.PROCESS_DATA;
     }
 
