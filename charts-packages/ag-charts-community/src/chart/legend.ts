@@ -63,15 +63,25 @@ export class LegendMarker {
      * If the marker type is set, the legend will always use that marker type for all its items,
      * regardless of the type that comes from the `data`.
      */
-    shape?: string | (new () => Marker) = undefined;
+    _shape?: string | (new () => Marker) = undefined;
+    set shape(value: string | (new () => Marker) | undefined) {
+        this._shape = value;
+        this.parent?.onMarkerShapeChange();
+    }
+    get shape() {
+        return this._shape;
+    }
+
     /**
      * Padding between the marker and the label within each legend item.
      */
     padding: number = 8;
     strokeWidth: number = 1;
+
+    parent?: { onMarkerShapeChange(): void }
 }
 
-export class LegendItem extends Observable {
+export class LegendItem {
     readonly marker = new LegendMarker();
     readonly label = new LegendLabel();
     /**
@@ -142,6 +152,16 @@ export class Legend {
     }
     get position() {
         return this._position;
+    }
+
+    constructor() {
+        this.item.marker.parent = this;
+    }
+
+    public onMarkerShapeChange() {
+        this.itemSelection = this.itemSelection.setData([]);
+        this.itemSelection.exit.remove();
+        this.group.markDirty();
     }
 
     /**
