@@ -129,11 +129,17 @@
     // Colour for borders used to separate elements within a major UI component
     --ag-secondary-border-color: var(--ag-border-color);
 
-    // Draw borders around most UI elements
-    --ag-borders: solid 1px var(--ag-border-color);
+    // Enable or disable borders around most UI elements in the grid. Set this to a
+    // border style and thickness, e.g. `solid 1px` to enable borders, or `none`
+    // to disable borders. Use the other --ag-borders-* variables for more fine
+    // grained control over which UI elements get borders.
+    --ag-borders: solid 1px;
 
-    // Draw the few borders that are critical to UX, e.g. between headers and rows.
-    --ag-borders-critical: var(--ag-borders);
+    // Enable or disable borders that are critical to UX, even in themes that
+    // generally do not user borders (e.g. the Material theme).
+    // Set this to a border style and thickness, e.g. `solid 1px` to enable borders,
+    // or `none` to disable borders.
+    --ag-borders-critical: solid 1px;
 
     // Draw decorative borders separating UI elements within components
     --ag-borders-secondary: var(--ag-borders);
