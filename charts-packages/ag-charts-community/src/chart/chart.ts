@@ -410,6 +410,9 @@ export abstract class Chart extends Observable {
             root?.appendChild(this._title.node);
         }
     }
+    get title() {
+        return this._title;
+    }
     
     _subtitle?: Caption = undefined;
     set subtitle(caption: Caption | undefined) {
@@ -421,6 +424,9 @@ export abstract class Chart extends Observable {
         if (this._subtitle != null) {
             root?.appendChild(this._subtitle.node);
         }
+    }
+    get subtitle() {
+        return this._subtitle;
     }
 
     private static tooltipDocuments: Document[] = [];
