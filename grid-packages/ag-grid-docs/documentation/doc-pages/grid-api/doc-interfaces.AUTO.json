@@ -2738,6 +2738,10 @@
       "description": "/** Set to `true` so that aggregations are not impacted by filtering. Default: `false` */",
       "type": { "returnType": "boolean", "optional": true }
     },
+    "removePivotHeaderRowWhenSingleValueColumn": {
+      "description": "/** Set to `true` to omit the value Column header when there is only a single value column. Default: `false` */",
+      "type": { "returnType": "boolean", "optional": true }
+    },
     "animateRows": {
       "description": "/** Set to `true` to enable Row Animation. Default: `false` */",
       "type": { "returnType": "boolean", "optional": true }
@@ -9425,13 +9429,6 @@
         "optional": false
       }
     },
-    "setAriaSort": {
-      "type": {
-        "arguments": { "sort": "ColumnSortState | undefined" },
-        "returnType": "void",
-        "optional": false
-      }
-    },
     "setColId": {
       "type": {
         "arguments": { "id": "string" },
@@ -9439,9 +9436,23 @@
         "optional": false
       }
     },
+    "setAriaLabel": {
+      "type": {
+        "arguments": { "id?": "string" },
+        "returnType": "void",
+        "optional": false
+      }
+    },
     "setAriaDescribedBy": {
       "type": {
-        "arguments": { "id": "string | undefined" },
+        "arguments": { "id?": "string" },
+        "returnType": "void",
+        "optional": false
+      }
+    },
+    "setAriaSort": {
+      "type": {
+        "arguments": { "sort?": "ColumnSortState" },
         "returnType": "void",
         "optional": false
       }
@@ -11456,8 +11467,8 @@
       "type": { "returnType": "number", "optional": true }
     },
     "autoRotate": {
-      "description": "/** By default, for a category axis, the labels will be automatically rotated to be perpendicular to the axis line to prevent overlaps. Set this to `false` to disable this behaviour. Note: if a label rotation angle is specified, auto rotation will not be applied. */",
-      "type": { "returnType": "boolean", "optional": true }
+      "description": "/** If specified and axis labels collide, they are rotated so that they are positioned at the supplied angle. This is enabled by default for category axes at an angle of 45 degrees. If the `rotation` property is specified, it takes precedence. */",
+      "type": { "returnType": "boolean | number", "optional": true }
     },
     "format": {
       "description": "/** Format string used when rendering labels for time axes. */",
@@ -16119,8 +16130,18 @@
       "description": "/** Fail callback, tell the grid the call failed so it can adjust it's state. */",
       "type": { "arguments": {}, "returnType": "void", "optional": false }
     },
-    "api": { "type": { "returnType": "GridApi", "optional": false } },
-    "columnApi": { "type": { "returnType": "ColumnApi", "optional": false } }
+    "api": {
+      "description": "/** The grid api. */",
+      "type": { "returnType": "GridApi", "optional": false }
+    },
+    "columnApi": {
+      "description": "/** The column api. */",
+      "type": { "returnType": "ColumnApi", "optional": false }
+    },
+    "context": {
+      "description": "/** Application context as set on `gridOptions.context`. */",
+      "type": { "returnType": "any", "optional": false }
+    }
   },
   "IServerSideDatasource": {
     "getRows": {
@@ -21900,6 +21921,10 @@
       "description": "/** Set to `true` so that aggregations are not impacted by filtering. Default: `false` */",
       "type": { "returnType": "boolean", "optional": true }
     },
+    "removePivotHeaderRowWhenSingleValueColumn": {
+      "description": "/** Set to `true` to omit the value Column header when there is only a single value column. Default: `false` */",
+      "type": { "returnType": "boolean", "optional": true }
+    },
     "animateRows": {
       "description": "/** Set to `true` to enable Row Animation. Default: `false` */",
       "type": { "returnType": "boolean", "optional": true }
@@ -24590,6 +24615,10 @@
     },
     "suppressAggFilteredOnly": {
       "description": "/** Set to `true` so that aggregations are not impacted by filtering. Default: `false` */",
+      "type": { "returnType": "boolean", "optional": true }
+    },
+    "removePivotHeaderRowWhenSingleValueColumn": {
+      "description": "/** Set to `true` to omit the value Column header when there is only a single value column. Default: `false` */",
       "type": { "returnType": "boolean", "optional": true }
     },
     "animateRows": {
@@ -27292,6 +27321,10 @@
     },
     "suppressAggFilteredOnly": {
       "description": "/** Set to `true` so that aggregations are not impacted by filtering. Default: `false` */",
+      "type": { "returnType": "boolean", "optional": true }
+    },
+    "removePivotHeaderRowWhenSingleValueColumn": {
+      "description": "/** Set to `true` to omit the value Column header when there is only a single value column. Default: `false` */",
       "type": { "returnType": "boolean", "optional": true }
     },
     "animateRows": {

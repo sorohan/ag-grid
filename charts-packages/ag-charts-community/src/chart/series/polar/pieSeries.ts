@@ -323,6 +323,8 @@ export class PieSeries extends PolarSeries {
         // Process segments.
         let end = 0;
         angleDataRatios.forEach((start) => {
+            if (isNaN(start)) { return; } // No segments displayed - nothing to do.
+
             const radius = radiusKey ? radiusData[datumIndex] : 1;
             const startAngle = angleScale.convert(start) + rotation;
             const endAngle = angleScale.convert(end) + rotation;

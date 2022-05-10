@@ -1576,6 +1576,7 @@
       "suppressAggAtRootLevel?": "boolean",
       "aggregateOnlyChangedColumns?": "boolean",
       "suppressAggFilteredOnly?": "boolean",
+      "removePivotHeaderRowWhenSingleValueColumn?": "boolean",
       "animateRows?": "boolean",
       "enableCellChangeFlash?": "boolean",
       "cellFlashDelay?": "number",
@@ -1949,6 +1950,7 @@
       "suppressAggAtRootLevel?": "/** When `true`, the aggregations won't be computed for the root node of the grid. Default: `false` */",
       "aggregateOnlyChangedColumns?": "/** When using change detection, only the updated column will be re-aggregated. Default: `false` */",
       "suppressAggFilteredOnly?": "/** Set to `true` so that aggregations are not impacted by filtering. Default: `false` */",
+      "removePivotHeaderRowWhenSingleValueColumn?": "/** Set to `true` to omit the value Column header when there is only a single value column. Default: `false` */",
       "animateRows?": "/** Set to `true` to enable Row Animation. Default: `false` */",
       "enableCellChangeFlash?": "/** Set to `true` to have cells flash after data changes. Default: `false` */",
       "cellFlashDelay?": "/** To be used in combination with `enableCellChangeFlash`, this configuration will set the delay in milliseconds of how long a cell should remain in its \"flashed\" state.\n * Default: `500` */",
@@ -5456,9 +5458,10 @@
     "type": {
       "setWidth(width: string)": "void",
       "addOrRemoveCssClass(cssClassName: string, on: boolean)": "void",
-      "setAriaSort(sort: ColumnSortState | undefined)": "void",
       "setColId(id: string)": "void",
-      "setAriaDescribedBy(id: string | undefined)": "void",
+      "setAriaLabel(id?: string)": "void",
+      "setAriaDescribedBy(id?: string)": "void",
+      "setAriaSort(sort?: ColumnSortState)": "void",
       "setUserCompDetails(compDetails: UserCompDetails)": "void",
       "getUserCompInstance()": "IHeader | undefined",
       "setTitle(title: string | undefined)": "void"
@@ -6621,7 +6624,7 @@
       "padding?": "PixelSize",
       "color?": "CssColor",
       "rotation?": "number",
-      "autoRotate?": "boolean",
+      "autoRotate?": "boolean | number",
       "format?": "string",
       "formatter?": "(params: AgAxisLabelFormatterParams) => string"
     },
@@ -6633,7 +6636,7 @@
       "padding?": "/** Padding in pixels between the axis label and the tick. */",
       "color?": "/** The colour to use for the labels */",
       "rotation?": "/** The rotation of the axis labels in degrees. Note: for integrated charts the default is 335 degrees, unless the axis shows grouped or default categories (indexes). The first row of labels in a grouped category axis is rotated perpendicular to the axis line. */",
-      "autoRotate?": "/** By default, for a category axis, the labels will be automatically rotated to be perpendicular to the axis line to prevent overlaps. Set this to `false` to disable this behaviour. Note: if a label rotation angle is specified, auto rotation will not be applied. */",
+      "autoRotate?": "/** If specified and axis labels collide, they are rotated so that they are positioned at the supplied angle. This is enabled by default for category axes at an angle of 45 degrees. If the `rotation` property is specified, it takes precedence. */",
       "format?": "/** Format string used when rendering labels for time axes. */",
       "formatter?": "/** Function used to render axis labels. If `value` is a number, `fractionDigits` will also be provided, which indicates the number of fractional digits used in the step between ticks; for example, a tick step of `0.0005` would have `fractionDigits` set to `4` */"
     }
@@ -9242,7 +9245,8 @@
       "failCallback()": "void",
       "fail()": "void",
       "api": "GridApi",
-      "columnApi": "ColumnApi"
+      "columnApi": "ColumnApi",
+      "context": "any"
     },
     "docs": {
       "request": "/** Details for the request. A simple object that can be converted to JSON. */",
@@ -9250,7 +9254,10 @@
       "successCallback(rowsThisPage: any[], lastRow: number)": "/** @deprecated Use `success` method instead and return result as a `LoadSuccessParams` object.\n */",
       "success(params: LoadSuccessParams)": "/** Success callback, pass the rows back to the grid that were requested. */",
       "failCallback()": "/** @deprecated Use `fail` instead.\n */",
-      "fail()": "/** Fail callback, tell the grid the call failed so it can adjust it's state. */"
+      "fail()": "/** Fail callback, tell the grid the call failed so it can adjust it's state. */",
+      "api": "/** The grid api. */",
+      "columnApi": "/** The column api. */",
+      "context": "/** Application context as set on `gridOptions.context`. */"
     }
   },
   "IServerSideDatasource": {
@@ -12384,6 +12391,7 @@
       "suppressAggAtRootLevel?": "boolean",
       "aggregateOnlyChangedColumns?": "boolean",
       "suppressAggFilteredOnly?": "boolean",
+      "removePivotHeaderRowWhenSingleValueColumn?": "boolean",
       "animateRows?": "boolean",
       "enableCellChangeFlash?": "boolean",
       "cellFlashDelay?": "number",
@@ -12757,6 +12765,7 @@
       "suppressAggAtRootLevel?": "/** When `true`, the aggregations won't be computed for the root node of the grid. Default: `false` */",
       "aggregateOnlyChangedColumns?": "/** When using change detection, only the updated column will be re-aggregated. Default: `false` */",
       "suppressAggFilteredOnly?": "/** Set to `true` so that aggregations are not impacted by filtering. Default: `false` */",
+      "removePivotHeaderRowWhenSingleValueColumn?": "/** Set to `true` to omit the value Column header when there is only a single value column. Default: `false` */",
       "animateRows?": "/** Set to `true` to enable Row Animation. Default: `false` */",
       "enableCellChangeFlash?": "/** Set to `true` to have cells flash after data changes. Default: `false` */",
       "cellFlashDelay?": "/** To be used in combination with `enableCellChangeFlash`, this configuration will set the delay in milliseconds of how long a cell should remain in its \"flashed\" state.\n * Default: `500` */",
@@ -13130,6 +13139,7 @@
       "suppressAggAtRootLevel?": "boolean",
       "aggregateOnlyChangedColumns?": "boolean",
       "suppressAggFilteredOnly?": "boolean",
+      "removePivotHeaderRowWhenSingleValueColumn?": "boolean",
       "animateRows?": "boolean",
       "enableCellChangeFlash?": "boolean",
       "cellFlashDelay?": "number",
@@ -13503,6 +13513,7 @@
       "suppressAggAtRootLevel?": "/** When `true`, the aggregations won't be computed for the root node of the grid. Default: `false` */",
       "aggregateOnlyChangedColumns?": "/** When using change detection, only the updated column will be re-aggregated. Default: `false` */",
       "suppressAggFilteredOnly?": "/** Set to `true` so that aggregations are not impacted by filtering. Default: `false` */",
+      "removePivotHeaderRowWhenSingleValueColumn?": "/** Set to `true` to omit the value Column header when there is only a single value column. Default: `false` */",
       "animateRows?": "/** Set to `true` to enable Row Animation. Default: `false` */",
       "enableCellChangeFlash?": "/** Set to `true` to have cells flash after data changes. Default: `false` */",
       "cellFlashDelay?": "/** To be used in combination with `enableCellChangeFlash`, this configuration will set the delay in milliseconds of how long a cell should remain in its \"flashed\" state.\n * Default: `500` */",
@@ -13880,6 +13891,7 @@
       "suppressAggAtRootLevel?": "boolean",
       "aggregateOnlyChangedColumns?": "boolean",
       "suppressAggFilteredOnly?": "boolean",
+      "removePivotHeaderRowWhenSingleValueColumn?": "boolean",
       "animateRows?": "boolean",
       "enableCellChangeFlash?": "boolean",
       "cellFlashDelay?": "number",
@@ -14253,6 +14265,7 @@
       "suppressAggAtRootLevel?": "/** When `true`, the aggregations won't be computed for the root node of the grid. Default: `false` */",
       "aggregateOnlyChangedColumns?": "/** When using change detection, only the updated column will be re-aggregated. Default: `false` */",
       "suppressAggFilteredOnly?": "/** Set to `true` so that aggregations are not impacted by filtering. Default: `false` */",
+      "removePivotHeaderRowWhenSingleValueColumn?": "/** Set to `true` to omit the value Column header when there is only a single value column. Default: `false` */",
       "animateRows?": "/** Set to `true` to enable Row Animation. Default: `false` */",
       "enableCellChangeFlash?": "/** Set to `true` to have cells flash after data changes. Default: `false` */",
       "cellFlashDelay?": "/** To be used in combination with `enableCellChangeFlash`, this configuration will set the delay in milliseconds of how long a cell should remain in its \"flashed\" state.\n * Default: `500` */",
