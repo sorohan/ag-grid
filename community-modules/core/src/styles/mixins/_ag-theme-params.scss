@@ -133,10 +133,11 @@ $-ag-theme-parameters-to-map-onto-variables: (grid-size icon-size widget-contain
         --ag-#{$name}: #{$value};
     };
 
-    @include -ag-border-type-to-variable-expressions(borders-critical, border-color);
-    @include -ag-border-type-to-variable-expressions(borders, border-color);
-    @include -ag-border-type-to-variable-expressions(borders-side-button, border-color);
-    @include -ag-border-type-to-variable-expressions(borders-secondary, secondary-border-color);
+    @include -ag-border-type-to-variable-expressions(borders-critical);
+    @include -ag-border-type-to-variable-expressions(borders);
+    @include -ag-border-type-to-variable-expressions(borders-side-button);
+    @include -ag-border-type-to-variable-expressions(borders-secondary);
+
     @if ag-param-is-set(row-border-color) and ag-param(borders-critical) {
         --ag-borders-row: solid 1px #{ag-param(row-border-color)};
     } @else {
@@ -171,9 +172,9 @@ $-ag-theme-parameters-to-map-onto-variables: (grid-size icon-size widget-contain
     }
 }
 
-@mixin -ag-border-type-to-variable-expressions($border-param, $color-property) {
+@mixin -ag-border-type-to-variable-expressions($border-param) {
     @if ag-param($border-param) {
-        --ag-#{$border-param}: solid 1px #{ag-param($color-property)};
+        --ag-#{$border-param}: solid 1px;
     } @else {
         --ag-#{$border-param}: none;
     }

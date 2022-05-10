@@ -122,27 +122,42 @@
     // BORDERS
     //
 
-    // Colour for border around major UI components like the grid itself, headers;
-    // footers and tool panels
-    --ag-border-color: rgba(#000, 0.25);
-
-    // Colour for borders used to separate elements within a major UI component
-    --ag-secondary-border-color: var(--ag-border-color);
-
     // Enable or disable borders around most UI elements in the grid. Set this to a
     // border style and thickness, e.g. `solid 1px` to enable borders, or `none`
     // to disable borders. Use the other --ag-borders-* variables for more fine
     // grained control over which UI elements get borders.
     --ag-borders: solid 1px;
 
-    // Enable or disable borders that are critical to UX, even in themes that
-    // generally do not user borders (e.g. the Material theme).
+    // Colour for border around major UI components like the grid itself, headers;
+    // footers and tool panels.
+    --ag-border-color: rgba(#000, 0.25);
+
+    // Enable or disable borders that are critical to UX, e.g. those between headers
+    // and rows. Themes that disable borders generally may want to enable these borders.
     // Set this to a border style and thickness, e.g. `solid 1px` to enable borders,
     // or `none` to disable borders.
-    --ag-borders-critical: solid 1px;
+    --ag-borders-critical: var(--ag-borders);
 
     // Draw decorative borders separating UI elements within components
-    --ag-borders-secondary: var(--ag-borders) var(--ag-border-color);
+    // Set this to a border style and thickness, e.g. `solid 1px` to enable borders,
+    // or `none` to disable borders.
+    --ag-borders-secondary: var(--ag-borders);
+
+    // Colour for borders used to separate elements within a major UI component
+    --ag-secondary-border-color: var(--ag-border-color);
+
+    // Draw borders separating cells within a row.
+    // Set this to a border style and thickness, e.g. `solid 1px` to enable borders,
+    // or `none` to disable borders.
+    --ag-borders-cell: none;
+
+    // The colour of cell borders, if they are enabled with --ag-borders-cell
+    --ag-cell-border-color: var(--ag-secondary-border-color);
+
+    // Draw borders around the vertical tabs on the side of the control panel
+    // Set this to a border style and thickness, e.g. `solid 1px` to enable borders,
+    // or `none` to disable borders.
+    --ag-borders-side-button: var(--ag-borders);
 
     // Border radius applied to many elements such as dialogs and form widgets
     --ag-border-radius: 0px;
@@ -177,7 +192,10 @@
     // The color applied to form elements in an invalid state
     --ag-invalid-color: red;
     
+    // A 3-part border style for inputs, e.g. `solid 1px #AAA` (or `none` to disable)
     --ag-input-border: var(--ag-borders-secondary) var(--ag-secondary-border-color);
+
+    // A 3-part border style for invalid inputs, e.g. `solid 2px red`
     --ag-input-border-invalid: solid 2px var(--ag-invalid-color);
     --ag-input-disabled-border-color: var(--ag-input-border-color);
     --ag-input-disabled-background-color: transparent;

@@ -2,7 +2,7 @@
 @mixin ag-theme-base-part-grid-borders {
 
     .ag-cell {
-        @include ag-theme-rtl(( border-right: var(--ag-borders-cell) ));
+        @include ag-theme-rtl(( border-right: var(--ag-borders-cell) var(--ag-cell-border-color) ));
     }
 
     .ag-cell.ag-cell-first-right-pinned:not(.ag-cell-range-left):not(.ag-cell-range-single-cell) {
