@@ -473,6 +473,8 @@ export abstract class Chart extends Observable {
     }
 
     destroy() {
+        this.performUpdateType = ChartUpdateType.NONE;
+
         this.tooltip.destroy();
         SizeMonitor.unobserve(this.element);
         this.container = undefined;
@@ -717,7 +719,7 @@ export abstract class Chart extends Observable {
     private resize(width: number, height: number) {
         if (this.scene.resize(width, height)) {
             this.firstResizeReceived = true;
-            
+
             this.background.width = this.width;
             this.background.height = this.height;
     
