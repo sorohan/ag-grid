@@ -1,0 +1,27 @@
+@import "./base-variables";
+
+.ag-root-wrapper {
+    background-color: var(--ag-background-color);
+    -webkit-font-smoothing: antialiased;
+    color: var(--ag-foreground-color);
+    font-family: var(--ag-font-family);
+    font-size: var(--ag-font-size);
+    line-height: normal;
+}
+
+@import "./parts/common-structural";
+@import "./parts/print-structural";
+@import "./parts/reset";
+@import "./parts/widgets";
+@import "./parts/grid-layout";
+@import "./parts/grid-borders";
+@import "./parts/menu";
+@import "./parts/sidebar";
+@import "./parts/filter-tool-panel";
+@import "./parts/columns-tool-panel";
+@import "./parts/header";
+@import "./parts/footer";
+@import "./parts/column-drop";
+@import "./parts/charts";
+@import "./parts/native-inputs";
+@import "./parts/date-time";

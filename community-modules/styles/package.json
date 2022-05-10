@@ -1,0 +1,31 @@
+{
+  "name": "@ag-grid-community/styles",
+  "version": "27.2.1",
+  "description": "AG Grid Styles and Themes",
+  "main": "main.scss",
+  "scripts": {
+    "build": "node-sass src --output . --output-style expanded",
+    "watch": "npm run build && npm run build -- --watch",
+    "hash": "sh ../../scripts/hashDirectory.sh > .hash"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ag-grid/ag-grid.git"
+  },
+  "keywords": [
+    "ag",
+    "ag-grid",
+    "style",
+    "theme"
+  ],
+  "author": "Niall Crosby <niall.crosby@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ag-grid/ag-grid/issues"
+  },
+  "homepage": "http://www.ag-grid.com/",
+  "dependencies": {
+    "sass-embedded": "^1.50.1",
+    "sass-embedded-cli": "^1.0.0-beta.0"
+  }
+}
