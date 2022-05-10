@@ -2,7 +2,7 @@
 
     .ag-header {
         background-color: var(--ag-header-background-color);
-        border-bottom: var(--ag-borders-critical);
+        border-bottom: var(--ag-borders-critical) var(--ag-border-color);
     }
 
     .ag-header-row {
@@ -11,11 +11,11 @@
     }
 
     .ag-pinned-right-header {
-        border-left: var(--ag-borders-critical);
+        border-left: var(--ag-borders-critical) var(--ag-border-color);
     }
 
     .ag-pinned-left-header {
-        border-right: var(--ag-borders-critical);
+        border-right: var(--ag-borders-critical) var(--ag-border-color);
     }
 
     .ag-header-cell:not(.ag-right-aligned-header) .ag-header-label-icon {
@@ -50,7 +50,7 @@
     .ag-header-row:not(:first-child) {
         .ag-header-cell,
         .ag-header-group-cell.ag-header-group-cell-with-group {
-            border-top: var(--ag-borders-critical);
+            border-top: var(--ag-borders-critical) var(--ag-border-color);
         }
     }
 

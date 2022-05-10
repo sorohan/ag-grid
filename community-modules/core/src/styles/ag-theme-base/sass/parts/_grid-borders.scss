@@ -6,11 +6,11 @@
     }
 
     .ag-cell.ag-cell-first-right-pinned:not(.ag-cell-range-left):not(.ag-cell-range-single-cell) {
-        border-left: var(--ag-borders-critical);
+        border-left: var(--ag-borders-critical) var(--ag-border-color);
     }
 
     .ag-cell.ag-cell-last-left-pinned:not(.ag-cell-range-right):not(.ag-cell-range-single-cell) {
-        border-right: var(--ag-borders-critical);
+        border-right: var(--ag-borders-critical) var(--ag-border-color);
     }
 
     .ag-row-selected {

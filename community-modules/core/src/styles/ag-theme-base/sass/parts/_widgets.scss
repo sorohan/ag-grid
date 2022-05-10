@@ -173,7 +173,7 @@
         padding: 0 var(--ag-grid-size) 0 var(--ag-cell-horizontal-padding);
         height: var(--ag-row-height);
 
-        border-bottom: var(--ag-borders-secondary);
+        border-bottom: var(--ag-borders-secondary) var(--ag-secondary-border-color);
     }
 
     .ag-rich-select-virtual-list-item {
@@ -373,7 +373,7 @@
         @include ag-card();
         overflow: hidden;
         text-overflow: ellipsis;
-        border: var(--ag-borders-secondary);
+        border: var(--ag-borders-secondary) var(--ag-secondary-border-color);
         color: var(--ag-secondary-foreground-color);
         height: var(--ag-header-height) !important;
         line-height: var(--ag-header-height);
@@ -406,7 +406,7 @@
 
     .ag-dialog {
         border-radius: var(--ag-border-radius);
-        border: var(--ag-borders);
+        border: var(--ag-borders) var(--ag-border-color);
     }
 
     .ag-panel {
@@ -418,7 +418,7 @@
         color: var(--ag-header-foreground-color);
         height: var(--ag-header-height);
         padding: var(--ag-grid-size) var(--ag-cell-horizontal-padding);
-        border-bottom: var(--ag-borders);
+        border-bottom: var(--ag-borders) var(--ag-border-color);
     }
 
     .ag-panel-title-bar-button {
@@ -432,7 +432,7 @@
         background-color: var(--ag-header-background-color);
         color: var(--ag-foreground-color);
         padding: var(--ag-grid-size);
-        border: var(--ag-borders);
+        border: var(--ag-borders) var(--ag-border-color);
         border-radius: var(--ag-card-radius);
         transition: opacity 1s;
         white-space: normal;

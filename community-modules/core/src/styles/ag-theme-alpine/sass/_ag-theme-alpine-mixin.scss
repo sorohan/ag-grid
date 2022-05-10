@@ -50,7 +50,7 @@
     }
 
     .ag-tabs-header {
-        border-bottom: var(--ag-borders);
+        border-bottom: var(--ag-borders) var(--ag-border-color);
     }
 
     .ag-charts-settings-group-title-bar,
@@ -65,7 +65,7 @@
     }
 
     .ag-chart-settings-nav-bar {
-        border-top: var(--ag-borders-secondary);
+        border-top: var(--ag-borders-secondary) var(--ag-secondary-border-color);
     }
 
     .ag-group-title-bar-icon {

@@ -21,12 +21,12 @@
         align-items: center;
         padding: 0 var(--ag-widget-container-horizontal-padding);
 
-        border-bottom: var(--ag-borders-secondary);
+        border-bottom: var(--ag-borders-secondary) var(--ag-secondary-border-color);
     }
     
     .ag-column-panel-column-select {
-        border-bottom: var(--ag-borders-secondary);
-        border-top: var(--ag-borders-secondary);
+        border-bottom: var(--ag-borders-secondary) var(--ag-secondary-border-color);
+        border-top: var(--ag-borders-secondary) var(--ag-secondary-border-color);
     }
 
     .ag-column-group-icons,

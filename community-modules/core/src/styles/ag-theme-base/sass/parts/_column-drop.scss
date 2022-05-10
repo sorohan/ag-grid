@@ -37,13 +37,13 @@
         background-color: var(--ag-control-panel-background-color);
         color: var(--ag-secondary-foreground-color);
         height: var(--ag-row-height);
-        border-bottom: var(--ag-borders);
+        border-bottom: var(--ag-borders) var(--ag-border-color);
 
         @include ag-theme-rtl(( padding-left: var(--ag-cell-horizontal-padding) ));
     }
     
     .ag-column-drop-horizontal-half-width:not(:last-child) {
-        @include ag-theme-rtl((border-right: var(--ag-borders)));
+        @include ag-theme-rtl((border-right: var(--ag-borders) var(--ag-border-color)));
     }
 
     .ag-column-drop-horizontal-cell-separator {
@@ -74,7 +74,7 @@
     .ag-column-drop-vertical {
         min-height: 50px;
         
-        border-bottom: var(--ag-borders-secondary);
+        border-bottom: var(--ag-borders-secondary) var(--ag-secondary-border-color);
         &.ag-last-column-drop {
             border-bottom: none;
         }

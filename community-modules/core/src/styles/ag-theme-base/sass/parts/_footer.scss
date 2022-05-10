@@ -29,7 +29,7 @@
     }
 
     .ag-status-bar {
-        border-top: var(--ag-borders);
+        border-top: var(--ag-borders) var(--ag-border-color);
         color: var(--ag-disabled-foreground-color);
         padding-right: calc(var(--ag-grid-size) * 4);
         padding-left: calc(var(--ag-grid-size) * 4);

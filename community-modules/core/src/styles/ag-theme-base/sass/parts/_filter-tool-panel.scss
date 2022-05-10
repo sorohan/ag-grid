@@ -37,7 +37,7 @@
     }
 
     .ag-filter-toolpanel-group-level-0 {
-        border-top: var(--ag-borders-secondary);
+        border-top: var(--ag-borders-secondary) var(--ag-secondary-border-color);
     }
 
     .ag-filter-toolpanel-expand,
@@ -65,8 +65,8 @@
     }
 
     .ag-filter-toolpanel-instance-filter {
-        border-bottom: var(--ag-borders);
-        border-top: var(--ag-borders);
+        border-bottom: var(--ag-borders) var(--ag-border-color);
+        border-top: var(--ag-borders) var(--ag-border-color);
         margin-top: var(--ag-grid-size);
     }
 

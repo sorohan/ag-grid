@@ -70,7 +70,7 @@
 }
 
 @mixin ag-card() {
-    border: var(--ag-borders);
+    border: var(--ag-borders) var(--ag-border-color);
     
     background: var(--ag-background-color);
     border-radius: var(--ag-card-radius);

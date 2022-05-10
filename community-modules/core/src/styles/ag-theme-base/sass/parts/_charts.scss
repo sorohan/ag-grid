@@ -63,7 +63,7 @@
     .ag-charts-settings-group-title-bar,
     .ag-charts-data-group-title-bar,
     .ag-charts-format-top-level-group-title-bar {
-        border-top: var(--ag-borders-secondary);
+        border-top: var(--ag-borders-secondary) var(--ag-secondary-border-color);
     }
 
     .ag-charts-settings-group-container {

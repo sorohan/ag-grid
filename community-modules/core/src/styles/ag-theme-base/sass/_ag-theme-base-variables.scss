@@ -142,7 +142,7 @@
     --ag-borders-critical: solid 1px;
 
     // Draw decorative borders separating UI elements within components
-    --ag-borders-secondary: var(--ag-borders);
+    --ag-borders-secondary: var(--ag-borders) var(--ag-border-color);
 
     // Border radius applied to many elements such as dialogs and form widgets
     --ag-border-radius: 0px;
@@ -177,7 +177,7 @@
     // The color applied to form elements in an invalid state
     --ag-invalid-color: red;
     
-    --ag-input-border: var(--ag-borders-secondary);
+    --ag-input-border: var(--ag-borders-secondary) var(--ag-secondary-border-color);
     --ag-input-border-invalid: solid 2px var(--ag-invalid-color);
     --ag-input-disabled-border-color: var(--ag-input-border-color);
     --ag-input-disabled-background-color: transparent;

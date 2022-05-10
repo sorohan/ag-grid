@@ -6,7 +6,7 @@
     }
 
     .ag-root-wrapper {
-        border: var(--ag-borders);
+        border: var(--ag-borders) var(--ag-border-color);
     }
     
     // support 100 levels here because row group indentation is used for tree data which can be quite deep
@@ -69,7 +69,7 @@
         height: var(--ag-row-height);
         background-color: var(--ag-background-color);
         color: var(--ag-data-color);
-        border-bottom: var(--ag-borders-row);
+        border-bottom: var(--ag-borders-row) var(--ag-border-color);
     }
 
     .ag-row-highlight-above::after, .ag-row-highlight-below::after {
@@ -100,11 +100,11 @@
     // NOTE: these don't need an RTL version because the "left spacer" is always the one visually on the left
     .ag-body-horizontal-scroll:not(.ag-scrollbar-invisible) {
         .ag-horizontal-left-spacer:not(.ag-scroller-corner) {
-            border-right: var(--ag-borders-critical);
+            border-right: var(--ag-borders-critical) var(--ag-border-color);
         }
 
         .ag-horizontal-right-spacer:not(.ag-scroller-corner) {
-            border-left: var(--ag-borders-critical);
+            border-left: var(--ag-borders-critical) var(--ag-border-color);
         }
     }
 
@@ -221,9 +221,9 @@
     }
 
     .ag-floating-top {
-        border-bottom: var(--ag-borders-critical);
+        border-bottom: var(--ag-borders-critical) var(--ag-border-color);
     }
     .ag-floating-bottom {
-        border-top: var(--ag-borders-critical);
+        border-top: var(--ag-borders-critical) var(--ag-border-color);
     }
 }

@@ -17,7 +17,7 @@
     .ag-menu-separator-part::after {
         content: "";
         display: block;
-        border-top: var(--ag-borders-critical);
+        border-top: var(--ag-borders-critical) var(--ag-border-color);
     }
 
     .ag-menu-option-active, .ag-compact-menu-option-active {
@@ -84,7 +84,7 @@
     }
 
     .ag-filter-separator {
-        border-top: var(--ag-borders-critical);
+        border-top: var(--ag-borders-critical) var(--ag-border-color);
     }
 
     .ag-menu:not(.ag-tabs) .ag-filter-select {
@@ -144,7 +144,7 @@
 
     .ag-filter-apply-panel {
         padding: var(--ag-widget-container-vertical-padding) var(--ag-widget-container-horizontal-padding);
-        border-top: var(--ag-borders-secondary);
+        border-top: var(--ag-borders-secondary) var(--ag-secondary-border-color);
     }
 
     .ag-filter-apply-panel-button {
