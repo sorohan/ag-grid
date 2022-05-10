@@ -198,7 +198,7 @@ export class HistogramSeries extends CartesianSeries {
 
     yName: string = '';
     strokeWidth: number = 1;
-    shadow?: DropShadow;
+    shadow?: DropShadow = undefined;
 
     onHighlightChange() {
         this.updateRectNodes();

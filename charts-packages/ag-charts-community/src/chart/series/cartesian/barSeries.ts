@@ -324,7 +324,7 @@ export class BarSeries extends CartesianSeries {
 
     strokeWidth: number = 1;
 
-    shadow?: DropShadow;
+    shadow?: DropShadow = undefined;
 
     onHighlightChange() {
         this.updateRectNodes();
