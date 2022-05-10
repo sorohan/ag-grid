@@ -4,7 +4,7 @@
   "description": "AG Grid Styles and Themes",
   "main": "main.scss",
   "scripts": {
-    "build": "node-sass src --output . --output-style expanded",
+    "build": "sass --no-source-map src/base/base.scss:ag-grid.css src/themes/alpine.scss:ag-theme-alpine.css",
     "watch": "npm run build && npm run build -- --watch",
     "hash": "sh ../../scripts/hashDirectory.sh > .hash"
   },
@@ -25,7 +25,6 @@
   },
   "homepage": "http://www.ag-grid.com/",
   "dependencies": {
-    "sass-embedded": "^1.50.1",
-    "sass-embedded-cli": "^1.0.0-beta.0"
+    "sass": "^1.51.0"
   }
 }
