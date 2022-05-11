@@ -37,12 +37,16 @@
   --ag-borders-critical: var(--ag-borders);
   --ag-borders-secondary: var(--ag-borders);
   --ag-secondary-border-color: var(--ag-border-color);
+  --ag-borders-row: none;
+  --ag-row-border-color: var(--ag-secondary-border-color),
+  // Draw borders separating cells within a row.
+  // Set this to a border style and thickness, e.g. `solid 1px` to enable borders,
+  // or `none` to disable borders.
   --ag-borders-cell: none;
   --ag-cell-border-color: var(--ag-secondary-border-color);
   --ag-borders-side-button: var(--ag-borders);
   --ag-border-radius: 0px;
   --ag-row-border-color: var(--ag-secondary-border-color);
-  --ag-cell-horizontal-border: solid transparent;
   --ag-header-column-separator-display: none;
   --ag-header-column-separator-height: 100%;
   --ag-header-column-separator-width: 1px;
@@ -5691,7 +5695,7 @@ input[class^=ag-][type=button]:focus, button[class^=ag-]:focus {
   height: var(--ag-row-height);
   background-color: var(--ag-background-color);
   color: var(--ag-data-color);
-  border-bottom: var(--ag-borders-row) var(--ag-border-color);
+  border-bottom: var(--ag-borders-row) var(--ag-row-border-color);
 }
 
 .ag-row-highlight-above::after, .ag-row-highlight-below::after {

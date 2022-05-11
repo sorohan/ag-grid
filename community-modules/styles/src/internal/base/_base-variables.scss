@@ -147,6 +147,14 @@
     // Colour for borders used to separate elements within a major UI component
     --ag-secondary-border-color: var(--ag-border-color);
 
+    // Draw borders between rows.
+    // Set this to a border style and thickness, e.g. `solid 1px` to enable borders,
+    // or `none` to disable borders.
+    --ag-borders-row: none;
+
+    // Colour for borders between rows, if enabled with --ag-borders-row
+    --ag-row-border-color: var(--ag-secondary-border-color),
+
     // Draw borders separating cells within a row.
     // Set this to a border style and thickness, e.g. `solid 1px` to enable borders,
     // or `none` to disable borders.
@@ -165,10 +173,6 @@
 
     // Colour of the border between grid rows, or "transparent" to display no border
     --ag-row-border-color: var(--ag-secondary-border-color);
-
-    // Default border for cells. This can be used to specify the border-style and
-    // border-color properties e.g. `dashed red` but the border-width is fixed at 1px.
-    --ag-cell-horizontal-border: solid transparent;
 
     // The Header Column Separator is a vertical border between all columns in the
     // header.

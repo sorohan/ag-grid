@@ -68,7 +68,7 @@
     height: var(--ag-row-height);
     background-color: var(--ag-background-color);
     color: var(--ag-data-color);
-    border-bottom: var(--ag-borders-row) var(--ag-border-color);
+    border-bottom: var(--ag-borders-row) var(--ag-row-border-color);
 }
 
 .ag-row-highlight-above::after, .ag-row-highlight-below::after {

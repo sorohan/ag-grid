@@ -3,6 +3,124 @@
 // https://ag-grid.com/javascript-data-grid/styling-sass/
 //
 
+// Note: some customers may use @import rather than @use, which will
+// cause all definitions to be merged into their global namespace,
+// so prefix all definitions with "ag-" or "-ag-" for private items
+
 @mixin ag-theme-alpine($params) {
     @import "";
+}
+
+// data types:
+//    "color": CSS color e.g. red or #fff
+//    "size": 0 or number and unit e.g. 4px or percentage e.g. 50%
+//    "border": CSS border spec e.g. `solid 1px red`
+//    "border-style": A valid CSS border style e.g. `dotted` or `solid`
+//    "duration": number with time duration e.g. 3s or 250ms
+//    "style-and-size": either `none` or 2-element list of a size and a border-style
+//    "display": `block` or `none` or a boolean
+//    "any": not validated
+
+$-ag-param-types: (
+    foreground-color: "color",
+    data-color: "color",
+    secondary-foreground-color: "color",
+    header-foreground-color: "color",
+    disabled-foreground-color: "color",
+    background-color: "color",
+    header-background-color: "color",
+    subheader-background-color: "color",
+    subheader-toolbar-background-color: "color",
+    control-panel-background-color: "color",
+    side-button-selected-background: "color",
+    selected-row-background-color: "color",
+    odd-row-background-color: "color",
+    modal-overlay-background-color: "color",
+    row-hover-color: "color",
+    column-hover-color: "color",
+    range-selection-border-color: "color",
+    range-selection-background-color: "color",
+    range-selection-background-color-2: "color",
+    range-selection-background-color-3: "color",
+    range-selection-background-color-4: "color",
+    range-selection-highlight-color: "color",
+    selected-tab-underline-color: "color",
+    selected-tab-underline-width: "size",
+    selected-tab-underline-transition-speed: "duration",
+    range-selection-chart-category-background-color: "color",
+    range-selection-chart-background-color: "color",
+    header-cell-hover-background-color: "color",
+    header-cell-moving-background-color: "color",
+    value-change-value-highlight-background-color: "color",
+    value-change-delta-up-color: "color",
+    value-change-delta-down-color: "color",
+    chip-background-color: "color",
+    borders: "style-and-size",
+    border-color: "color",
+    borders-critical: "style-and-size",
+    borders-secondary: "style-and-size",
+    secondary-border-color: "color",
+    borders-row: "style-and-size",
+    row-border-color: "color",
+    borders-cell: "style-and-size",
+    cell-border-color: "color",
+    borders-side-button: "style-and-size",
+    border-radius: "size",
+    header-column-separator-display: "display",
+    header-column-separator-height: "size",
+    header-column-separator-width: "size",
+    header-column-separator-color: "color",
+    header-column-resize-handle-display: none,
+    header-column-resize-handle-height: 50"size",
+    header-column-resize-handle-width: "size",
+    header-column-resize-handle-color: "color",
+    invalid-color: "color",
+    input-border: "border",
+    input-border-invalid: "border",
+    input-disabled-border-color: "color",
+    input-disabled-background-color: "color",
+    checkbox-background-color: "color",
+    checkbox-border-radius: "size",
+    checkbox-checked-color: "color",
+    checkbox-unchecked-color: "color",
+    checkbox-indeterminate-color: "color",
+    toggle-button-off-border-color: "color",
+    toggle-button-off-background-color: "color",
+    toggle-button-on-border-color: "color",
+    toggle-button-on-background-color: "color",
+    toggle-button-switch-background-color: "color",
+    toggle-button-switch-border-color: "color",
+    toggle-button-border-width: "size",
+    toggle-button-height: "size",
+    toggle-button-width: "size",
+    input-focus-box-shadow: none,
+    input-focus-border-color: none,
+    minichart-selected-chart-color: "color",
+    minichart-selected-page-color: "color",
+    grid-size: "size",
+    icon-size: "size",
+    widget-container-horizontal-padding: "size",
+    widget-container-vertical-padding: "size",
+    widget-horizontal-spacing: "size",
+    widget-vertical-spacing: "size",
+    cell-horizontal-padding: "size",
+    cell-widget-spacing: "size",
+    row-height: "size",
+    header-height: "size",
+    list-item-height: "size",
+    column-select-indent-size: "size",
+    row-group-indent-size: "size",
+    filter-tool-panel-group-indent: "size",
+    tab-min-width: "size",
+    menu-min-width: "size",
+    side-bar-panel-width: "size",
+    font-family: "any",
+    font-size: "size",
+    card-radius: "size",
+    card-shadow: "any",
+    popup-shadow: "any",
+);
+
+@mixin -ag-validate-params($params) {
+
 }
