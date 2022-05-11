@@ -153,7 +153,7 @@
     --ag-borders-row: none;
 
     // Colour for borders between rows, if enabled with --ag-borders-row
-    --ag-row-border-color: var(--ag-secondary-border-color),
+    --ag-row-border-color: var(--ag-secondary-border-color);
 
     // Draw borders separating cells within a row.
     // Set this to a border style and thickness, e.g. `solid 1px` to enable borders,

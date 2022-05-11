@@ -1,13 +1,35 @@
+
 //
 // This file defines the public Sass API to ag-Grid's styles.
 // https://ag-grid.com/javascript-data-grid/styling-sass/
 //
 
-// Note: some customers may use @import rather than @use, which will
+@use "sass:map";
+@use "sass:meta";
+
+// Note: some customers may @import rather than @use this file, which will
 // cause all definitions to be merged into their global namespace,
 // so prefix all definitions with "ag-" or "-ag-" for private items
 
 @mixin ag-theme-alpine($params) {
+    @include meta.load-css("./ag-grid.css");
+    @include meta.load-css("./ag-theme-alpine.css");
+    @include ag-validate-params($params, (alpine-active-color: "color"));
+    .ag-theme-alpine {
+        @include ag-params-variables($params);
+    }
+}
+
+@mixin ag-theme-alpine-dark($params) {
+    @include meta.load-css("./ag-grid.css");
+    @include meta.load-css("./ag-theme-alpine.css");
+    @include ag-validate-params($params, (alpine-active-color: "color"));
+    .ag-theme-alpine-dark {
+        @include ag-params-variables($params);
+    }
+}
+
+@mixin ag-theme-material($params) {
     @import "";
 }
 
@@ -19,7 +41,7 @@
 //    "duration": number with time duration e.g. 3s or 250ms
 //    "style-and-size": either `none` or 2-element list of a size and a border-style
 //    "display": `block` or `none` or a boolean
-//    "any": not validated
+//    "any": allows any value
 
 $-ag-param-types: (
     foreground-color: "color",
@@ -119,8 +141,74 @@ $-ag-param-types: (
     card-radius: "size",
     card-shadow: "any",
     popup-shadow: "any",
+    alpine-active-color: "color",
+    balham-active-color: "color",
+    material-primary-color: "color",
+    material-accent-color: "color",
 );
 
-@mixin -ag-validate-params($params) {
+@mixin ag-validate-params($params, $extra-param-types: ()) {
+    $param-types: map.merge($-ag-param-types, $extra-param-types);
+    $errors: ();
+    @each $name, $value in $params {
+        $expected-type: map.get($param-types, $name);
+        @if $expected-type {
+            $validator-name: "-ag-validate-#{$expected-type}";
+            $validator: meta.get-function($validator-name);
+            @if not $validator {
+                @error "Internal error: no validator function #{$validator-name}";
+            }
+            $is-valid: meta.call($validator);
+            @if not $is-valid {
+                $expected: map.get($-ag-param-type-descriptions, $expected-type);
+                $expected: $expected-type !default;
+                @warn "Invalid value for parameter '#{$name}': #{meta.inspect($value)} -- expected #{$expected}";
+                $has-error: true
+            }
+        } @else {
+            @warn "Unrecognised parameter '#{$name}'";
+            $has-error: true
+        }
+    }
+    @if $has-error {
+        @error "Stopping compilation due to errors, see lines above for details";
+    }
+}
 
+$-ag-param-type-descriptions: (
+    "color": "a CSS color (e.g. `red` or `#fff`)",
+    "size": "a CSS size (e.g. `0`, `4px` or `50%`)",
+    "border": "a 3-part border spec in the form `style width color` (e.g. `solid 1px red`)",
+    "border-style": "a CSS border style (e.g. `dotted` or `solid`)",
+    "duration": "a number with time duration units (e.g. `3s` or `250ms`)",
+    "style-and-size": "either `none` or 2-element list of a border-style and size (e.g. `solid 1px`)",
+    "display": "`true`, `false`, `block` (equivalent to `true`) or `none` (equivalent to `false`)"
+);
+
+@function -ag-validate-color($name, $value) {
+    @return meta.type-of($value) == "color";
+}
+
+@function -ag-validate-size($name, $value) {
+    @return true;
+}
+
+@function -ag-validate-border($name, $value) {
+    @return true;
+}
+
+@function -ag-validate-border-style($name, $value) {
+    @return true;
+}
+
+@function -ag-validate-duration($name, $value) {
+    @return true;
+}
+
+@function -ag-validate-style-and-size($name, $value) {
+    @return true;
+}
+
+@function -ag-validate-any($name, $value) {
+    @return true;
 }

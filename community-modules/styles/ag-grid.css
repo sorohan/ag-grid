@@ -38,10 +38,7 @@
   --ag-borders-secondary: var(--ag-borders);
   --ag-secondary-border-color: var(--ag-border-color);
   --ag-borders-row: none;
-  --ag-row-border-color: var(--ag-secondary-border-color),
-  // Draw borders separating cells within a row.
-  // Set this to a border style and thickness, e.g. `solid 1px` to enable borders,
-  // or `none` to disable borders.
+  --ag-row-border-color: var(--ag-secondary-border-color);
   --ag-borders-cell: none;
   --ag-cell-border-color: var(--ag-secondary-border-color);
   --ag-borders-side-button: var(--ag-borders);
