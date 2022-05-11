@@ -1,10 +1,13 @@
+@use "sass:string";
+@use "sass:list";
+
 // Automatically generate rtl styles from provided ltr styles by
 // flipping "left" and "right" in property names and values.
 //
 // For example:
 //
 // .foo {
-//     @include ag-unthemed-rtl((margin-left: 10px));
+//     @include ag.unthemed-rtl((margin-left: 10px));
 // }
 //
 // Will emit:
@@ -15,12 +18,12 @@
 // .ag-rtl .foo {
 //   margin-right: 10px;
 // }
-@mixin ag-unthemed-rtl($rules) {
-    @if length(nth(&, 1)) < 1 {
+@mixin unthemed-rtl($rules) {
+    @if list.length(nth(&, 1)) < 1 {
         @error "ag-unthemed-rtl() can't be used at the top level of a css file, only nested in a selector.";
     }
-    @if str-index(nth(nth(&, 1), 1), ".ag-theme-") != null {
-        @error "ag-unthemed-rtl() should not be used in a theme, use ag-theme-rtl() instead.";
+    @if string.index(nth(nth(&, 1), 1), ".ag-theme-") != null {
+        @error "ag-unthemed-rtl() should not be used in a theme, use ag.theme-rtl() instead.";
     }
     .ag-ltr & {
         @each $property, $value in $rules {
@@ -34,7 +37,7 @@
     }
 }
 
-// Like ag-unthemed-rtl, automatically generate rtl styles from provided ltr
+// Like ag.unthemed-rtl, automatically generate rtl styles from provided ltr
 // styles by flipping "left" and "right" in property names and values. However
 // this mixin is for use in themes. Because the div with the theme class is
 // outside the div with the .ag-rtl class, we need to keep the theme class
@@ -44,7 +47,7 @@
 //
 // .ag-theme-xyz {
 //     .foo {
-//         @include ag-theme-rtl((margin-left: 10px));
+//         @include ag.theme-rtl((margin-left: 10px));
 //     }
 // }
 //
@@ -58,8 +61,8 @@
 // }
 //
 // Note how the .ag-ltr class is inserted between the theme class and the rest of the selector
-@mixin ag-theme-rtl($rules) {
-    @if length(nth(&, 1)) < 2 {
+@mixin theme-rtl($rules) {
+    @if list.length(nth(&, 1)) < 2 {
         @error "ag-theme-rtl() can't be used at the top level of a SCSS file, only nested in a selector.";
     }
     @at-root {
@@ -80,12 +83,12 @@
 @function -ag-get-rtl-rules($ltr-rules) {
     $rtl-rules: ();
     @each $property, $value in $ltr-rules {
-        @if str-index($property, "-right") {
-            $rtl-property: ag-str-replace($property, "-right", "-left");
+        @if string.index($property, "-right") {
+            $rtl-property: -str-replace($property, "-right", "-left");
             $rtl-rules: map-merge($rtl-rules, ($rtl-property: $value));
         }
-        @else if str-index($property, "-left") {
-            $rtl-property: ag-str-replace($property, "-left", "-right");
+        @else if string.index($property, "-left") {
+            $rtl-property: -str-replace($property, "-left", "-right");
             $rtl-rules: map-merge($rtl-rules, ($rtl-property: $value));
         }
         @else if $property == "right" {
@@ -105,6 +108,17 @@
         }
     }
     @return $rtl-rules;
+}
+
+@function -str-replace($string, $search, $replace: '') {
+    $index: str-index($string, $search);
+    @if $index {
+        @return str-slice($string, 1, $index - 1)
+                + $replace
+                + -str-replace(str-slice($string, $index
+                + str-length($search)), $search, $replace);
+    }
+    @return $string;
 }
 
 @function -ag-insert-class-after-theme($selectors, $class) {

@@ -1,3 +1,4 @@
+@use "ag";
 
 .ag-checkbox,
 .ag-radio-button {
@@ -19,7 +20,7 @@
 }
 
 .ag-label-align-right .ag-label {
-    @include ag-unthemed-rtl((margin-left: var(--ag-grid-size)));
+    @include ag.unthemed-rtl((margin-left: var(--ag-grid-size)));
 }
 
 input[class^='ag-'] {
@@ -94,7 +95,7 @@ input[class^='ag-'][type='button'], button[class^='ag-'] {
     height: var(--ag-list-item-height);
 }
 
-@include ag-keyboard-focus((ag-virtual-list-item), 4px);
+@include ag.keyboard-focus((ag-virtual-list-item), 4px);
 
 .ag-select-list {
     background-color: var(--ag-background-color);
@@ -118,7 +119,7 @@ input[class^='ag-'][type='button'], button[class^='ag-'] {
     padding-left: 4px;
     padding-right: 4px;
     cursor: default;
-    @include ag-selectable(none);
+    @include ag.selectable(none);
     span {
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -201,7 +202,7 @@ input[class^='ag-'][type='button'], button[class^='ag-'] {
 .ag-selection-checkbox,
 .ag-group-expanded,
 .ag-group-contracted {
-    @include ag-unthemed-rtl(( margin-right: var(--ag-cell-widget-spacing) ));
+    @include ag.unthemed-rtl(( margin-right: var(--ag-cell-widget-spacing) ));
 
     color: var(--ag-secondary-foreground-color);
 }
@@ -226,7 +227,7 @@ input[class^='ag-'][type='button'], button[class^='ag-'] {
 }
 
 .ag-group-child-count {
-    @include ag-unthemed-rtl(( margin-left: 2px ));
+    @include ag.unthemed-rtl(( margin-left: 2px ));
 }
 
 .ag-group-title-bar {
@@ -249,7 +250,7 @@ input[class^='ag-'][type='button'], button[class^='ag-'] {
 
 .ag-label {
     white-space: nowrap;
-    @include ag-unthemed-rtl((margin-right: var(--ag-grid-size)));
+    @include ag.unthemed-rtl((margin-right: var(--ag-grid-size)));
 }
 
 .ag-label-align-top .ag-label {
@@ -258,7 +259,7 @@ input[class^='ag-'][type='button'], button[class^='ag-'] {
 
 .ag-slider-field,
 .ag-angle-select-field {
-    @include ag-unthemed-rtl((margin-right: calc(var(--ag-grid-size) * 2)));
+    @include ag.unthemed-rtl((margin-right: calc(var(--ag-grid-size) * 2)));
 }
 
 .ag-angle-select-parent-circle {
@@ -370,7 +371,7 @@ input[class^='ag-'][type='button'], button[class^='ag-'] {
 // Ghost Element (Drag and Drop)
 ////////////////////////////////////////
 .ag-dnd-ghost {
-    @include ag-card();
+    @include ag.card();
     overflow: hidden;
     text-overflow: ellipsis;
     border: var(--ag-borders-secondary) var(--ag-secondary-border-color);
@@ -422,7 +423,7 @@ input[class^='ag-'][type='button'], button[class^='ag-'] {
 }
 
 .ag-panel-title-bar-button {
-    @include ag-unthemed-rtl((margin-left: var(--ag-grid-size)));
+    @include ag.unthemed-rtl((margin-left: var(--ag-grid-size)));
 }
 
 ////////////////////////////////////////
@@ -451,7 +452,7 @@ input[class^='ag-'][type='button'], button[class^='ag-'] {
 // Column select
 @for $i from 1 to 10 {
     .ag-column-select-indent-#{$i} {
-        @include ag-unthemed-rtl(( padding-left: calc(#{$i} * var(--ag-column-select-indent-size)) ));
+        @include ag.unthemed-rtl(( padding-left: calc(#{$i} * var(--ag-column-select-indent-size)) ));
     }
 }
 
@@ -459,7 +460,7 @@ input[class^='ag-'][type='button'], button[class^='ag-'] {
     cursor: pointer;
 }
 
-@include ag-keyboard-focus((ag-column-select-header-icon), 0px);
+@include ag.keyboard-focus((ag-column-select-header-icon), 0px);
 
 .ag-column-group-icons,
 .ag-column-select-header-icon,
@@ -470,13 +471,11 @@ input[class^='ag-'][type='button'], button[class^='ag-'] {
 .ag-column-select-column-group-drag-handle,
 .ag-column-select-column-label {
     &:not(:last-child) {
-        @include ag-unthemed-rtl((margin-right: var(--ag-widget-horizontal-spacing)))
+        @include ag.unthemed-rtl((margin-right: var(--ag-widget-horizontal-spacing)))
     }
 }
 
-@include ag-keyboard-focus((
-    ag-column-select-virtual-list-item
-), 1px);
+@include ag.keyboard-focus((ag-column-select-virtual-list-item), 1px);
 
 .ag-column-select-column-group,
 .ag-column-select-column {
@@ -494,7 +493,7 @@ input[class^='ag-'][type='button'], button[class^='ag-'] {
 // note - this applies a margin of the same width as a .ag-column-group-icons element, to indent columns
 // wihtout icons to the same level as siblings with icons. If changing .ag-column-group-icons, change this too.
 .ag-column-select-add-group-indent {
-    @include ag-unthemed-rtl(( margin-left: calc(var(--ag-icon-size) + var(--ag-grid-size) * 2) ));
+    @include ag.unthemed-rtl(( margin-left: calc(var(--ag-icon-size) + var(--ag-grid-size) * 2) ));
 }
 
 .ag-column-select-virtual-list-viewport {

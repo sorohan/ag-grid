@@ -1,6 +1,7 @@
+@use "ag";
 
 .ag-cell {
-    @include ag-unthemed-rtl(( border-right: var(--ag-borders-cell) var(--ag-cell-border-color) ));
+    @include ag.unthemed-rtl(( border-right: var(--ag-borders-cell) var(--ag-cell-border-color) ));
 }
 
 .ag-cell.ag-cell-first-right-pinned:not(.ag-cell-range-left):not(.ag-cell-range-single-cell) {
@@ -85,7 +86,7 @@
 
 .ag-cell.ag-selection-fill-right,
 .ag-cell.ag-selection-fill-right.ag-cell-range-selected {
-    @include ag-unthemed-rtl((border-right: 1px dashed var(--ag-range-selection-border-color)));
+    @include ag.unthemed-rtl((border-right: 1px dashed var(--ag-range-selection-border-color)));
 }
 
 .ag-cell.ag-selection-fill-bottom,
@@ -96,7 +97,7 @@
 
 .ag-cell.ag-selection-fill-left,
 .ag-cell.ag-selection-fill-left.ag-cell-range-selected {
-    @include ag-unthemed-rtl((border-left: 1px dashed var(--ag-range-selection-border-color)));
+    @include ag.unthemed-rtl((border-left: 1px dashed var(--ag-range-selection-border-color)));
 }
 
 .ag-fill-handle, .ag-range-handle {
@@ -104,7 +105,7 @@
     width: 6px;
     height: 6px;
     bottom: -1px;
-    @include ag-unthemed-rtl((right: -1px));
+    @include ag.unthemed-rtl((right: -1px));
     background-color: var(--ag-range-selection-border-color);
 }
 

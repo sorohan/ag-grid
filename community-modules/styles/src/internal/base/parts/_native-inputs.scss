@@ -1,5 +1,8 @@
-@mixin ag-check-button-base {
-    @include ag-icon();
+@use "ag";
+@use "sass:meta";
+
+@mixin -check-button-base {
+    @include ag.icon();
 
     width: var(--ag-icon-size);
     height: var(--ag-icon-size);
@@ -28,7 +31,7 @@
 }
 
 .ag-checkbox-input-wrapper {
-    @include ag-check-button-base();
+    @include -check-button-base();
 
     // IMPORTANT!
     // We document these styles at /javascript-grid-icons/ and advise users who want to change
@@ -36,7 +39,7 @@
     // these styles without also updating the icons examples.
 
     &::after {
-        content: ag-icon-char(checkbox-unchecked);
+        content: ag.icon-char(checkbox-unchecked);
         color: var(--ag-checkbox-unchecked-color);
         position: absolute;
         top: 0;
@@ -45,7 +48,7 @@
     }
 
     &.ag-checked::after {
-        content: ag-icon-char(checkbox-checked);
+        content: ag.icon-char(checkbox-checked);
         color: var(--ag-checkbox-checked-color);
         position: absolute;
         top: 0;
@@ -54,7 +57,7 @@
     }
 
     &.ag-indeterminate::after {
-        content: ag-icon-char(checkbox-indeterminate);
+        content: ag.icon-char(checkbox-indeterminate);
         color: var(--ag-checkbox-indeterminate-color);
         position: absolute;
         top: 0;
@@ -119,12 +122,12 @@
 
 
 .ag-radio-button-input-wrapper {
-    @include ag-check-button-base();
+    @include -check-button-base();
 
     border-radius: var(--ag-icon-size);
 
     &::after {
-        content: ag-icon-char(radio-button-off);
+        content: ag.icon-char(radio-button-off);
         color: var(--ag-checkbox-unchecked-color);
         position: absolute;
         top: 0;
@@ -133,7 +136,7 @@
     }
 
     &.ag-checked::after {
-        content: ag-icon-char(radio-button-on);
+        content: ag.icon-char(radio-button-on);
         color: var(--ag-checkbox-checked-color);
         position: absolute;
         top: 0;
@@ -145,8 +148,8 @@
 
 
 @mixin -ag-range-track {
-    @if mixin-exists(ag-range-track) {
-        @include ag-range-track
+    @if meta.mixin-exists(ag-range-track) {
+        @include ag.range-track
     }
     @else {
         margin: 0;
@@ -160,14 +163,14 @@
 }
 
 @mixin -ag-focus-range-track {
-    @if mixin-exists(ag-focus-range-track) {
-        @include ag-focus-range-track
+    @if meta.mixin-exists(ag-focus-range-track) {
+        @include ag.focus-range-track
     }
 }
 
 @mixin -ag-active-range-track {
-    @if mixin-exists(ag-focus-range-track) {
-        @include ag-focus-range-track
+    @if meta.mixin-exists(ag-focus-range-track) {
+        @include ag.focus-range-track
     }
     @else {
         background-color: var(--ag-input-focus-border-color);
@@ -175,8 +178,8 @@
 }
 
 @mixin -ag-range-thumb {
-    @if mixin-exists(ag-range-thumb) {
-        @include ag-range-thumb
+    @if meta.mixin-exists(ag-range-thumb) {
+        @include ag.range-thumb
     }
     @else {
         margin: 0;
@@ -193,8 +196,8 @@
 
 @mixin -ag-focus-range-thumb {
     box-shadow: var(--ag-input-focus-box-shadow);
-    @if mixin-exists(ag-focus-range-thumb) {
-        @include ag-focus-range-thumb
+    @if meta.mixin-exists(ag-focus-range-thumb) {
+        @include ag.focus-range-thumb
     }
     @else {
         border-color: var(--ag-checkbox-checked-color);
@@ -202,8 +205,8 @@
 }
 
 @mixin -ag-active-range-thumb {
-    @if mixin-exists(ag-active-range-thumb) {
-        @include ag-active-range-thumb
+    @if meta.mixin-exists(ag-active-range-thumb) {
+        @include ag.active-range-thumb
     }
 }
 

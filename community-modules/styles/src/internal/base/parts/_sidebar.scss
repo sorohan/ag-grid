@@ -1,3 +1,5 @@
+@use "ag";
+
 .ag-side-bar {
     position: relative;
 }
@@ -16,7 +18,7 @@
 }
 
 button.ag-side-button-button {
-    @include ag-inherit-text-styles();
+    @include ag.inherit-text-styles();
     background: transparent;
     padding: calc(var(--ag-grid-size) * 2) 0 calc(var(--ag-grid-size) * 2) 0;
     width: 100%;
@@ -37,7 +39,7 @@ button.ag-side-button-button {
     }
 }
 
-@include ag-keyboard-focus((ag-side-button-button), 4px);
+@include ag.keyboard-focus((ag-side-button-button), 4px);
 
 .ag-selected button.ag-side-button-button {
     background: var(--ag-side-button-selected-background);

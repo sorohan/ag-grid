@@ -1,3 +1,5 @@
+@use "ag";
+
 .ag-chart {
     position: relative;
     display: flex;
@@ -42,7 +44,7 @@
     display: flex;
     flex-direction: column;
 
-    @include ag-unthemed-rtl((right: 20px));
+    @include ag.unthemed-rtl((right: 20px));
 }
 
 .ag-chart-docked-container {
@@ -295,11 +297,11 @@
     }
 
     &:first-child {
-        @include ag-unthemed-rtl((margin-left: 0));
+        @include ag.unthemed-rtl((margin-left: 0));
     }
 
     &:last-child {
-        @include ag-unthemed-rtl((margin-right: 0));
+        @include ag.unthemed-rtl((margin-right: 0));
     }
 
     &.ag-selected {
@@ -339,7 +341,7 @@
         height: var(--ag-list-item-height);
     }
 
-    @include ag-list-item-hovered();
+    @include ag.list-item-hovered();
 }
 
 .ag-charts-format-top-level-group-container {
@@ -352,7 +354,7 @@
 }
 
 .ag-charts-format-sub-level-group-container {
-    @include ag-vertical-widget-container();
+    @include ag.vertical-widget-container();
 }
 
 .ag-charts-group-container.ag-group-container-horizontal {
@@ -366,6 +368,6 @@
 }
 
 .ag-chart-menu-panel {
-    @include ag-unthemed-rtl((border-left: solid 1px var(--ag-border-color)));
+    @include ag.unthemed-rtl((border-left: solid 1px var(--ag-border-color)));
     background-color: var(--ag-control-panel-background-color);
 }

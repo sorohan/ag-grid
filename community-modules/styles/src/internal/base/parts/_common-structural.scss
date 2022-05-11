@@ -1,4 +1,4 @@
-@use "utils";
+@use "ag";
 
 // /**
 //  ****************************
@@ -391,7 +391,7 @@ ag-grid, ag-grid-angular, ag-grid-ng2, ag-grid-polymer, ag-grid-aurelia  {
     cursor: ew-resize;
 
     // unpinned headers get their rezise handle on the right in normal mode and left in RTL mode
-    @include ag-unthemed-rtl((
+    @include ag.unthemed-rtl((
         right: -4px
     ));
 }
@@ -1122,7 +1122,7 @@ ag-grid, ag-grid-angular, ag-grid-ng2, ag-grid-polymer, ag-grid-aurelia  {
 .ag-rich-select-value-icon {
     flex: 1 1 auto;
     order: 1;
-    @include ag-unthemed-rtl(( text-align: right ));
+    @include ag.unthemed-rtl(( text-align: right ));
 }
 
 
@@ -1208,11 +1208,11 @@ ag-grid, ag-grid-angular, ag-grid-ng2, ag-grid-polymer, ag-grid-aurelia  {
 }
 
 .ag-side-bar-left .ag-tool-panel-horizontal-resize {
-    @include ag-unthemed-rtl(( right: -3px ));
+    @include ag.unthemed-rtl(( right: -3px ));
 }
 
 .ag-side-bar-right .ag-tool-panel-horizontal-resize {
-    @include ag-unthemed-rtl(( left: -3px ));
+    @include ag.unthemed-rtl(( left: -3px ));
 }
 
 .ag-details-row {
@@ -1558,11 +1558,11 @@ ag-grid, ag-grid-angular, ag-grid-ng2, ag-grid-polymer, ag-grid-aurelia  {
 // Default values for themes that do not use the mixins
 @for $i from 1 to 100 {
     .ag-column-select-indent-#{$i} {
-        @include ag-unthemed-rtl(( padding-left: $i * 20px ));
+        @include ag.unthemed-rtl(( padding-left: $i * 20px ));
     }
 
     .ag-row-group-indent-#{$i} {
-        @include ag-unthemed-rtl(( padding-left: $i * 20px ));
+        @include ag.unthemed-rtl(( padding-left: $i * 20px ));
     }
 }
 

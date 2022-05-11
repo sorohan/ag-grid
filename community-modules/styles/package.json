@@ -5,8 +5,9 @@
   "main": "main.scss",
   "scripts": {
     "build": "sass --no-source-map --load-path src/internal src:.",
-    "build-prod": "npm run build",
-    "watch": "npm run build && npm run build -- --watch",
+    "build-prod": "npm run build -- --no-error-css",
+    "test": "npm run build-prod && stylelint *.css",
+    "watch": "npm run build; npm run build -- --watch",
     "hash": "sh ../../scripts/hashDirectory.sh > .hash"
   },
   "repository": {
@@ -27,5 +28,17 @@
   "homepage": "http://www.ag-grid.com/",
   "dependencies": {
     "sass": "^1.51.0"
+  },
+  "devDependencies": {
+    "stylelint": "^14.8.2",
+    "stylelint-csstree-validator": "^2.0.0"
+  },
+  "stylelint": {
+    "plugins": [
+      "stylelint-csstree-validator"
+    ],
+    "rules": {
+      "csstree/validator": true
+    }
   }
 }

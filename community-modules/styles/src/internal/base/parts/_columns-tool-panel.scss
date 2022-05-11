@@ -1,3 +1,5 @@
+@use "ag";
+
 .ag-pivot-mode-panel {
     min-height: var(--ag-header-height);
     height: var(--ag-header-height);
@@ -8,10 +10,10 @@
     display: flex;
     align-items: center;
 
-    @include ag-unthemed-rtl(( margin-left: var(--ag-widget-container-horizontal-padding) ));
+    @include ag.unthemed-rtl(( margin-left: var(--ag-widget-container-horizontal-padding) ));
 }
 
-@include ag-keyboard-focus((ag-column-select-header), 4px);
+@include ag.keyboard-focus((ag-column-select-header), 4px);
 
 .ag-column-select-header {
     height: var(--ag-header-height);
@@ -32,5 +34,5 @@
 }
 
 .ag-column-select-list {
-    @include ag-list-item-hovered()
+    @include ag.list-item-hovered()
 }

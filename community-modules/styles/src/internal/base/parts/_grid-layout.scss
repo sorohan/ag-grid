@@ -1,3 +1,4 @@
+@use "ag";
 
 .ag-rtl {
     text-align: right;
@@ -10,20 +11,20 @@
 // support 100 levels here because row group indentation is used for tree data which can be quite deep
 @for $i from 1 to 100 {
     .ag-row > .ag-cell-wrapper.ag-row-group-indent-#{$i} {
-        @include ag-unthemed-rtl(( padding-left: calc(var(--ag-cell-horizontal-padding) + #{$i} * var(--ag-row-group-indent-size)) ));
+        @include ag.unthemed-rtl(( padding-left: calc(var(--ag-cell-horizontal-padding) + #{$i} * var(--ag-row-group-indent-size)) ));
     }
     
     .ag-row-group-indent-#{$i} {
-        @include ag-unthemed-rtl(( padding-left: calc(#{$i} * var(--ag-row-group-indent-size)) ));
+        @include ag.unthemed-rtl(( padding-left: calc(#{$i} * var(--ag-row-group-indent-size)) ));
     }
 
     .ag-row-level-#{$i} .ag-pivot-leaf-group {
-        @include ag-unthemed-rtl(( margin-left: var(--ag-row-group-indent-size) ));
+        @include ag.unthemed-rtl(( margin-left: var(--ag-row-group-indent-size) ));
     }
 }
 
 .ag-row-group-leaf-indent {
-    @include ag-unthemed-rtl(( margin-left: var(--ag-row-group-indent-size) ));
+    @include ag.unthemed-rtl(( margin-left: var(--ag-row-group-indent-size) ));
 }
 
 .ag-value-change-delta {
@@ -107,9 +108,10 @@
 }
 
 .ag-row-hover {
-    @if ag-param-is-set(row-hover-color) {
+    // TODO make sure this works
+    // @if ag-param-is-set(row-hover-color) {
         background-color: var(--ag-row-hover-color);
-    }
+    // }
 }
 
 .ag-column-hover {
@@ -117,13 +119,13 @@
 }
 
 .ag-right-aligned-cell {
-    @include ag-unthemed-rtl(( text-align: right ));
+    @include ag.unthemed-rtl(( text-align: right ));
 }
 
 // right-align numeric values in cells with wrappers
 .ag-right-aligned-cell .ag-cell-value,
 .ag-right-aligned-cell .ag-group-value {
-    @include ag-unthemed-rtl(( margin-left: auto ));
+    @include ag.unthemed-rtl(( margin-left: auto ));
 }
 
 .ag-cell, .ag-full-width-row .ag-cell-wrapper.ag-row-group {
@@ -150,14 +152,14 @@
 }
 
 .ag-cell-inline-editing {
-    @include ag-card();
+    @include ag.card();
     padding: 0;
     height: var(--ag-row-height);
     background-color: var(--ag-control-panel-background-color);
 }
 
 .ag-popup-editor {
-    @include ag-card();
+    @include ag.card();
     background-color: var(--ag-control-panel-background-color);
     padding: 0;
 }
@@ -183,7 +185,7 @@
 }
 
 .ag-overlay-loading-center {
-    @include ag-card();
+    @include ag.card();
 }
 
 // in auto-height mode with no rows, add padding to prevent grid being too small

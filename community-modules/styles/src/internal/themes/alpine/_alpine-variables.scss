@@ -46,8 +46,8 @@
     --ag-icon-size: 16px;
     --ag-row-height: calc(var(--ag-grid-size) * 7);          // if changed, update environment.ts
     --ag-header-height: calc(var(--ag-grid-size) * 8);       // if changed, update environment.ts
-    --ag-list-item-height: ag-derived(grid-size, $times: 4); // if changed, update environment.ts
-    --ag-column-select-indent-size: ag-derived(icon-size);
+    --ag-list-item-height: calc(var(--ag-grid-size) * 4); // if changed, update environment.ts
+    --ag-column-select-indent-size: var(--ag-icon-size);
     --ag-cell-horizontal-padding: calc(var(--ag-grid-size) * 3);
     --ag-cell-widget-spacing: calc(var(--ag-grid-size) * 2);
 
@@ -61,17 +61,15 @@
     // FONTS
     --ag-font-family: (-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif);
     --ag-font-size: 13px;
-    --ag-icon-font-family: $ag-theme-alpine-icon-font-family;
-    --ag-icons-data: $ag-theme-alpine-icons-data;
-    --ag-icons-font-codes: $ag-theme-alpine-icons-font-codes;
+    --ag-icon-font-family: agGridAlpine;
 
     // MISC
-    --ag-selected-tab-underline-color: ag-derived(alpine-active-color);
+    --ag-selected-tab-underline-color: var(--ag-alpine-active-color);
     --ag-selected-tab-underline-width: 2px;
     --ag-selected-tab-underline-transition-speed: 0.3s;
     --ag-tab-min-width: 240px;
 
     --ag-card-shadow: 0 1px 4px 1px rgba(186, 191, 199, 0.4);
-    --ag-popup-shadow: ag-derived(card-shadow);
+    --ag-popup-shadow: var(--ag-card-shadow);
     --ag-side-bar-panel-width: 250px;
 };

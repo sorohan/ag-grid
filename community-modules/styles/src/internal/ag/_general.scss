@@ -1,30 +1,6 @@
 
-@mixin ag-icon() {
-    font-family: var(--ag-icon-font-family);
-    font-size: var(--ag-icon-size);
-    line-height: var(--ag-icon-size);
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    
-    // Better Font Rendering
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
 
-@function ag-str-replace($string, $search, $replace: '') {
-    $index: str-index($string, $search);
-    @if $index {
-        @return str-slice($string, 1, $index - 1)
-                + $replace
-                + ag-str-replace(str-slice($string, $index
-                + str-length($search)), $search, $replace);
-    }
-    @return $string;
-}
-
-@mixin ag-selectable($value) {
+@mixin selectable($value) {
     @if $value == null {
         $value: none;
     }
@@ -35,7 +11,7 @@
     user-select: $value;
 }
 
-@mixin ag-inherit-text-styles() {
+@mixin inherit-text-styles() {
     color: inherit;
     font-family: inherit;
     font-size: inherit;
@@ -43,7 +19,7 @@
     line-height: inherit;
 }
 
-@mixin ag-keyboard-focus($selectors, $offset) {
+@mixin keyboard-focus($selectors, $offset) {
     .ag-keyboard-focus {
         @each $selector in $selectors {
             .#{$selector}:focus {
@@ -66,7 +42,7 @@
     }
 }
 
-@mixin ag-vertical-widget-container {
+@mixin vertical-widget-container {
     padding: var(--ag-widget-container-vertical-padding) var(--ag-widget-container-horizontal-padding);
     padding-bottom: calc(var(--ag-widget-container-vertical-padding) - var(--ag-widget-vertical-spacing));
 
@@ -75,7 +51,7 @@
     }
 }
 
-@mixin ag-list-item-hovered {
+@mixin list-item-hovered {
     .ag-list-item-hovered::after {
         content: '';
         position: absolute;
@@ -92,7 +68,7 @@
     }
 }
 
-@mixin ag-card() {
+@mixin card() {
     border: var(--ag-borders) var(--ag-border-color);
     
     background: var(--ag-background-color);

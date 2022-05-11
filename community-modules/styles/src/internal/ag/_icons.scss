@@ -1,0 +1,75 @@
+
+@mixin icon() {
+    font-family: var(--ag-icon-font-family);
+    font-size: var(--ag-icon-size);
+    line-height: var(--ag-icon-size);
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    
+    // Better Font Rendering
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$-name-to-glyph: (
+    aggregation: unquote("\"\\") + unquote("f101\""),
+    arrows: unquote("\"\\") + unquote("f102\""),
+    asc: unquote("\"\\") + unquote("f103\""),
+    cancel: unquote("\"\\") + unquote("f104\""),
+    chart: unquote("\"\\") + unquote("f105\""),
+    checkbox-checked: unquote("\"\\") + unquote("f106\""),
+    checkbox-indeterminate: unquote("\"\\") + unquote("f107\""),
+    checkbox-unchecked: unquote("\"\\") + unquote("f108\""),
+    color-picker: unquote("\"\\") + unquote("f109\""),
+    columns: unquote("\"\\") + unquote("f10a\""),
+    contracted: unquote("\"\\") + unquote("f10b\""),
+    copy: unquote("\"\\") + unquote("f10c\""),
+    cross: unquote("\"\\") + unquote("f10d\""),
+    csv: unquote("\"\\") + unquote("f10e\""),
+    desc: unquote("\"\\") + unquote("f10f\""),
+    excel: unquote("\"\\") + unquote("f110\""),
+    expanded: unquote("\"\\") + unquote("f111\""),
+    eye-slash: unquote("\"\\") + unquote("f112\""),
+    eye: unquote("\"\\") + unquote("f113\""),
+    filter: unquote("\"\\") + unquote("f114\""),
+    first: unquote("\"\\") + unquote("f115\""),
+    grip: unquote("\"\\") + unquote("f116\""),
+    group: unquote("\"\\") + unquote("f117\""),
+    last: unquote("\"\\") + unquote("f118\""),
+    left: unquote("\"\\") + unquote("f119\""),
+    linked: unquote("\"\\") + unquote("f11a\""),
+    loading: unquote("\"\\") + unquote("f11b\""),
+    maximize: unquote("\"\\") + unquote("f11c\""),
+    menu: unquote("\"\\") + unquote("f11d\""),
+    minimize: unquote("\"\\") + unquote("f11e\""),
+    next: unquote("\"\\") + unquote("f11f\""),
+    none: unquote("\"\\") + unquote("f120\""),
+    not-allowed: unquote("\"\\") + unquote("f121\""),
+    paste: unquote("\"\\") + unquote("f122\""),
+    pin: unquote("\"\\") + unquote("f123\""),
+    pivot: unquote("\"\\") + unquote("f124\""),
+    previous: unquote("\"\\") + unquote("f125\""),
+    radio-button-off: unquote("\"\\") + unquote("f126\""),
+    radio-button-on: unquote("\"\\") + unquote("f127\""),
+    right: unquote("\"\\") + unquote("f128\""),
+    save: unquote("\"\\") + unquote("f129\""),
+    small-down: unquote("\"\\") + unquote("f12a\""),
+    small-left: unquote("\"\\") + unquote("f12b\""),
+    small-right: unquote("\"\\") + unquote("f12c\""),
+    small-up: unquote("\"\\") + unquote("f12d\""),
+    tick: unquote("\"\\") + unquote("f12e\""),
+    tree-closed: unquote("\"\\") + unquote("f12f\""),
+    tree-indeterminate: unquote("\"\\") + unquote("f130\""),
+    tree-open: unquote("\"\\") + unquote("f131\""),
+    unlinked: unquote("\"\\") + unquote("f132\""),
+);
+
+@function icon-char($name) {
+    $glyph: map-get($-name-to-glyph, $name);
+    @if not $glyph {
+        @error "No such icon: #{$name}";
+    }
+    @return $glyph;
+}
