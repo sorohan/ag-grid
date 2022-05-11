@@ -4,6 +4,8 @@ const webfontsGenerator = require('@vusion/webfonts-generator');
 
 const fonts = fs.readdirSync(path.join(__dirname, 'fonts'));
 
+// NOTE: this map of icon names to codepoints is documented and customers may
+// depend on it not changing. Add new codepoints but don't alter existing ones.
 const codepoints = {
     "aggregation": 0xf101,
     "arrows": 0xf102,
@@ -57,10 +59,9 @@ const codepoints = {
     "unlinked": 0xf132,
 }
 
-fonts.forEach((fontName) => {
+
+function generateFontFile(fontName) {
     const sourceFolder = path.join(__dirname, `fonts/${fontName}`);
-    const destinationFile = path.join(__dirname, `${fontName}.woff2`);
-    console.log(`Generating ${destinationFile}`);
     const files = fs.readdirSync(sourceFolder)
         .filter(file => file.endsWith(".svg"))
         .map(file => path.join(sourceFolder, file));
@@ -82,7 +83,49 @@ fonts.forEach((fontName) => {
                 console.log(err);
                 process.exit(1);
             }
-            fs.writeFileSync(destinationFile, res.woff2);
+            const woffFile = path.join(__dirname, "..", `${fontName}Font.woff2`);
+            fs.writeFileSync(woffFile, res.woff2);
+            console.log(`Generated ${woffFile}`);
+            const cssFile = path.join(__dirname, "..", `${fontName}Font.css`);
+            fs.writeFileSync(cssFile, getIconFontFaceCSS(fontName, res.woff2), "utf8");
+            console.log(`Generated ${cssFile}`);
         }
     );
-});
+}
+
+const getIconFontFaceCSS = (name, buffer) => `
+@font-face {
+    font-family: "${name}";
+    src: "data:font/woff2;base64,${Buffer.from(buffer).toString('base64')}";
+    font-weight: normal;
+    font-style: normal;
+}
+`;
+
+const generateScssIconMap = () => {
+    const outputFile = path.join(__dirname, "../src/internal/ag/_icon-font-codes.scss");
+    if (!fs.existsSync(outputFile)) {
+        console.error(`Could not find icon map file to replace: ${outputFile}`);
+        process.exit(1);
+    }
+    console.log(`Generating ${outputFile}`);
+    fs.writeFileSync(outputFile, getIconFontCodeScss(), "utf8");
+}
+
+const getIconFontCodeScss = () => `
+// THIS FILE IS GENERATED, DO NOT EDIT IT!
+// To change the icon font code map, edit ${path.basename(__filename)}
+
+@use "sass:string";
+
+$icon-font-codes: (
+${
+    Object.keys(codepoints).map(iconName =>
+        `    ${iconName}: string.unquote("\\"\\\\") + string.unquote("${codepoints[iconName].toString(16)}\\""),`
+    ).join("\n")
+}
+)
+`
+
+generateScssIconMap();
+fonts.forEach(generateFontFile);
