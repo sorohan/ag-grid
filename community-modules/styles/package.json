@@ -6,7 +6,9 @@
   "scripts": {
     "build": "sass --no-source-map --load-path src/internal src:.",
     "build-prod": "npm run build -- --no-error-css",
-    "test": "npm run build-prod && stylelint *.css",
+    "test": "npm run lint:scss && npm run build-prod && npm run lint:css",
+    "lint:css": "stylelint --config stylelint-config-css.js '*.css'",
+    "lint:scss": "stylelint --config stylelint-config-scss.js src",
     "watch": "npm run build; npm run build -- --watch",
     "hash": "sh ../../scripts/hashDirectory.sh > .hash"
   },
@@ -26,19 +28,22 @@
     "url": "https://github.com/ag-grid/ag-grid/issues"
   },
   "homepage": "http://www.ag-grid.com/",
-  "dependencies": {
-    "sass": "^1.51.0"
-  },
   "devDependencies": {
+    "postcss-scss": "^4.0.4",
+    "sass": "^1.51.0",
     "stylelint": "^14.8.2",
-    "stylelint-csstree-validator": "^2.0.0"
+    "stylelint-csstree-validator": "^2.0.0",
+    "stylelint-scss": "^4.2.0"
   },
   "stylelint": {
     "plugins": [
-      "stylelint-csstree-validator"
+      "stylelint-csstree-validator",
+      "stylelint-scss"
     ],
     "rules": {
-      "csstree/validator": true
+      "csstree/validator": true,
+      "at-rule-no-unknown": null,
+      "scss/at-rule-no-unknown": true
     }
   }
 }
