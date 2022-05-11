@@ -4,7 +4,8 @@
   "description": "AG Grid Styles and Themes",
   "main": "main.scss",
   "scripts": {
-    "build": "sass --no-source-map src/base/base.scss:ag-grid.css src/themes/alpine.scss:ag-theme-alpine.css",
+    "build": "sass --no-source-map src:.",
+    "build-prod": "npm run build",
     "watch": "npm run build && npm run build -- --watch",
     "hash": "sh ../../scripts/hashDirectory.sh > .hash"
   },
