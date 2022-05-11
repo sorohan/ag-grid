@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "build": "node generate-web-fonts.js"
+    "build": "node generate-web-fonts.js",
+    "build-prod": "npm run build"
   },
   "devDependencies": {
     "@vusion/webfonts-generator": "^0.6.0",

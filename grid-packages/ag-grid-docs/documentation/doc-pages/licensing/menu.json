@@ -51,9 +51,9 @@
             "pane": "left"
           },
           {
-            "title": "Stackblitz Example",
+            "title": "{example-title}",
             "url": "{example}",
-            "icon": "stackblitz",
+            "icon": "{example-icon}",
             "menuHide": true,
             "frameworks": [
               "angular",
@@ -470,6 +470,11 @@
                 "showInCollapsed": true
               }
             ]
+          },
+          {
+            "title": "Immutable Data",
+            "url": "/immutable-data/",
+            "showInCollapsed": true
           },
           {
             "title": "Data Stages",

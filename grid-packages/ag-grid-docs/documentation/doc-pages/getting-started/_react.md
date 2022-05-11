@@ -1,6 +1,4 @@
 [[only-react]]
-| AG Grid is the industry standard for React Enterprise Applications. Developers using AG Grid
-| are building applications that would not be possible if AG Grid did not exist.
 |
 |<section class="code-tab mb-3">
 |<div class="card">
@@ -389,7 +387,7 @@
 | And that is all, you use the same `<AgGridReact/>` component, except this time it comes installed
 | with all the Enterprise features.
 |
-| For example, you can now Row Group (and Enterprise Feature) by a particular Column by
+| For example, you can now Row Group (an Enterprise Feature) by a particular Column by
 | setting `rowGroup=true` on the Column Definition.
 |
 |```jsx

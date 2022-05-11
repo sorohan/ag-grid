@@ -2943,7 +2943,10 @@
     },
     "rowModelType": {
       "description": "/** Sets the row model type. Default: `clientSide` */",
-      "type": { "returnType": "string", "optional": true }
+      "type": {
+        "returnType": "'clientSide' | 'infinite' | 'viewport' | 'serverSide'",
+        "optional": true
+      }
     },
     "rowData": {
       "description": "/** Set the data to be displayed as rows in the grid. */",
@@ -3489,11 +3492,11 @@
       "type": { "returnType": "GetRowNodeIdFunc", "optional": true }
     },
     "getRowId": {
-      "description": "/** Allows you to set the ID for a particular row based on the data and enables immutableData. */",
+      "description": "/** Allows setting the ID for a particular row node based on the data. */",
       "type": { "returnType": "GetRowIdFunc", "optional": true }
     },
     "resetRowDataOnUpdate": {
-      "description": "/** When new Row Data is set, and getRowId() is provided, the grid will disregard all previous rows and treat the new Row Data as a new set. All Row State (eg selection, rendered rows) will be lost. */",
+      "description": "/** When enabled, getRowId() callback is implemented and new Row Data is set, the grid will disregard all previous rows and treat the new Row Data as new data. As a consequence, all Row State (eg selection, rendered rows) will be reset.  Default: `false` */",
       "type": { "returnType": "boolean", "optional": true }
     },
     "processRowPostCreate": {
@@ -4539,7 +4542,7 @@
       "meta": { "isEvent": true, "name": "onRowDataChanged" }
     },
     "onRowDataUpdated": {
-      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by changing the `rowData` bound property with `immutableData=true`. */",
+      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by setting new Row Data and Row ID's are provided (as this results in a transaction underneath the hood). */",
       "type": {
         "arguments": { "event": "RowDataUpdatedEvent" },
         "returnType": "void",
@@ -4548,7 +4551,7 @@
       "meta": { "isEvent": true, "name": "onRowDataUpdated" }
     },
     "rowDataUpdated": {
-      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by changing the `rowData` bound property with `immutableData=true`. */",
+      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by setting new Row Data and Row ID's are provided (as this results in a transaction underneath the hood). */",
       "type": {
         "arguments": { "event": "RowDataUpdatedEvent" },
         "returnType": "void",
@@ -6658,6 +6661,38 @@
     }
   },
   "CellFocusedEvent": {
+    "rowIndex": {
+      "description": "/** Row index of the focused cell */",
+      "type": { "returnType": "number | null", "optional": false }
+    },
+    "column": {
+      "description": "/** Column of the focused cell */",
+      "type": { "returnType": "Column | null", "optional": false }
+    },
+    "rowPinned": {
+      "description": "/** either 'top', 'bottom' or null / undefined (if not pinned) */",
+      "type": { "returnType": "string | null", "optional": true }
+    },
+    "isFullWidthCell": {
+      "description": "/** Whether the cell a full width cell or a regular cell */",
+      "type": { "returnType": "boolean", "optional": false }
+    },
+    "forceBrowserFocus": {
+      "description": "/** Whether browser focus is also set (false when editing) */",
+      "type": { "returnType": "boolean", "optional": true }
+    },
+    "floating": {
+      "type": { "returnType": "string | null", "optional": false }
+    },
+    "api": { "type": { "returnType": "GridApi", "optional": false } },
+    "columnApi": { "type": { "returnType": "ColumnApi", "optional": false } },
+    "type": {
+      "description": "/** Event identifier */",
+      "type": { "returnType": "string", "optional": false }
+    }
+  },
+  "FullWidthRowFocusedEvent": {
+    "fromBelow": { "type": { "returnType": "boolean", "optional": false } },
     "rowIndex": {
       "description": "/** Row index of the focused cell */",
       "type": { "returnType": "number | null", "optional": false }
@@ -11467,7 +11502,7 @@
       "type": { "returnType": "number", "optional": true }
     },
     "autoRotate": {
-      "description": "/** If specified and axis labels collide, they are rotated so that they are positioned at the supplied angle. This is enabled by default for category axes at an angle of 45 degrees. If the `rotation` property is specified, it takes precedence. */",
+      "description": "/** If specified and axis labels collide, they are rotated so that they are positioned at the supplied angle. This is enabled by default for category axes at an angle of 335 degrees. If the `rotation` property is specified, it takes precedence. */",
       "type": { "returnType": "boolean | number", "optional": true }
     },
     "format": {
@@ -17953,6 +17988,13 @@
         "returnType": "void",
         "optional": false
       }
+    },
+    "getGui": {
+      "type": {
+        "arguments": {},
+        "returnType": "HTMLElement",
+        "optional": false
+      }
     }
   },
   "IDetailCellRendererParams": {
@@ -22126,7 +22168,10 @@
     },
     "rowModelType": {
       "description": "/** Sets the row model type. Default: `clientSide` */",
-      "type": { "returnType": "string", "optional": true }
+      "type": {
+        "returnType": "'clientSide' | 'infinite' | 'viewport' | 'serverSide'",
+        "optional": true
+      }
     },
     "rowData": {
       "description": "/** Set the data to be displayed as rows in the grid. */",
@@ -22672,11 +22717,11 @@
       "type": { "returnType": "GetRowNodeIdFunc", "optional": true }
     },
     "getRowId": {
-      "description": "/** Allows you to set the ID for a particular row based on the data and enables immutableData. */",
+      "description": "/** Allows setting the ID for a particular row node based on the data. */",
       "type": { "returnType": "GetRowIdFunc", "optional": true }
     },
     "resetRowDataOnUpdate": {
-      "description": "/** When new Row Data is set, and getRowId() is provided, the grid will disregard all previous rows and treat the new Row Data as a new set. All Row State (eg selection, rendered rows) will be lost. */",
+      "description": "/** When enabled, getRowId() callback is implemented and new Row Data is set, the grid will disregard all previous rows and treat the new Row Data as new data. As a consequence, all Row State (eg selection, rendered rows) will be reset.  Default: `false` */",
       "type": { "returnType": "boolean", "optional": true }
     },
     "processRowPostCreate": {
@@ -23722,7 +23767,7 @@
       "meta": { "isEvent": true, "name": "onRowDataChanged" }
     },
     "onRowDataUpdated": {
-      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by changing the `rowData` bound property with `immutableData=true`. */",
+      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by setting new Row Data and Row ID's are provided (as this results in a transaction underneath the hood). */",
       "type": {
         "arguments": { "event": "RowDataUpdatedEvent" },
         "returnType": "void",
@@ -23731,7 +23776,7 @@
       "meta": { "isEvent": true, "name": "onRowDataUpdated" }
     },
     "rowDataUpdated": {
-      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by changing the `rowData` bound property with `immutableData=true`. */",
+      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by setting new Row Data and Row ID's are provided (as this results in a transaction underneath the hood). */",
       "type": {
         "arguments": { "event": "RowDataUpdatedEvent" },
         "returnType": "void",
@@ -24822,7 +24867,10 @@
     },
     "rowModelType": {
       "description": "/** Sets the row model type. Default: `clientSide` */",
-      "type": { "returnType": "string", "optional": true }
+      "type": {
+        "returnType": "'clientSide' | 'infinite' | 'viewport' | 'serverSide'",
+        "optional": true
+      }
     },
     "rowData": {
       "description": "/** Set the data to be displayed as rows in the grid. */",
@@ -25368,11 +25416,11 @@
       "type": { "returnType": "GetRowNodeIdFunc", "optional": true }
     },
     "getRowId": {
-      "description": "/** Allows you to set the ID for a particular row based on the data and enables immutableData. */",
+      "description": "/** Allows setting the ID for a particular row node based on the data. */",
       "type": { "returnType": "GetRowIdFunc", "optional": true }
     },
     "resetRowDataOnUpdate": {
-      "description": "/** When new Row Data is set, and getRowId() is provided, the grid will disregard all previous rows and treat the new Row Data as a new set. All Row State (eg selection, rendered rows) will be lost. */",
+      "description": "/** When enabled, getRowId() callback is implemented and new Row Data is set, the grid will disregard all previous rows and treat the new Row Data as new data. As a consequence, all Row State (eg selection, rendered rows) will be reset.  Default: `false` */",
       "type": { "returnType": "boolean", "optional": true }
     },
     "processRowPostCreate": {
@@ -26418,7 +26466,7 @@
       "meta": { "isEvent": true, "name": "onRowDataChanged" }
     },
     "onRowDataUpdated": {
-      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by changing the `rowData` bound property with `immutableData=true`. */",
+      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by setting new Row Data and Row ID's are provided (as this results in a transaction underneath the hood). */",
       "type": {
         "arguments": { "event": "RowDataUpdatedEvent" },
         "returnType": "void",
@@ -26427,7 +26475,7 @@
       "meta": { "isEvent": true, "name": "onRowDataUpdated" }
     },
     "rowDataUpdated": {
-      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by changing the `rowData` bound property with `immutableData=true`. */",
+      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by setting new Row Data and Row ID's are provided (as this results in a transaction underneath the hood). */",
       "type": {
         "arguments": { "event": "RowDataUpdatedEvent" },
         "returnType": "void",
@@ -27528,7 +27576,10 @@
     },
     "rowModelType": {
       "description": "/** Sets the row model type. Default: `clientSide` */",
-      "type": { "returnType": "string", "optional": true }
+      "type": {
+        "returnType": "'clientSide' | 'infinite' | 'viewport' | 'serverSide'",
+        "optional": true
+      }
     },
     "rowData": {
       "description": "/** Set the data to be displayed as rows in the grid. */",
@@ -28074,11 +28125,11 @@
       "type": { "returnType": "GetRowNodeIdFunc", "optional": true }
     },
     "getRowId": {
-      "description": "/** Allows you to set the ID for a particular row based on the data and enables immutableData. */",
+      "description": "/** Allows setting the ID for a particular row node based on the data. */",
       "type": { "returnType": "GetRowIdFunc", "optional": true }
     },
     "resetRowDataOnUpdate": {
-      "description": "/** When new Row Data is set, and getRowId() is provided, the grid will disregard all previous rows and treat the new Row Data as a new set. All Row State (eg selection, rendered rows) will be lost. */",
+      "description": "/** When enabled, getRowId() callback is implemented and new Row Data is set, the grid will disregard all previous rows and treat the new Row Data as new data. As a consequence, all Row State (eg selection, rendered rows) will be reset.  Default: `false` */",
       "type": { "returnType": "boolean", "optional": true }
     },
     "processRowPostCreate": {
@@ -29124,7 +29175,7 @@
       "meta": { "isEvent": true, "name": "onRowDataChanged" }
     },
     "onRowDataUpdated": {
-      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by changing the `rowData` bound property with `immutableData=true`. */",
+      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by setting new Row Data and Row ID's are provided (as this results in a transaction underneath the hood). */",
       "type": {
         "arguments": { "event": "RowDataUpdatedEvent" },
         "returnType": "void",
@@ -29133,7 +29184,7 @@
       "meta": { "isEvent": true, "name": "onRowDataUpdated" }
     },
     "rowDataUpdated": {
-      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by changing the `rowData` bound property with `immutableData=true`. */",
+      "description": "/** The client has updated data for the grid using `api.applyTransaction(transaction)` or by setting new Row Data and Row ID's are provided (as this results in a transaction underneath the hood). */",
       "type": {
         "arguments": { "event": "RowDataUpdatedEvent" },
         "returnType": "void",
