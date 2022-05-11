@@ -96,7 +96,7 @@ function generateFontFile(fontName) {
 const getIconFontFaceCSS = (name, buffer) => `
 @font-face {
     font-family: "${name}";
-    src: "data:font/woff2;base64,${Buffer.from(buffer).toString('base64')}";
+    src: url("data:font/woff2;charset=utf-8;base64,${Buffer.from(buffer).toString('base64')}");
     font-weight: normal;
     font-style: normal;
 }

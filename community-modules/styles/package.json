@@ -3,6 +3,11 @@
   "version": "27.2.1",
   "description": "AG Grid Styles and Themes",
   "main": "main.scss",
+  "files": [
+    "*.css",
+    "*.scss",
+    "*.woff2"
+  ],
   "scripts": {
     "build": "sass --no-source-map --load-path src/internal src:.",
     "build-prod": "npm run build -- --no-error-css",
@@ -10,7 +15,8 @@
     "lint:css": "stylelint --formatter unix --config stylelint-config-css.js '*.css'",
     "lint:scss": "stylelint --formatter unix --config stylelint-config-scss.js src/**/*.scss",
     "watch": "npm run build; npm run build -- --watch",
-    "hash": "sh ../../scripts/hashDirectory.sh > .hash"
+    "hash": "sh ../../scripts/hashDirectory.sh > .hash",
+    "update-icon-fonts": "cd icon-fonts && npm i && npm run build"
   },
   "repository": {
     "type": "git",
@@ -29,21 +35,11 @@
   },
   "homepage": "http://www.ag-grid.com/",
   "devDependencies": {
+    "@vusion/webfonts-generator": "^0.8.0",
     "postcss-scss": "^4.0.4",
     "sass": "^1.51.0",
     "stylelint": "^14.8.2",
     "stylelint-csstree-validator": "^2.0.0",
     "stylelint-scss": "^4.2.0"
-  },
-  "stylelint": {
-    "plugins": [
-      "stylelint-csstree-validator",
-      "stylelint-scss"
-    ],
-    "rules": {
-      "csstree/validator": true,
-      "at-rule-no-unknown": null,
-      "scss/at-rule-no-unknown": true
-    }
   }
 }
