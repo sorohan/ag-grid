@@ -33,7 +33,6 @@ module.exports = {
         }
       ],
       "scss/at-function-pattern": "^(?!-?ag-)",
-      "scss/at-import-no-partial-leading-underscore": true,
       "scss/comment-no-loud": true,
       "scss/no-global-function-names": true,
       "scss/no-duplicate-mixins": true
