@@ -1,5 +1,5 @@
-@import "../utils";
-@import "./alpine-variables";
+@use "../utils";
+@use "./alpine-variables";
 
 .ag-theme-alpine, .ag-theme-alpine-dark {
     .ag-filter-toolpanel-header,
